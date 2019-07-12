@@ -147,7 +147,7 @@
 											"top": 342,
 											"width": 135,
 											"height": 13,
-											"text": "#IDUsuario",
+											"text": "#ID",
 											"horizontalAlignment": 0
 										},
 										{
@@ -13894,25 +13894,6 @@
 											"height": 13,
 											"text": "#Mail",
 											"horizontalAlignment": 0
-										},
-										{
-											"_type": "UMLAttributeView",
-											"_id": "AAAAAAFr55T18h3Nglc=",
-											"_parent": {
-												"$ref": "AAAAAAFr55MEvsKo64M="
-											},
-											"model": {
-												"$ref": "AAAAAAFr55T1yR12Mrk="
-											},
-											"lineColor": "#005446",
-											"fillColor": "#91ffec",
-											"font": "Arial;13;0",
-											"left": 309,
-											"top": 180,
-											"width": 134,
-											"height": 13,
-											"text": "#Direccion",
-											"horizontalAlignment": 0
 										}
 									],
 									"lineColor": "#005446",
@@ -13921,7 +13902,7 @@
 									"left": 304,
 									"top": 145,
 									"width": 144,
-									"height": 53
+									"height": 38
 								},
 								{
 									"_type": "UMLOperationCompartmentView",
@@ -13936,7 +13917,7 @@
 									"fillColor": "#91ffec",
 									"font": "Arial;13;0",
 									"left": 304,
-									"top": 198,
+									"top": 183,
 									"width": 144,
 									"height": 10
 								},
@@ -14333,9 +14314,8 @@
 							"_parent": {
 								"$ref": "AAAAAAFr50sfaOrhqX0="
 							},
-							"name": "IDUsuario",
-							"visibility": "protected",
-							"type": ""
+							"name": "ID",
+							"visibility": "protected"
 						},
 						{
 							"_type": "UMLAttribute",
@@ -15874,7 +15854,8 @@
 								"$ref": "AAAAAAFr535ygg4pr4k="
 							},
 							"name": "CantidadDeInscriptos",
-							"visibility": "protected"
+							"visibility": "protected",
+							"type": ""
 						}
 					]
 				},
@@ -15947,7 +15928,8 @@
 								"$ref": "AAAAAAFr55MEvcKgc34="
 							},
 							"name": "Telefono",
-							"visibility": "protected"
+							"visibility": "protected",
+							"type": ""
 						},
 						{
 							"_type": "UMLAttribute",
@@ -15956,16 +15938,8 @@
 								"$ref": "AAAAAAFr55MEvcKgc34="
 							},
 							"name": "Mail",
-							"visibility": "protected"
-						},
-						{
-							"_type": "UMLAttribute",
-							"_id": "AAAAAAFr55T1yR12Mrk=",
-							"_parent": {
-								"$ref": "AAAAAAFr55MEvcKgc34="
-							},
-							"name": "Direccion",
-							"visibility": "protected"
+							"visibility": "protected",
+							"type": ""
 						}
 					]
 				}
