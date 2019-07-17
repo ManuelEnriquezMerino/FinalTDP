@@ -1,7 +1,10 @@
-package com.jornadas.client.usuario;
+	package com.jornadas.shared.usuario;
 
-public abstract class Usuario {
+import java.io.Serializable;
 
+public class Usuario implements Serializable{
+
+	private static final long serialVersionUID = 4864708511213559500L;
 	protected String ID;
 	protected String DNI;
 	protected String Nombre;
@@ -9,8 +12,9 @@ public abstract class Usuario {
 	protected DatosDeContacto DatosDeContacto;
 	
 	//Constructor
+	public Usuario() {}
 	
-	protected Usuario(String id, String dni) {
+	public Usuario(String id, String dni) {
 		ID = id;
 		DNI = dni;
 	}

@@ -1,16 +1,19 @@
-package com.jornadas.client.usuario;
+package com.jornadas.shared.usuario;
 
-import com.jornadas.client.excepciones.FechaInvalidaException;
-import com.jornadas.client.extras.Fecha;
+import com.jornadas.shared.excepciones.FechaInvalidaException;
+import com.jornadas.shared.extras.Fecha;
 
 public class Organizador extends Usuario{
 	
+	private static final long serialVersionUID = 1384555305901560482L;
 	protected Fecha FechaDeNacimiento;
 	protected String LU;
 	protected String Universidad;
 	protected String Carrera;
 	//protected Area Area;
 
+	public Organizador() {}
+	
 	public Organizador(String id, String dni) {
 		super(id, dni);
 	}

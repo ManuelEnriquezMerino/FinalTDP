@@ -1,10 +1,11 @@
-package com.jornadas.client.usuario;
+package com.jornadas.shared.usuario;
 
-import com.jornadas.client.excepciones.FechaInvalidaException;
-import com.jornadas.client.extras.Fecha;
+import com.jornadas.shared.excepciones.FechaInvalidaException;
+import com.jornadas.shared.extras.Fecha;
 
-public class Asistente extends Usuario{
+public class Asistente extends Usuario {
 
+	private static final long serialVersionUID = -3904737622861838398L;
 	protected Fecha FechaDeNacimiento;
 	protected String LU;
 	protected String Universidad;
@@ -16,9 +17,11 @@ public class Asistente extends Usuario{
 	//protected List<Seleccionable> Servicios;
 	//protected List<Actividad> Actividades;
 
-	//Constructor
+	//Constructor	
 	
-	protected Asistente(String id, String dni) {
+	public Asistente() {}
+	
+	public Asistente(String id, String dni) {
 		super(id, dni);
 	}
 

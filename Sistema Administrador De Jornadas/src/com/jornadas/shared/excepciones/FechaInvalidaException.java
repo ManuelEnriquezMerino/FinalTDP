@@ -1,4 +1,4 @@
-package com.jornadas.client.excepciones;
+package com.jornadas.shared.excepciones;
 
 public class FechaInvalidaException extends Exception{
 	

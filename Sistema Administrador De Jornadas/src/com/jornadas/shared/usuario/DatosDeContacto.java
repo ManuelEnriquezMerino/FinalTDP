@@ -1,9 +1,14 @@
-package com.jornadas.client.usuario;
+package com.jornadas.shared.usuario;
 
-public class DatosDeContacto {
+import java.io.Serializable;
 
+public class DatosDeContacto implements Serializable{
+
+	private static final long serialVersionUID = -5812665969254748615L;
 	private String Telefono;
 	private String Mail;
+	
+	public DatosDeContacto() {}
 	
 	public DatosDeContacto(String telefono, String mail) {
 		Telefono=telefono;

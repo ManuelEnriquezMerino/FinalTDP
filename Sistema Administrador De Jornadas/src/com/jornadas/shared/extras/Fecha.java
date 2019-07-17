@@ -1,12 +1,17 @@
-package com.jornadas.client.extras;
+package com.jornadas.shared.extras;
 
-import com.jornadas.client.excepciones.FechaInvalidaException;
+import java.io.Serializable;
 
-public class Fecha {
+import com.jornadas.shared.excepciones.FechaInvalidaException;
 
+public class Fecha implements Serializable{
+
+	private static final long serialVersionUID = 8332012622326708370L;
 	private int Dia;
 	private int Mes;
 	private int Anio;
+	
+	public Fecha() {}
 	
 	public Fecha(int dia, int mes, int anio) throws FechaInvalidaException{
 		if(anio>0)
