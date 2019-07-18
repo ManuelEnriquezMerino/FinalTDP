@@ -1,13 +1,15 @@
 package com.jornadas.server;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
 import com.jornadas.shared.usuario.Asistente;
 import com.jornadas.shared.usuario.Usuario;
 
-public class Jornada {
+public class Jornada implements Serializable{
 
+	private static final long serialVersionUID = -5891511464715397196L;
 	private Map<String, Usuario> ColeccionDeUsuarios;
 	
 	public Jornada() {
