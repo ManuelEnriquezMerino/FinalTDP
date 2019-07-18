@@ -29,6 +29,8 @@ public class Sistema_Administrador_De_Jornadas implements EntryPoint {
 		verticalPanel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
 		verticalPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
 		
+		verticalPanel.getElement().getStyle().setBackgroundColor("#262B71");
+		
 		textBoxID = new TextBox();
 		textBoxID.setText("ID Aca");
 		
@@ -42,6 +44,8 @@ public class Sistema_Administrador_De_Jornadas implements EntryPoint {
 		botonAgregar.addClickHandler(new oyenteAgregar());
 		
 		lbl = new Label("OwO");
+		lbl.getElement().getStyle().setColor("#fffff0");
+		
 		
 		verticalPanel.add(textBoxDNI);
 		verticalPanel.add(textBoxID);

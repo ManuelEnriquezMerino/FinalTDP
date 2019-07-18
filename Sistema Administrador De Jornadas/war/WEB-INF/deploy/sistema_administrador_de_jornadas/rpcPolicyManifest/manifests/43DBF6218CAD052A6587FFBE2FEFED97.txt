@@ -1,0 +1,2 @@
+serviceClass: com.jornadas.client.Servicio
+path: D43350D7D49419255463DD467504E5FC.gwt.rpc

@@ -1,0 +1,3 @@
+# Module sistema_administrador_de_jornadas
+# RPC service class, partial path of RPC policy file
+com.jornadas.client.Servicio, D43350D7D49419255463DD467504E5FC.gwt.rpc
