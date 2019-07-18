@@ -2,6 +2,7 @@ package com.jornadas.shared.usuario;
 
 import com.jornadas.shared.excepciones.FechaInvalidaException;
 import com.jornadas.shared.extras.Fecha;
+import com.jornadas.shared.actividad.Area;
 
 public class Organizador extends Usuario{
 	
@@ -10,7 +11,7 @@ public class Organizador extends Usuario{
 	protected String LU;
 	protected String Universidad;
 	protected String Carrera;
-	//protected Area Area;
+	protected Area Area;
 
 	public Organizador() {}
 	
@@ -32,6 +33,19 @@ public class Organizador extends Usuario{
 	
 	public void establecerCarrera(String carrera) {
 		Carrera = carrera;
+	}
+	
+	public boolean establecerArea(Area area) {
+		if(Area==null) {
+			Area = area;
+			return true;
+		}
+		else
+			return false;
+	}
+	
+	public void quitarArea() {
+		Area = null;
 	}
 	
 	public Fecha obtenerFechaDeNacimiento() {
