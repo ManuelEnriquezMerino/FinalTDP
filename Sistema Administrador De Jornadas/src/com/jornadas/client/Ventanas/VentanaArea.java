@@ -27,7 +27,7 @@ import com.jornadas.shared.actividad.TipoActividad;
 import com.jornadas.shared.usuario.CoordinadorDeArea;
 import com.jornadas.shared.usuario.Usuario;
 
-public class VentanaArea {
+public class VentanaArea extends Ventana{
 	
 	protected VerticalPanel Panel;
 	protected HorizontalPanel PanelCheckBox, PanelID, PanelNombre, PanelCoordinador, PanelActividades;
@@ -44,6 +44,7 @@ public class VentanaArea {
 	private Button botonGuardar;
 	
 	public VentanaArea(Area area, ServicioAsync servicio) {
+		Nombre = "Area";
 		Area = area;
 		Servicio = servicio;
 		
@@ -57,6 +58,7 @@ public class VentanaArea {
 	}
 	
 	public VentanaArea(ServicioAsync servicio) {
+		Nombre = "Area";
 		Servicio = servicio;
 		Area = new Area();
 		

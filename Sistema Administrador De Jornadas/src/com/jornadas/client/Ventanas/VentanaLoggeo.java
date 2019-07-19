@@ -69,7 +69,7 @@ public class VentanaLoggeo {
 
 				@Override
 				public void onFailure(Throwable caught) {
-					Window.alert("Exception Received from server.");
+					Window.alert("Error al comunicarse con el servidor. Por favor vuelva a intentarlo");
 				}
 
 				@Override
@@ -82,10 +82,10 @@ public class VentanaLoggeo {
 						VentanaDatos datos = new VentanaDatos(resultado, Servicio);
 						VentanaArea area = new VentanaArea(Servicio);
 						
-						Collection<Panel> paneles = new LinkedList<Panel>();
+						Collection<Ventana> paneles = new LinkedList<Ventana>();
 						
-						paneles.add(datos.obtenerPanel());
-						paneles.add(area.obtenerPanel());
+						paneles.add(datos);
+						paneles.add(area);
 						
 						VentanaPestanias pestanias = new VentanaPestanias(paneles);
 						

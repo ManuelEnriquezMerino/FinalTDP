@@ -16,7 +16,7 @@ import com.jornadas.client.ServicioAsync;
 import com.jornadas.shared.excepciones.FechaInvalidaException;
 import com.jornadas.shared.usuario.Usuario;
 
-public class VentanaDatos{
+public class VentanaDatos extends Ventana{
 	
 	protected VerticalPanel Panel;
 	
@@ -30,6 +30,8 @@ public class VentanaDatos{
 	private Button botonGuardar;
 
 	public VentanaDatos(Usuario usuario, ServicioAsync servicio) {
+		Nombre = "Datos de Usuario";
+		
 		Usuario = usuario;
 		Servicio = servicio;
 		
@@ -66,7 +68,7 @@ public class VentanaDatos{
 		etiquetaCarrera = new Label("Carrera:");
 		etiquetaDia = new Label("Dia:");
 		etiquetaMes = new Label("Mes:");
-		etiquetaAnio = new Label("Año");
+		etiquetaAnio = new Label("Anio");
 		etiquetaTelefono = new Label("Telefono");
 		etiquetaMail = new Label("Mail");
 	}
