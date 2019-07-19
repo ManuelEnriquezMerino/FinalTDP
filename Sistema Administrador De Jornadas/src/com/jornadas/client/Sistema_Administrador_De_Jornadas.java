@@ -14,6 +14,7 @@ import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.jornadas.client.Ventanas.VentanaCargarArea;
 import com.jornadas.client.Ventanas.VentanaDatos;
 import com.jornadas.shared.usuario.Usuario;
 
@@ -28,8 +29,11 @@ public class Sistema_Administrador_De_Jornadas implements EntryPoint {
 	private Button botonConsultar, botonAgregar;
 	
 	public void onModuleLoad() {
-		crearPanelLoggeo();
-		RootLayoutPanel.get().add(panelLoggeo);
+		//crearPanelLoggeo();
+		//RootLayoutPanel.get().add(panelLoggeo);
+		
+		VentanaCargarArea cargarArea = new VentanaCargarArea(Servicio);
+		RootLayoutPanel.get().add(cargarArea.obtenerPanel());
 	}
 	
 	private void crearPanelLoggeo() {

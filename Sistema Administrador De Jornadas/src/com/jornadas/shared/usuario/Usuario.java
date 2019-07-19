@@ -2,10 +2,11 @@
 
 import java.io.Serializable;
 
+import com.jornadas.shared.Visitor.Accion;
 import com.jornadas.shared.excepciones.FechaInvalidaException;
 import com.jornadas.shared.extras.Fecha;
 
-public class Usuario implements Serializable{
+public abstract class Usuario implements Serializable{
 
 	private static final long serialVersionUID = 4864708511213559500L;
 	protected String ID;
@@ -19,7 +20,10 @@ public class Usuario implements Serializable{
 	protected DatosDeContacto DatosDeContacto;
 	
 	//Constructor
-	public Usuario() {}
+	public Usuario() {
+		DatosDeContacto = new DatosDeContacto();
+		FechaDeNacimiento = new Fecha();
+	}
 	
 	public Usuario(String id, String dni) {
 		ID = id;
@@ -111,4 +115,6 @@ public class Usuario implements Serializable{
 	public String obtenerCarrera() {
 		return Carrera;
 	}
+	
+	public abstract void accionar(Accion accion);
 }

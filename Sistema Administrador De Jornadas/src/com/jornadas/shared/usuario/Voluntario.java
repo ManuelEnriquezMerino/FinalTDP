@@ -3,6 +3,8 @@ package com.jornadas.shared.usuario;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
+
+import com.jornadas.shared.Visitor.Accion;
 import com.jornadas.shared.actividad.Tarea;
 
 public class Voluntario extends Usuario{
@@ -10,7 +12,9 @@ public class Voluntario extends Usuario{
 	protected Collection<Tarea> Tareas;
 	private static final long serialVersionUID = 3298967923039628962L;
 
-	public Voluntario() {}
+	public Voluntario() {
+		super();
+	}
 	
 	public Voluntario(String id, String dni) {
 		super(id, dni);
@@ -23,5 +27,9 @@ public class Voluntario extends Usuario{
 	
 	public Iterator<Tarea> obtenerTareas(){
 		return Tareas.iterator();
+	}
+	
+	public void accionar(Accion accion) {
+		accion.Accionar(this);
 	}
 }
