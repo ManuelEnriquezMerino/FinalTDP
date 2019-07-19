@@ -8,4 +8,6 @@ public interface ServicioAsync {
 	public void obtenerUsuario(String DNI, String ID, AsyncCallback<Usuario> Respuesta);
 	
 	public void registrarUsuario(String DNI, String ID, AsyncCallback<Boolean> Respuesta);
+	
+	public void actualizarUsuario(Usuario usuario, AsyncCallback<Boolean> Respuesta);
 }

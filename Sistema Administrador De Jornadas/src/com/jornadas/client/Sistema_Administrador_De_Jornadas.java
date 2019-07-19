@@ -10,26 +10,34 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.jornadas.client.Ventanas.VentanaDatos;
 import com.jornadas.shared.usuario.Usuario;
 
 public class Sistema_Administrador_De_Jornadas implements EntryPoint {
 	
 	ServicioAsync Servicio = GWT.create(Servicio.class);
 	
+	protected VerticalPanel panelLoggeo;
+	
 	private Label lbl;
 	private TextBox textBoxID, textBoxDNI;
 	private Button botonConsultar, botonAgregar;
 	
-	public void onModuleLoad() {		
-		VerticalPanel verticalPanel = new VerticalPanel();
-		verticalPanel.setSize("100%", "100%"); 
-		verticalPanel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
-		verticalPanel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-		
-		verticalPanel.getElement().getStyle().setBackgroundColor("#262B71");
+	public void onModuleLoad() {
+		crearPanelLoggeo();
+		RootLayoutPanel.get().add(panelLoggeo);
+	}
+	
+	private void crearPanelLoggeo() {
+		panelLoggeo = new VerticalPanel();
+		panelLoggeo.setSize("100%", "100%"); 
+		panelLoggeo.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
+		panelLoggeo.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
+		panelLoggeo.getElement().getStyle().setBackgroundColor("#262B71");
 		
 		textBoxID = new TextBox();
 		textBoxID.setText("ID Aca");
@@ -47,15 +55,12 @@ public class Sistema_Administrador_De_Jornadas implements EntryPoint {
 		lbl.getElement().getStyle().setColor("#fffff0");
 		
 		
-		verticalPanel.add(textBoxDNI);
-		verticalPanel.add(textBoxID);
-		verticalPanel.add(botonConsultar);
-		verticalPanel.add(botonAgregar);
-		verticalPanel.add(lbl);
-		
-		RootLayoutPanel.get().add(verticalPanel);
+		panelLoggeo.add(textBoxDNI);
+		panelLoggeo.add(textBoxID);
+		panelLoggeo.add(botonConsultar);
+		panelLoggeo.add(botonAgregar);
+		panelLoggeo.add(lbl);
 	}
-	
 	
 	private class oyenteConsultar implements ClickHandler {
 
@@ -73,8 +78,11 @@ public class Sistema_Administrador_De_Jornadas implements EntryPoint {
 				public void onSuccess(Usuario resultado) {
 					if(resultado==null)
 						lbl.setText("ERROR: Usuario no encontrado");
-					else
-						lbl.setText("DNI: " +resultado.obtenerDNI() + " ID: " + resultado.obtenerID());
+					else {
+						RootLayoutPanel.get().remove(0);
+						VentanaDatos datos = new VentanaDatos(resultado, Servicio);
+						RootLayoutPanel.get().add(datos.obtenerPanel());
+					}
 				}
 			});
 		}

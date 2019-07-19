@@ -11,4 +11,6 @@ public interface Servicio extends RemoteService{
 	public Usuario obtenerUsuario(String DNI, String ID);
 	
 	public Boolean registrarUsuario(String DNI, String ID);
+	
+	public Boolean actualizarUsuario(Usuario usuario);
 }

@@ -206,6 +206,82 @@
 											"height": 13,
 											"text": "#Apellido",
 											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLAttributeView",
+											"_id": "AAAAAAFsBuZrn898AoU=",
+											"_parent": {
+												"$ref": "AAAAAAFr50sfaurpVqQ="
+											},
+											"model": {
+												"$ref": "AAAAAAFsBuZrhs955Sw="
+											},
+											"lineColor": "#005446",
+											"fillColor": "#91ffec",
+											"font": "Arial;13;0",
+											"left": 309,
+											"top": 402,
+											"width": 135,
+											"height": 13,
+											"text": "+FechaNacimiento",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLAttributeView",
+											"_id": "AAAAAAFsBuZ/FdH5J9k=",
+											"_parent": {
+												"$ref": "AAAAAAFr50sfaurpVqQ="
+											},
+											"model": {
+												"$ref": "AAAAAAFsBuZ/B9H2Ptc="
+											},
+											"lineColor": "#005446",
+											"fillColor": "#91ffec",
+											"font": "Arial;13;0",
+											"left": 309,
+											"top": 417,
+											"width": 135,
+											"height": 13,
+											"text": "+LU",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLAttributeView",
+											"_id": "AAAAAAFsBuaGoNR2c0o=",
+											"_parent": {
+												"$ref": "AAAAAAFr50sfaurpVqQ="
+											},
+											"model": {
+												"$ref": "AAAAAAFsBuaGmdRzDXw="
+											},
+											"lineColor": "#005446",
+											"fillColor": "#91ffec",
+											"font": "Arial;13;0",
+											"left": 309,
+											"top": 432,
+											"width": 135,
+											"height": 13,
+											"text": "+Universidad",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLAttributeView",
+											"_id": "AAAAAAFsBuaZS9bzqts=",
+											"_parent": {
+												"$ref": "AAAAAAFr50sfaurpVqQ="
+											},
+											"model": {
+												"$ref": "AAAAAAFsBuaZQtbwSlU="
+											},
+											"lineColor": "#005446",
+											"fillColor": "#91ffec",
+											"font": "Arial;13;0",
+											"left": 309,
+											"top": 447,
+											"width": 135,
+											"height": 13,
+											"text": "+Carrera",
+											"horizontalAlignment": 0
 										}
 									],
 									"lineColor": "#005446",
@@ -214,7 +290,7 @@
 									"left": 304,
 									"top": 337,
 									"width": 145,
-									"height": 68
+									"height": 128
 								},
 								{
 									"_type": "UMLOperationCompartmentView",
@@ -229,7 +305,7 @@
 									"fillColor": "#91ffec",
 									"font": "Arial;13;0",
 									"left": 304,
-									"top": 405,
+									"top": 465,
 									"width": 145,
 									"height": 10
 								},
@@ -277,7 +353,7 @@
 							"left": 304,
 							"top": 312,
 							"width": 145,
-							"height": 145,
+							"height": 163,
 							"nameCompartment": {
 								"$ref": "AAAAAAFr50sfaurkGXk="
 							},
@@ -404,129 +480,13 @@
 									"model": {
 										"$ref": "AAAAAAFr50vs5+sytAE="
 									},
-									"subViews": [
-										{
-											"_type": "UMLAttributeView",
-											"_id": "AAAAAAFr50xWHOtljI4=",
-											"_parent": {
-												"$ref": "AAAAAAFr50vs6Os6EAk="
-											},
-											"model": {
-												"$ref": "AAAAAAFr50xV2etiEG4="
-											},
-											"lineColor": "#005446",
-											"fillColor": "#91ffec",
-											"font": "Arial;13;0",
-											"left": 149,
-											"top": 630,
-											"width": 135,
-											"height": 13,
-											"text": "#FechaNacimiento",
-											"horizontalAlignment": 0
-										},
-										{
-											"_type": "UMLAttributeView",
-											"_id": "AAAAAAFr50xLSutfUWE=",
-											"_parent": {
-												"$ref": "AAAAAAFr50vs6Os6EAk="
-											},
-											"model": {
-												"$ref": "AAAAAAFr50xLButcLu0="
-											},
-											"lineColor": "#005446",
-											"fillColor": "#91ffec",
-											"font": "Arial;13;0",
-											"left": 149,
-											"top": 645,
-											"width": 135,
-											"height": 13,
-											"text": "#LU",
-											"horizontalAlignment": 0
-										},
-										{
-											"_type": "UMLAttributeView",
-											"_id": "AAAAAAFr50ygHettpU0=",
-											"_parent": {
-												"$ref": "AAAAAAFr50vs6Os6EAk="
-											},
-											"model": {
-												"$ref": "AAAAAAFr50yf/Otqajw="
-											},
-											"lineColor": "#005446",
-											"fillColor": "#91ffec",
-											"font": "Arial;13;0",
-											"left": 149,
-											"top": 660,
-											"width": 135,
-											"height": 13,
-											"text": "#Universidad",
-											"horizontalAlignment": 0
-										},
-										{
-											"_type": "UMLAttributeView",
-											"_id": "AAAAAAFr50yz5et0Q5M=",
-											"_parent": {
-												"$ref": "AAAAAAFr50vs6Os6EAk="
-											},
-											"model": {
-												"$ref": "AAAAAAFr50yzxutxyrw="
-											},
-											"lineColor": "#005446",
-											"fillColor": "#91ffec",
-											"font": "Arial;13;0",
-											"left": 149,
-											"top": 675,
-											"width": 135,
-											"height": 13,
-											"text": "#Carrera",
-											"horizontalAlignment": 0
-										},
-										{
-											"_type": "UMLAttributeView",
-											"_id": "AAAAAAFr50zNUOt7iXU=",
-											"_parent": {
-												"$ref": "AAAAAAFr50vs6Os6EAk="
-											},
-											"model": {
-												"$ref": "AAAAAAFr50zNKut4ob4="
-											},
-											"lineColor": "#005446",
-											"fillColor": "#91ffec",
-											"font": "Arial;13;0",
-											"left": 149,
-											"top": 690,
-											"width": 135,
-											"height": 13,
-											"text": "#Nacionalidad",
-											"horizontalAlignment": 0
-										},
-										{
-											"_type": "UMLAttributeView",
-											"_id": "AAAAAAFr50zi7uuCXTc=",
-											"_parent": {
-												"$ref": "AAAAAAFr50vs6Os6EAk="
-											},
-											"model": {
-												"$ref": "AAAAAAFr50ziz+t/tys="
-											},
-											"lineColor": "#005446",
-											"fillColor": "#91ffec",
-											"font": "Arial;13;0",
-											"left": 149,
-											"top": 705,
-											"width": 135,
-											"height": 13,
-											"text": "#Grupo",
-											"horizontalAlignment": 0
-										}
-									],
 									"lineColor": "#005446",
 									"fillColor": "#91ffec",
 									"font": "Arial;13;0",
 									"left": 144,
 									"top": 625,
 									"width": 145,
-									"height": 98
+									"height": 10
 								},
 								{
 									"_type": "UMLOperationCompartmentView",
@@ -541,7 +501,7 @@
 									"fillColor": "#91ffec",
 									"font": "Arial;13;0",
 									"left": 144,
-									"top": 723,
+									"top": 635,
 									"width": 145,
 									"height": 10
 								},
@@ -912,91 +872,13 @@
 									"model": {
 										"$ref": "AAAAAAFr502p9+vAeJ8="
 									},
-									"subViews": [
-										{
-											"_type": "UMLAttributeView",
-											"_id": "AAAAAAFr502zFOvt/aU=",
-											"_parent": {
-												"$ref": "AAAAAAFr502p+OvIo9o="
-											},
-											"model": {
-												"$ref": "AAAAAAFr502y8+vqZ8c="
-											},
-											"lineColor": "#005446",
-											"fillColor": "#91ffec",
-											"font": "Arial;13;0",
-											"left": 453,
-											"top": 814,
-											"width": 135,
-											"height": 13,
-											"text": "#FechaNacimiento",
-											"horizontalAlignment": 0
-										},
-										{
-											"_type": "UMLAttributeView",
-											"_id": "AAAAAAFr50+Cq+v1SaA=",
-											"_parent": {
-												"$ref": "AAAAAAFr502p+OvIo9o="
-											},
-											"model": {
-												"$ref": "AAAAAAFr50+CWuvyZPE="
-											},
-											"lineColor": "#005446",
-											"fillColor": "#91ffec",
-											"font": "Arial;13;0",
-											"left": 453,
-											"top": 829,
-											"width": 135,
-											"height": 13,
-											"text": "#LU",
-											"horizontalAlignment": 0
-										},
-										{
-											"_type": "UMLAttributeView",
-											"_id": "AAAAAAFr50+y6+v8H5o=",
-											"_parent": {
-												"$ref": "AAAAAAFr502p+OvIo9o="
-											},
-											"model": {
-												"$ref": "AAAAAAFr50+yyOv5A38="
-											},
-											"lineColor": "#005446",
-											"fillColor": "#91ffec",
-											"font": "Arial;13;0",
-											"left": 453,
-											"top": 844,
-											"width": 135,
-											"height": 13,
-											"text": "#Universidad",
-											"horizontalAlignment": 0
-										},
-										{
-											"_type": "UMLAttributeView",
-											"_id": "AAAAAAFr50/a2+wDUgM=",
-											"_parent": {
-												"$ref": "AAAAAAFr502p+OvIo9o="
-											},
-											"model": {
-												"$ref": "AAAAAAFr50/amuwAlNY="
-											},
-											"lineColor": "#005446",
-											"fillColor": "#91ffec",
-											"font": "Arial;13;0",
-											"left": 453,
-											"top": 859,
-											"width": 135,
-											"height": 13,
-											"text": "#Carrera",
-											"horizontalAlignment": 0
-										}
-									],
 									"lineColor": "#005446",
 									"fillColor": "#91ffec",
 									"font": "Arial;13;0",
 									"left": 448,
 									"top": 809,
 									"width": 145,
-									"height": 68
+									"height": 10
 								},
 								{
 									"_type": "UMLOperationCompartmentView",
@@ -1011,7 +893,7 @@
 									"fillColor": "#91ffec",
 									"font": "Arial;13;0",
 									"left": 448,
-									"top": 877,
+									"top": 819,
 									"width": 145,
 									"height": 10
 								},
@@ -1833,7 +1715,7 @@
 							"tail": {
 								"$ref": "AAAAAAFr50vs5+s0L+c="
 							},
-							"points": "216:600;216:536;368:536;368:456",
+							"points": "216:600;216:536;368:536;368:474",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAFr51H2ROy08uU="
@@ -1927,7 +1809,7 @@
 							"tail": {
 								"$ref": "AAAAAAFr5013iuuNIVY="
 							},
-							"points": "520:600;520:536;368:536;368:456",
+							"points": "520:600;520:536;368:536;368:474",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAFr51IJnezFLk0="
@@ -14636,6 +14518,38 @@
 							"name": "Apellido",
 							"visibility": "protected",
 							"type": ""
+						},
+						{
+							"_type": "UMLAttribute",
+							"_id": "AAAAAAFsBuZrhs955Sw=",
+							"_parent": {
+								"$ref": "AAAAAAFr50sfaOrhqX0="
+							},
+							"name": "FechaNacimiento"
+						},
+						{
+							"_type": "UMLAttribute",
+							"_id": "AAAAAAFsBuZ/B9H2Ptc=",
+							"_parent": {
+								"$ref": "AAAAAAFr50sfaOrhqX0="
+							},
+							"name": "LU"
+						},
+						{
+							"_type": "UMLAttribute",
+							"_id": "AAAAAAFsBuaGmdRzDXw=",
+							"_parent": {
+								"$ref": "AAAAAAFr50sfaOrhqX0="
+							},
+							"name": "Universidad"
+						},
+						{
+							"_type": "UMLAttribute",
+							"_id": "AAAAAAFsBuaZQtbwSlU=",
+							"_parent": {
+								"$ref": "AAAAAAFr50sfaOrhqX0="
+							},
+							"name": "Carrera"
 						}
 					],
 					"isAbstract": true
@@ -14777,68 +14691,6 @@
 							},
 							"visibility": "protected"
 						}
-					],
-					"attributes": [
-						{
-							"_type": "UMLAttribute",
-							"_id": "AAAAAAFr50xV2etiEG4=",
-							"_parent": {
-								"$ref": "AAAAAAFr50vs5+sytAE="
-							},
-							"name": "FechaNacimiento",
-							"visibility": "protected",
-							"type": ""
-						},
-						{
-							"_type": "UMLAttribute",
-							"_id": "AAAAAAFr50xLButcLu0=",
-							"_parent": {
-								"$ref": "AAAAAAFr50vs5+sytAE="
-							},
-							"name": "LU",
-							"visibility": "protected",
-							"type": ""
-						},
-						{
-							"_type": "UMLAttribute",
-							"_id": "AAAAAAFr50yf/Otqajw=",
-							"_parent": {
-								"$ref": "AAAAAAFr50vs5+sytAE="
-							},
-							"name": "Universidad",
-							"visibility": "protected",
-							"type": ""
-						},
-						{
-							"_type": "UMLAttribute",
-							"_id": "AAAAAAFr50yzxutxyrw=",
-							"_parent": {
-								"$ref": "AAAAAAFr50vs5+sytAE="
-							},
-							"name": "Carrera",
-							"visibility": "protected",
-							"type": ""
-						},
-						{
-							"_type": "UMLAttribute",
-							"_id": "AAAAAAFr50zNKut4ob4=",
-							"_parent": {
-								"$ref": "AAAAAAFr50vs5+sytAE="
-							},
-							"name": "Nacionalidad",
-							"visibility": "protected",
-							"type": ""
-						},
-						{
-							"_type": "UMLAttribute",
-							"_id": "AAAAAAFr50ziz+t/tys=",
-							"_parent": {
-								"$ref": "AAAAAAFr50vs5+sytAE="
-							},
-							"name": "Grupo",
-							"visibility": "protected",
-							"type": ""
-						}
 					]
 				},
 				{
@@ -14913,48 +14765,6 @@
 									"$ref": "AAAAAAFr51zbpxAepA0="
 								}
 							}
-						}
-					],
-					"attributes": [
-						{
-							"_type": "UMLAttribute",
-							"_id": "AAAAAAFr502y8+vqZ8c=",
-							"_parent": {
-								"$ref": "AAAAAAFr502p9+vAeJ8="
-							},
-							"name": "FechaNacimiento",
-							"visibility": "protected",
-							"type": ""
-						},
-						{
-							"_type": "UMLAttribute",
-							"_id": "AAAAAAFr50+CWuvyZPE=",
-							"_parent": {
-								"$ref": "AAAAAAFr502p9+vAeJ8="
-							},
-							"name": "LU",
-							"visibility": "protected",
-							"type": ""
-						},
-						{
-							"_type": "UMLAttribute",
-							"_id": "AAAAAAFr50+yyOv5A38=",
-							"_parent": {
-								"$ref": "AAAAAAFr502p9+vAeJ8="
-							},
-							"name": "Universidad",
-							"visibility": "protected",
-							"type": ""
-						},
-						{
-							"_type": "UMLAttribute",
-							"_id": "AAAAAAFr50/amuwAlNY=",
-							"_parent": {
-								"$ref": "AAAAAAFr502p9+vAeJ8="
-							},
-							"name": "Carrera",
-							"visibility": "protected",
-							"type": ""
 						}
 					]
 				},

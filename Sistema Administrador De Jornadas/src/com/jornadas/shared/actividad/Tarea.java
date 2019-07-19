@@ -10,7 +10,8 @@ import com.jornadas.shared.extras.Hora;
 import com.jornadas.shared.usuario.Voluntario;
 
 public abstract class Tarea implements Serializable{
-	
+
+	private static final long serialVersionUID = 3224887178289840475L;
 	protected String ID;
 	protected String Titulo;
 	protected String Descripcion;

@@ -7,8 +7,11 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
+import com.google.gwt.core.client.GWT;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.jornadas.client.Servicio;
+import com.jornadas.shared.excepciones.FechaInvalidaException;
 import com.jornadas.shared.usuario.Asistente;
 import com.jornadas.shared.usuario.Usuario;
 
@@ -49,6 +52,32 @@ public class ServicioImpl extends RemoteServiceServlet implements Servicio {
 			return true;
 		} else
 			return false;
+	}
+	
+	public Boolean actualizarUsuario(Usuario usuario) {
+		Usuario usuarioServidor = jornada.recuperarUsuario(usuario.obtenerID(), usuario.obtenerDNI());
+		
+		
+		
+		if(usuarioServidor!=null) {
+			usuarioServidor.establecerNombre(usuario.obtenerNombre());
+			usuarioServidor.establecerApellido(usuario.obtenerApellido());
+			usuarioServidor.establecerUniversidad(usuario.obtenerUniversidad());
+			usuarioServidor.establecerCarrera(usuario.obtenerCarrera());
+			usuarioServidor.establecerLU(usuario.obtenerLU());
+			usuarioServidor.establecerTelefono(usuario.obtenerTelefono());
+			usuarioServidor.establecerMail(usuario.obtenerMail());
+			try {
+				usuarioServidor.establecerFechaDeNacimiento(usuario.obtenerFechaDeNacimiento().obtenerDia(), usuario.obtenerFechaDeNacimiento().obtenerMes(), usuario.obtenerFechaDeNacimiento().obtenerAnio());
+			} catch (FechaInvalidaException e) {
+				e.printStackTrace();
+				return false;
+			}
+			guardarJornada();
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
 	private void guardarJornada() {

@@ -6,7 +6,7 @@ import com.jornadas.shared.excepciones.FechaInvalidaException;
 
 public class Fecha implements Serializable{
 
-	private static final long serialVersionUID = 8332012622326708370L;
+	private static final long serialVersionUID = -3283873647403197605L;
 	private int Dia;
 	private int Mes;
 	private int Anio;
@@ -71,7 +71,7 @@ public class Fecha implements Serializable{
 		if(anio>0)
 			return true;
 		else
-			throw new FechaInvalidaException("Error: El año no puede ser menor a 0");
+			throw new FechaInvalidaException("Error: El año no puede ser menor a 0 ");
 	}
 	
 	private boolean mesValido(int mes) throws FechaInvalidaException {
@@ -83,7 +83,7 @@ public class Fecha implements Serializable{
 	
 	private boolean diaValido(int dia) throws FechaInvalidaException {
 		if(Mes==1 || Mes==3 || Mes==5 || Mes==7 || Mes==8 || Mes==10 || Mes==12 ) {
-			if(Dia>0 && Dia<=31)
+			if(dia>0 && dia<=31)
 				return true;
 			else
 				throw new FechaInvalidaException("Error: Dia Invalido");
@@ -103,7 +103,7 @@ public class Fecha implements Serializable{
 			} else {
 				//El mes es 4,6,9 o 11
 				if(Mes==4 || Mes==6 || Mes==9 || Mes==11) {
-					if(Dia>0 && Dia<=30)
+					if(dia>0 && dia<=30)
 						return true;
 					else
 						throw new FechaInvalidaException("Error: Dia Invalido");

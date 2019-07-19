@@ -37,8 +37,31 @@ public class Area implements Serializable{
 		Nombre = nombre;
 	}
 	
-	public void establecerCoordniador(CoordinadorDeArea coordinador) {
-		Coordinador = coordinador;
+	/**
+	*	Establece a un Coordinador como el Coordinador del area, y le establece su Area como esta area
+	*	@return verdadero si el coordinador no tenia area asignada y el area no teania ya un coordinador, caso contrario falso
+	*/
+	public boolean establecerCoordinador(CoordinadorDeArea coordinador) {
+		if(Coordinador==null && coordinador.establecerArea(this)) {
+			Coordinador = coordinador;
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
+	/**
+	*	Quita al Coordinador del area y se la desasigna
+	*	@return verdadero si el area tenia un Coordinador y se lo pudo remover, caso contrario falso
+	*/
+	public boolean quitarCoordinador() {
+		if(Coordinador!=null) {
+			Coordinador.quitarArea();
+			Coordinador = null;
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
 	/**
