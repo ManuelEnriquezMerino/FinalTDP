@@ -3,14 +3,9 @@ package com.jornadas.server;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Collection;
-import java.util.Iterator;
-
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.jornadas.client.Servicio;
 import com.jornadas.shared.actividad.Area;

@@ -1,9 +1,6 @@
 package com.jornadas.shared.actividad;
 
 import com.jornadas.shared.excepciones.CupoInvalidoException;
-import com.jornadas.shared.excepciones.FechaInvalidaException;
-import com.jornadas.shared.excepciones.HoraInvalidaException;
-import com.jornadas.shared.excepciones.HorariosEventoInvalidosException;
 
 public class InformacionActividad extends InformacionTarea{
 

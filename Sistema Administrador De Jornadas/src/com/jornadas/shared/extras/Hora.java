@@ -5,7 +5,8 @@ import java.io.Serializable;
 import com.jornadas.shared.excepciones.HoraInvalidaException;
 
 public class Hora implements Serializable{
-	
+
+	private static final long serialVersionUID = -1900044918962743880L;
 	protected int H;
 	protected int M;
 	

@@ -1,0 +1,22 @@
+private class oyenteAgregar implements ClickHandler {
+
+		public void onClick(ClickEvent event) {
+			System.out.println("CLICK");
+			
+			Servicio.registrarUsuario(textBoxID.getText(), textBoxDNI.getText(), new AsyncCallback<Boolean>() {
+
+				@Override
+				public void onFailure(Throwable caught) {
+					Window.alert("Exception Received from server.");
+				}
+
+				@Override
+				public void onSuccess(Boolean resultado) {
+					if(resultado==true)
+						lbl.setText("Usuario agregado con exito");
+					else
+						lbl.setText("Error: El usuario ya existe");
+				}
+			});
+		}
+    }

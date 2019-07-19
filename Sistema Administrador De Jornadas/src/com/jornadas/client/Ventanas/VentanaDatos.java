@@ -6,20 +6,24 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Panel;
-import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.HasHorizontalAlignment;
+import com.google.gwt.user.client.ui.HasVerticalAlignment;
+import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.client.ui.VerticalPanel;
 import com.jornadas.client.ServicioAsync;
 import com.jornadas.shared.excepciones.FechaInvalidaException;
 import com.jornadas.shared.usuario.Usuario;
 
 public class VentanaDatos{
 	
-	protected FlowPanel Panel;
+	protected VerticalPanel Panel;
 	
 	protected Usuario Usuario;
 	protected ServicioAsync Servicio;
-	
+
+	protected HorizontalPanel panelID, panelDNI, panelNombre, panelApellido, panelFechaNacimiento, panelLU, panelUniversidad, panelCarrera, panelTelefono, panelMail;
 	private Label etiquetaDNI, etiquetaID, etiquetaNombre, etiquetaApellido, etiquetaFechaNacimiento, etiquetaLU, etiquetaUniversidad, etiquetaCarrera, etiquetaTelefono, etiquetaMail, etiquetaDia, etiquetaMes, etiquetaAnio;
 	private Label labelDNI, labelID;
 	private TextBox textBoxNombre, textBoxApellido, textBoxUniversidad, textBoxCarrera, textBoxTelefono, textBoxMail, textBoxDia, textBoxMes, textBoxAnio, textBoxLU;
@@ -29,8 +33,10 @@ public class VentanaDatos{
 		Usuario = usuario;
 		Servicio = servicio;
 		
-		Panel = new FlowPanel();
+		Panel = new VerticalPanel();
 		Panel.setSize("100%", "100%"); 
+		Panel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
+		Panel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
 		Panel.getElement().getStyle().setBackgroundColor("#c0e7f6");
 				
 		inicializarEtiquetas();
@@ -39,6 +45,8 @@ public class VentanaDatos{
 		
 		botonGuardar = new Button("Guardar");
 		botonGuardar.addClickHandler(new oyenteGuardarDatos());
+		
+		inicializarPaneles();
 		
 		poblarPanel();
 	}
@@ -97,52 +105,65 @@ public class VentanaDatos{
 		textBoxAnio.setText(anioNacimiento);
 	}
 	
+	protected void inicializarPaneles() {
+		panelDNI = new HorizontalPanel();
+		panelDNI.add(etiquetaDNI);
+		panelDNI.add(labelDNI);
+		
+		panelID = new HorizontalPanel();
+		panelID.add(etiquetaID);
+		panelID.add(labelID);
+		
+		panelNombre = new HorizontalPanel();
+		panelNombre.add(etiquetaNombre);
+		panelNombre.add(textBoxNombre);
+		
+		panelApellido = new HorizontalPanel();
+		panelApellido.add(etiquetaApellido);
+		panelApellido.add(textBoxApellido);
+		
+		panelFechaNacimiento = new HorizontalPanel();
+		panelFechaNacimiento.add(etiquetaDia);
+		panelFechaNacimiento.add(textBoxDia);
+		panelFechaNacimiento.add(etiquetaMes);
+		panelFechaNacimiento.add(textBoxMes);
+		panelFechaNacimiento.add(etiquetaAnio);
+		panelFechaNacimiento.add(textBoxAnio);
+		
+		panelUniversidad = new HorizontalPanel();
+		panelUniversidad.add(etiquetaUniversidad);
+		panelUniversidad.add(textBoxUniversidad);
+		
+		panelCarrera = new HorizontalPanel();
+		panelCarrera.add(etiquetaCarrera);
+		panelCarrera.add(textBoxCarrera);
+		
+		panelLU = new HorizontalPanel();
+		panelLU.add(etiquetaLU);
+		panelLU.add(textBoxLU);
+		
+		panelTelefono = new HorizontalPanel();
+		panelTelefono.add(etiquetaTelefono);
+		panelTelefono.add(textBoxTelefono);
+		
+		panelMail = new HorizontalPanel();
+		panelMail.add(etiquetaMail);
+		panelMail.add(textBoxMail);
+
+	}
+	
 	private void poblarPanel() {
-		//DNI
-		Panel.add(etiquetaDNI);
-		Panel.add(labelDNI);
-		
-		//ID
-		Panel.add(etiquetaID);
-		Panel.add(labelID);
-		
-		//Nombre
-		Panel.add(etiquetaNombre);
-		Panel.add(textBoxNombre);
-		
-		//Apellido
-		Panel.add(etiquetaApellido);
-		Panel.add(textBoxApellido);
-		
-		//Fecha de Nacimiento
+		Panel.add(panelID);
+		Panel.add(panelDNI);
+		Panel.add(panelNombre);
+		Panel.add(panelApellido);
 		Panel.add(etiquetaFechaNacimiento);
-		Panel.add(etiquetaDia);
-		Panel.add(textBoxDia);
-		Panel.add(etiquetaMes);
-		Panel.add(textBoxMes);
-		Panel.add(etiquetaAnio);
-		Panel.add(textBoxAnio);
-		
-		//Universidad
-		Panel.add(etiquetaUniversidad);
-		Panel.add(textBoxUniversidad);
-		
-		//Carrera
-		Panel.add(etiquetaCarrera);
-		Panel.add(textBoxCarrera);
-		
-		//LU
-		Panel.add(etiquetaLU);
-		Panel.add(textBoxLU);
-		
-		//Telefono
-		Panel.add(etiquetaTelefono);
-		Panel.add(textBoxTelefono);
-		
-		//Mail
-		Panel.add(etiquetaMail);
-		Panel.add(textBoxMail);
-		
+		Panel.add(panelFechaNacimiento);
+		Panel.add(panelLU);
+		Panel.add(panelUniversidad);
+		Panel.add(panelCarrera);
+		Panel.add(panelTelefono);
+		Panel.add(panelMail);	
 		Panel.add(botonGuardar);
 	}
 	
