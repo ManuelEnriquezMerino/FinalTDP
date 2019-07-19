@@ -1,5 +1,8 @@
 package com.jornadas.client.Ventanas;
 
+import java.util.Collection;
+import java.util.LinkedList;
+
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
@@ -75,8 +78,18 @@ public class VentanaLoggeo {
 						lbl.setText("ERROR: Usuario no encontrado");
 					else {
 						RootLayoutPanel.get().remove(0);
+						
 						VentanaDatos datos = new VentanaDatos(resultado, Servicio);
-						RootLayoutPanel.get().add(datos.obtenerPanel());
+						VentanaArea area = new VentanaArea(Servicio);
+						
+						Collection<Panel> paneles = new LinkedList<Panel>();
+						
+						paneles.add(datos.obtenerPanel());
+						paneles.add(area.obtenerPanel());
+						
+						VentanaPestanias pestanias = new VentanaPestanias(paneles);
+						
+						RootLayoutPanel.get().add(pestanias.obtenerPanel());
 					}
 				}
 			});
