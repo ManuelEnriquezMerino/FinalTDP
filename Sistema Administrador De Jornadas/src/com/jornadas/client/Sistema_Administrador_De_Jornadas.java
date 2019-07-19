@@ -10,12 +10,15 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
-import com.jornadas.client.Ventanas.VentanaCargarArea;
+import com.jornadas.client.Ventanas.VentanaArea;
 import com.jornadas.client.Ventanas.VentanaDatos;
+import com.jornadas.shared.actividad.Area;
+import com.jornadas.shared.actividad.TipoActividad;
+import com.jornadas.shared.excepciones.FechaInvalidaException;
+import com.jornadas.shared.usuario.CoordinadorDeArea;
 import com.jornadas.shared.usuario.Usuario;
 
 public class Sistema_Administrador_De_Jornadas implements EntryPoint {
@@ -32,7 +35,39 @@ public class Sistema_Administrador_De_Jornadas implements EntryPoint {
 		//crearPanelLoggeo();
 		//RootLayoutPanel.get().add(panelLoggeo);
 		
-		VentanaCargarArea cargarArea = new VentanaCargarArea(Servicio);
+		Area area = new Area();
+		area.establecerID("" + 1);
+		area.establecerNombre("Charlas");
+		
+		
+		CoordinadorDeArea c = new CoordinadorDeArea();
+		c.establecerApellido("z");
+		c.establecerCarrera("z");
+		c.establecerDNI("z");
+		try {
+			c.establecerFechaDeNacimiento(1, 1, 1);
+		} catch (FechaInvalidaException e) {
+			e.printStackTrace();
+		}
+		c.establecerID("z");
+		c.establecerLU("z");
+		c.establecerMail("z");
+		c.establecerNombre("z");
+		c.establecerTelefono("z");
+		c.establecerUniversidad("z");
+		
+		
+		area.establecerCoordinador(c);
+		
+		TipoActividad tipo;
+		tipo = new TipoActividad();
+		tipo.establecerDescripcion("Descripcion: "+2);
+		tipo.establecerID("ID: "+2);
+		tipo.establecerTitulo("Titulo: "+2);
+		
+		area.agregarTipoDeActividad(tipo);
+		
+		VentanaArea cargarArea = new VentanaArea(area,Servicio);
 		RootLayoutPanel.get().add(cargarArea.obtenerPanel());
 	}
 	

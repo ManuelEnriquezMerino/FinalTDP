@@ -36,6 +36,28 @@ public class Jornada implements Serializable{
 		ColeccionDeUsuarios.put(Clave, usuario);
 	}
 	
+	public boolean modificarArea(Area areaModificada){
+		boolean encontre = false;
+		String idArea = areaModificada.obtenerID();
+		Area AreaActual = null;
+		Iterator<Area> iterador = Areas.iterator();
+		
+		while (!encontre && iterador.hasNext()) {
+			AreaActual = iterador.next();
+			encontre = idArea.equals(AreaActual.obtenerID());
+		}
+		
+		if(encontre) {
+			AreaActual.establecerNombre(areaModificada.obtenerNombre());
+			if(AreaActual.establecerCoordinador(areaModificada.obtenerCoordinador()))
+				return true;
+			else
+				return false;
+		}
+		
+		return false;
+	}
+	
 	public boolean agregarArea(Area area) {
 		if (Areas.add(area)) {
 			String Clave = area.obtenerCoordinador().obtenerID()+area.obtenerCoordinador().obtenerDNI();

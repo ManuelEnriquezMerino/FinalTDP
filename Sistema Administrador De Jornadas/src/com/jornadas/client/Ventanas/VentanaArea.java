@@ -2,6 +2,7 @@ package com.jornadas.client.Ventanas;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -26,23 +27,24 @@ import com.jornadas.shared.actividad.TipoActividad;
 import com.jornadas.shared.usuario.CoordinadorDeArea;
 import com.jornadas.shared.usuario.Usuario;
 
-public class VentanaCargarArea {
+public class VentanaArea {
 	
 	protected VerticalPanel Panel;
 	protected HorizontalPanel PanelCheckBox, PanelID, PanelNombre, PanelCoordinador, PanelActividades;
 	
 	protected ServicioAsync Servicio;
-	protected Area NuevaArea;
+	protected Area Area;
 	protected Map<String,CoordinadorDeArea> MapeoDeCoordinadores;
 	
 	private Label etiquetaID, etiquetaNombre, etiquetaCoordinador, etiquetaTiposDeActividades;
 	private Label labelID;
 	private TextBox textBoxNombre;
 	private ListBox listBoxCoordinadores;
-	private Map<CheckBox,TipoActividad> checkBoxTipoDeActividades;
+	private Map<TipoActividad,CheckBox> checkBoxTipoDeActividades;
 	private Button botonGuardar;
 	
-	public VentanaCargarArea(ServicioAsync servicio) {
+	public VentanaArea(Area area, ServicioAsync servicio) {
+		Area = area;
 		Servicio = servicio;
 		
 		Panel = new VerticalPanel();
@@ -54,9 +56,20 @@ public class VentanaCargarArea {
 		cargarVentana();
 	}
 	
-	protected void cargarVentana() {
-		NuevaArea = new Area();
+	public VentanaArea(ServicioAsync servicio) {
+		Servicio = servicio;
+		Area = new Area();
 		
+		Panel = new VerticalPanel();
+		Panel.setSize("100%", "100%"); 
+		Panel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
+		Panel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
+		Panel.getElement().getStyle().setBackgroundColor("#d6e2d5");
+		
+		cargarVentana();
+	}
+	
+	protected void cargarVentana() {
 		inicializarEtiquetas();
 		inicializarLabel();
 		inicializarListBox();
@@ -65,7 +78,11 @@ public class VentanaCargarArea {
 		inicializarPaneles();
 		
 		botonGuardar = new Button("Guardar");
-		botonGuardar.addClickHandler(new oyenteGuardarDatos());
+		
+		if(Area.obtenerNombre()==null)
+			botonGuardar.addClickHandler(new oyenteGuardarDatos());
+		else
+			botonGuardar.addClickHandler(new oyenteModificarDatos());
 		
 		poblarPanel();
 	}
@@ -83,25 +100,35 @@ public class VentanaCargarArea {
 	
 	protected void inicializarLabel() {
 		labelID = new Label();
-		Servicio.obtenerIDNuevaArea(new AsyncCallback<Integer>() {
+		
+		if(Area.obtenerID()!=null)
+			labelID.setText(Area.obtenerID());
+		else {
+			Servicio.obtenerIDNuevaArea(new AsyncCallback<Integer>() {
 
-			@Override
-			public void onFailure(Throwable caught) {
-				Window.alert("Error al comunicarse con el servidor. Por favor vuelva a intentarlo");
-			}
+				@Override
+				public void onFailure(Throwable caught) {
+					Window.alert("Error al comunicarse con el servidor. Por favor vuelva a intentarlo");
+				}
 
-			@Override
-			public void onSuccess(Integer resultado) {
-				String nuevoID = "Area_" + resultado;
-				NuevaArea.establecerID(nuevoID);
-				labelID.setText(nuevoID);
-			}
-		});
+				@Override
+				public void onSuccess(Integer resultado) {
+					String nuevoID = "Area_" + resultado;
+					Area.establecerID(nuevoID);
+					labelID.setText(nuevoID);
+				}
+			});
+		}
 	}
 	
 	protected void inicializarListBox() {
 		listBoxCoordinadores = new ListBox();
 		final CoordinadoresDeArea coordinadores = new CoordinadoresDeArea();
+		
+		if(Area.obtenerCoordinador()!=null) {
+			String CoordinadorActual = Area.obtenerCoordinador().obtenerNombre() + " " + Area.obtenerCoordinador().obtenerApellido();
+			listBoxCoordinadores.addItem(CoordinadorActual);
+		}
 		
 		Servicio.obtenerUsuarios(new AsyncCallback<Collection<Usuario>>() {
 
@@ -127,7 +154,7 @@ public class VentanaCargarArea {
 	}
 	
 	protected void inicializarCheckBox() {
-		checkBoxTipoDeActividades = new HashMap<CheckBox,TipoActividad>();
+		checkBoxTipoDeActividades = new HashMap<TipoActividad,CheckBox>();
 		PanelCheckBox = new HorizontalPanel();
 		
 		Servicio.obtenerTiposDeActividades(new AsyncCallback<Collection<TipoActividad>>() {
@@ -140,18 +167,27 @@ public class VentanaCargarArea {
 			@Override
 			public void onSuccess(Collection<TipoActividad> resultado) {
 				for(TipoActividad tipo : resultado){
-					checkBoxTipoDeActividades.put(new CheckBox(tipo.obtenerTitulo()), tipo);
+					checkBoxTipoDeActividades.put(tipo ,new CheckBox(tipo.obtenerTitulo()));
 				}
 				
-				for(CheckBox checkBox : checkBoxTipoDeActividades.keySet()) {
+				for(CheckBox checkBox : checkBoxTipoDeActividades.values()) {
 					PanelCheckBox.add(checkBox);
+				}
+				
+				Iterator<TipoActividad> iterador = Area.obtenerTiposDeActividades();
+				
+				while(iterador.hasNext()) {
+					checkBoxTipoDeActividades.get(iterador.next()).setValue(true);
 				}
 			}
 		});
+		
+		
 	}
 	
 	protected void inicializarTextBox() {
 		textBoxNombre = new TextBox();
+		textBoxNombre.setText(Area.obtenerNombre());
 	}
 	
 	protected void inicializarPaneles() {
@@ -187,12 +223,12 @@ public class VentanaCargarArea {
 	protected void modificarArea() {
 		CoordinadorDeArea coordinador = MapeoDeCoordinadores.get(listBoxCoordinadores.getSelectedItemText());
 		
-		if(NuevaArea.establecerCoordinador(coordinador)) {
-			NuevaArea.establecerNombre(textBoxNombre.getText());
+		if(Area.establecerCoordinador(coordinador)) {
+			Area.establecerNombre(textBoxNombre.getText());
 			
-			for(Entry<CheckBox,TipoActividad> entrada : checkBoxTipoDeActividades.entrySet()) {
-				if(entrada.getKey().getValue()) {
-					NuevaArea.agregarTipoDeActividad(entrada.getValue());
+			for(Entry<TipoActividad,CheckBox> entrada : checkBoxTipoDeActividades.entrySet()) {
+				if(entrada.getValue().getValue()) {
+					Area.agregarTipoDeActividad(entrada.getKey());
 				}
 			}
 			
@@ -213,7 +249,7 @@ public class VentanaCargarArea {
 		public void onClick(ClickEvent event) {
 			modificarArea();
 			
-			Servicio.agregarArea(NuevaArea, new AsyncCallback<Boolean>() {
+			Servicio.agregarArea(Area, new AsyncCallback<Boolean>() {
 
 			@Override
 			public void onFailure(Throwable caught) {
@@ -227,6 +263,34 @@ public class VentanaCargarArea {
 				else
 					Window.alert("Error al agregar el area");
 				
+				Area = new Area();
+				limpiarPanel();
+				cargarVentana();
+			}
+			});
+		}
+	}
+	
+	protected class oyenteModificarDatos implements ClickHandler {
+
+		public void onClick(ClickEvent event) {
+			modificarArea();
+			
+			Servicio.agregarArea(Area, new AsyncCallback<Boolean>() {
+
+			@Override
+			public void onFailure(Throwable caught) {
+				Window.alert("Error al comunicarse con el servidor. Por favor vuelva a intentarlo");
+			}
+
+			@Override
+			public void onSuccess(Boolean resultado) {
+				if(resultado)
+					Window.alert("Area agregada correctamente");
+				else
+					Window.alert("Error al agregar el area");
+				
+				Area = new Area();
 				limpiarPanel();
 				cargarVentana();
 			}

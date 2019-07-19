@@ -22,4 +22,6 @@ public interface ServicioAsync {
 	public void obtenerTiposDeActividades(AsyncCallback<Collection<TipoActividad>> Respuesta);
 	
 	public void agregarArea(Area NuevaArea, AsyncCallback<Boolean> Respuesta);
+	
+	public void modificarArea(Area AreaModificada, AsyncCallback<Boolean> Respuesta);
 }

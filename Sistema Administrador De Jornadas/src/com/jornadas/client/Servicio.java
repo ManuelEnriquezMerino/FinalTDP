@@ -25,4 +25,6 @@ public interface Servicio extends RemoteService{
 	public Collection<TipoActividad> obtenerTiposDeActividades();
 	
 	public Boolean agregarArea(Area NuevaArea);
+	
+	public Boolean modificarArea(Area AreaModificada);
 }

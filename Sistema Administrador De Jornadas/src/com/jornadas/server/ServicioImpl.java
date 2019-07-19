@@ -196,6 +196,13 @@ public class ServicioImpl extends RemoteServiceServlet implements Servicio {
 		return resultado;
 	}
 	
+	public Boolean modificarArea(Area AreaModificada) {
+		Boolean resultado = jornada.modificarArea(AreaModificada);
+		if(resultado)
+			guardarJornada();
+		return resultado;
+	}
+	
 	private void guardarJornada() {
 		try {
 			FileOutputStream fout = new FileOutputStream("DatosDeJornada");
