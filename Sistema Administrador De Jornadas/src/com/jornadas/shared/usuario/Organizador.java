@@ -36,4 +36,8 @@ public class Organizador extends Voluntario{
 	public void accionar(Accion accion) {
 		accion.Accionar(this);
 	}
+	
+	public boolean tieneArea() {
+		return Area!=null;
+	}
 }

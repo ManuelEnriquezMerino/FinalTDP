@@ -8,6 +8,7 @@ import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.Map;
 
+import com.jornadas.shared.Visitor.EstablecerArea;
 import com.jornadas.shared.actividad.Area;
 import com.jornadas.shared.actividad.TipoActividad;
 import com.jornadas.shared.usuario.Usuario;
@@ -36,7 +37,16 @@ public class Jornada implements Serializable{
 	}
 	
 	public boolean agregarArea(Area area) {
-		return Areas.add(area);
+		if (Areas.add(area)) {
+			String Clave = area.obtenerCoordinador().obtenerID()+area.obtenerCoordinador().obtenerDNI();
+			EstablecerArea accion = new EstablecerArea(area);
+			ColeccionDeUsuarios.get(Clave).accionar(accion);
+			if(accion.obtenerResultado())
+				return true;
+			else
+				Areas.remove(area);
+		}
+		return false;
 	}
 	
 	public boolean agregarTipoActividad(TipoActividad tipo) {

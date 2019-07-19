@@ -11,12 +11,14 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.CheckBox;
+import com.google.gwt.user.client.ui.HasHorizontalAlignment;
+import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.Panel;
-import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.client.ui.VerticalPanel;
 import com.jornadas.client.ServicioAsync;
 import com.jornadas.shared.Visitor.CoordinadoresDeArea;
 import com.jornadas.shared.actividad.Area;
@@ -26,8 +28,8 @@ import com.jornadas.shared.usuario.Usuario;
 
 public class VentanaCargarArea {
 	
-	protected FlowPanel Panel;
-	protected HorizontalPanel PanelCheckBox;
+	protected VerticalPanel Panel;
+	protected HorizontalPanel PanelCheckBox, PanelID, PanelNombre, PanelCoordinador, PanelActividades;
 	
 	protected ServicioAsync Servicio;
 	protected Area NuevaArea;
@@ -42,19 +44,25 @@ public class VentanaCargarArea {
 	
 	public VentanaCargarArea(ServicioAsync servicio) {
 		Servicio = servicio;
-		NuevaArea = new Area();
 		
-		Panel = new FlowPanel();
+		Panel = new VerticalPanel();
 		Panel.setSize("100%", "100%"); 
+		Panel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
+		Panel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
 		Panel.getElement().getStyle().setBackgroundColor("#d6e2d5");
 		
-		PanelCheckBox = new HorizontalPanel();
+		cargarVentana();
+	}
+	
+	protected void cargarVentana() {
+		NuevaArea = new Area();
 		
 		inicializarEtiquetas();
 		inicializarLabel();
 		inicializarListBox();
 		inicializarTextBox();
 		inicializarCheckBox();
+		inicializarPaneles();
 		
 		botonGuardar = new Button("Guardar");
 		botonGuardar.addClickHandler(new oyenteGuardarDatos());
@@ -110,8 +118,9 @@ public class VentanaCargarArea {
 				
 				MapeoDeCoordinadores = coordinadores.obtenerColeccionCoordinadores();
 				
-				for(String nombreCoordinador : MapeoDeCoordinadores.keySet()) {
-					listBoxCoordinadores.addItem(nombreCoordinador);
+				for(Entry<String, CoordinadorDeArea> Coordinador : MapeoDeCoordinadores.entrySet()) {
+					if(!Coordinador.getValue().tieneArea())
+						listBoxCoordinadores.addItem(Coordinador.getKey());
 				}
 			}
 		});
@@ -119,6 +128,7 @@ public class VentanaCargarArea {
 	
 	protected void inicializarCheckBox() {
 		checkBoxTipoDeActividades = new HashMap<CheckBox,TipoActividad>();
+		PanelCheckBox = new HorizontalPanel();
 		
 		Servicio.obtenerTiposDeActividades(new AsyncCallback<Collection<TipoActividad>>() {
 
@@ -134,7 +144,7 @@ public class VentanaCargarArea {
 				}
 				
 				for(CheckBox checkBox : checkBoxTipoDeActividades.keySet()) {
-					Panel.add(checkBox);
+					PanelCheckBox.add(checkBox);
 				}
 			}
 		});
@@ -144,22 +154,32 @@ public class VentanaCargarArea {
 		textBoxNombre = new TextBox();
 	}
 	
+	protected void inicializarPaneles() {
+		PanelID = new HorizontalPanel();
+		PanelID.add(etiquetaID);
+		PanelID.add(labelID);
+		
+		PanelNombre = new HorizontalPanel();
+		PanelNombre.add(etiquetaNombre);
+		PanelNombre.add(textBoxNombre);
+		
+		PanelCoordinador = new HorizontalPanel();
+		PanelCoordinador.add(etiquetaCoordinador);
+		PanelCoordinador.add(listBoxCoordinadores);
+		
+		PanelActividades = new HorizontalPanel();
+		PanelActividades.add(etiquetaTiposDeActividades);
+		PanelActividades.add(PanelCheckBox);
+	}
+	
 	protected void poblarPanel() {
-		//ID
-		Panel.add(etiquetaID);
-		Panel.add(labelID);
+		Panel.add(PanelID);
 		
-		//Titulo
-		Panel.add(etiquetaNombre);
-		Panel.add(textBoxNombre);
+		Panel.add(PanelNombre);
 		
-		//Coordinador
-		Panel.add(etiquetaCoordinador);
-		Panel.add(listBoxCoordinadores);
-
-		//Tipos de Actividades
-		Panel.add(etiquetaTiposDeActividades);
-		Panel.add(PanelCheckBox);
+		Panel.add(PanelCoordinador);
+		
+		Panel.add(PanelActividades);
 		
 		Panel.add(botonGuardar);
 	}
@@ -182,9 +202,17 @@ public class VentanaCargarArea {
 		}
 	}
 	
+	protected void limpiarPanel() {
+		while(Panel.getWidgetCount()>0) {
+			Panel.remove(0);
+		}
+	}
+	
 	protected class oyenteGuardarDatos implements ClickHandler {
 
 		public void onClick(ClickEvent event) {
+			modificarArea();
+			
 			Servicio.agregarArea(NuevaArea, new AsyncCallback<Boolean>() {
 
 			@Override
@@ -197,7 +225,10 @@ public class VentanaCargarArea {
 				if(resultado)
 					Window.alert("Area agregada correctamente");
 				else
-					Window.alert("Error al agregar el area, el area ya existe en al jornada");
+					Window.alert("Error al agregar el area");
+				
+				limpiarPanel();
+				cargarVentana();
 			}
 			});
 		}
