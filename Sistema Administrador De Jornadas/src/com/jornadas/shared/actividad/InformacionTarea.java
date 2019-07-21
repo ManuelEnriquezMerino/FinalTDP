@@ -19,15 +19,20 @@ public class InformacionTarea implements Serializable{
 	public InformacionTarea() {}
 	
 	public void establecerHorarioInicio(int HI, int MI) throws HorariosEventoInvalidosException, HoraInvalidaException {
-		if(verificarHoraInicioHoraFin(HI,MI,HorarioFin.obtenerHora(),HorarioFin.obtenerMinutos())) {
+		if(HorarioFin!=null) {
+			if(verificarHoraInicioHoraFin(HI,MI,HorarioFin.obtenerHora(),HorarioFin.obtenerMinutos()))
+				HorarioInicio = new Hora(HI,MI);
+		} else
 			HorarioInicio = new Hora(HI,MI);
-		}
+				
 	}
 	
 	public void establecerHorarioFin(int HF, int MF) throws HorariosEventoInvalidosException, HoraInvalidaException {
-		if(verificarHoraInicioHoraFin(HorarioInicio.obtenerHora(),HorarioFin.obtenerMinutos(),HF,MF)) {
+		if(HorarioInicio!=null) {
+			if(verificarHoraInicioHoraFin(HorarioInicio.obtenerHora(),HorarioInicio.obtenerMinutos(),HF,MF))
+				HorarioFin = new Hora(HF,MF);
+		} else
 			HorarioFin = new Hora(HF,MF);
-		}
 	}
 	
 	public void establecerLugar(String lugar) {

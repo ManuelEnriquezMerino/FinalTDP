@@ -6,8 +6,11 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Collection;
+import java.util.Random;
+
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.jornadas.client.Servicio;
+import com.jornadas.shared.actividad.Actividad;
 import com.jornadas.shared.actividad.Area;
 import com.jornadas.shared.actividad.TipoActividad;
 import com.jornadas.shared.excepciones.FechaInvalidaException;
@@ -139,13 +142,15 @@ public class ServicioImpl extends RemoteServiceServlet implements Servicio {
 		return jornada.recuperarUsuario(ID, DNI);
 	}
 
-	public Boolean registrarUsuario(String ID, String DNI) {
-		if(jornada.recuperarUsuario(ID, DNI)==null) {
+	public String registrarAsistente(String DNI) {
+		if(!jornada.existeAsistente(DNI)) {
+			Random aleatorio = new Random(System.currentTimeMillis());
+			String ID = "A" + aleatorio.nextInt(1000);
 			jornada.agregarUsuario(new Asistente(ID, DNI));
 			guardarJornada();
-			return true;
+			return ID;
 		} else
-			return false;
+			return null;
 	}
 	
 	public Boolean actualizarUsuario(Usuario usuario) {
@@ -196,6 +201,14 @@ public class ServicioImpl extends RemoteServiceServlet implements Servicio {
 		if(resultado)
 			guardarJornada();
 		return resultado;
+	}
+	
+	public String agregarActividad(Actividad NuevaActividad) {
+		String ID = "Act_" + jornada.obtenerNuevoIDActividad();
+		NuevaActividad.establecerID(ID);
+		jornada.agregarActividad(NuevaActividad);
+		guardarJornada();
+		return ID;
 	}
 	
 	private void guardarJornada() {

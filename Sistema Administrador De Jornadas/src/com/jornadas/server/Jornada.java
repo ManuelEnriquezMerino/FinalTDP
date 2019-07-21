@@ -9,6 +9,7 @@ import java.util.LinkedList;
 import java.util.Map;
 
 import com.jornadas.shared.Visitor.EstablecerArea;
+import com.jornadas.shared.actividad.Actividad;
 import com.jornadas.shared.actividad.Area;
 import com.jornadas.shared.actividad.TipoActividad;
 import com.jornadas.shared.usuario.Usuario;
@@ -19,6 +20,7 @@ public class Jornada implements Serializable{
 	private Map<String, Usuario> ColeccionDeUsuarios;
 	private Collection<TipoActividad> TiposDeActividades;
 	private Collection<Area> Areas;
+	private Collection<Actividad> Actividades;
 	
 	//Constructor
 	
@@ -26,6 +28,7 @@ public class Jornada implements Serializable{
 		ColeccionDeUsuarios= new HashMap<String,Usuario>();
 		TiposDeActividades = new LinkedHashSet<TipoActividad>();
 		Areas = new LinkedHashSet<Area>();
+		Actividades = new LinkedHashSet<Actividad>();
 	}
 	
 	
@@ -75,6 +78,10 @@ public class Jornada implements Serializable{
 		return TiposDeActividades.add(tipo);
 	}
 	
+	public boolean agregarActividad(Actividad NuevaActividad) {
+		return Actividades.add(NuevaActividad);
+	}
+	
 	
 	//Consultas
 	
@@ -93,5 +100,18 @@ public class Jornada implements Serializable{
 	
 	public int obtenerNuevoIDArea() {
 		return (Areas.size()+1);
+	}
+	
+	public int obtenerNuevoIDActividad() {
+		return (Actividades.size()+1);
+	}
+	
+	public boolean existeAsistente(String DNI) {
+		boolean existe = false;
+		Iterator<Usuario> iterador = ColeccionDeUsuarios.values().iterator();
+		while(iterador.hasNext() && !existe) {
+			existe=iterador.next().obtenerDNI().equals(DNI);
+		}
+		return existe;
 	}
 }
