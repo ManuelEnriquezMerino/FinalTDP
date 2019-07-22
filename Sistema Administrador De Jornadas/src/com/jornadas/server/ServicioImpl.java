@@ -6,7 +6,6 @@ import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.Collection;
-import java.util.Random;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.jornadas.client.Servicio;
@@ -14,11 +13,12 @@ import com.jornadas.shared.actividad.Actividad;
 import com.jornadas.shared.actividad.Area;
 import com.jornadas.shared.actividad.TipoActividad;
 import com.jornadas.shared.excepciones.FechaInvalidaException;
-import com.jornadas.shared.tarea.CreadorTarea;
 import com.jornadas.shared.tarea.Tarea;
+import com.jornadas.shared.tarea.creadoresDeTareas.CreadorTarea;
 import com.jornadas.shared.usuario.Asistente;
 import com.jornadas.shared.usuario.*;
 import com.jornadas.shared.usuario.Usuario;
+import com.jornadas.shared.usuario.creadoresDeOrganizadores.CreadorAyudanteEvento;
 
 @SuppressWarnings("serial")
 public class ServicioImpl extends RemoteServiceServlet implements Servicio {
@@ -145,10 +145,22 @@ public class ServicioImpl extends RemoteServiceServlet implements Servicio {
 	}
 
 	public String registrarAsistente(String DNI) {
-		if(!jornada.existeAsistente(DNI)) {
-			Random aleatorio = new Random(System.currentTimeMillis());
-			String ID = "A" + aleatorio.nextInt(1000);
+		if(!jornada.existeUsuario(DNI)) {
+			String ID = "A" + jornada.obtenerNuevoIDUsuario();
 			jornada.agregarUsuario(new Asistente(ID, DNI));
+			guardarJornada();
+			return ID;
+		} else
+			return null;
+	}
+	
+	public String registrarAyudante(String DNI, CreadorAyudanteEvento Creador) {
+		if(!jornada.existeUsuario(DNI)) {
+			String ID = Creador.obtenerPrefijoID() + jornada.obtenerNuevoIDUsuario();
+			Voluntario nuevoAyudante = Creador.crearAyudante();
+			nuevoAyudante.establecerDNI(DNI);
+			nuevoAyudante.establecerID(ID);
+			jornada.agregarUsuario(nuevoAyudante);
 			guardarJornada();
 			return ID;
 		} else
@@ -193,6 +205,10 @@ public class ServicioImpl extends RemoteServiceServlet implements Servicio {
 	
 	public Collection<CreadorTarea> obtenerTiposDeTareas(){
 		return jornada.obtenerTiposDeTareas();
+	}
+	
+	public Collection<CreadorAyudanteEvento> obtenerTiposDeAyudantes(){
+		return jornada.obtenerTiposDeAyudantes();
 	}
 	
 	public Boolean agregarArea(Area NuevaArea) {

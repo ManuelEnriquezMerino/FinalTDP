@@ -1,6 +1,8 @@
-package com.jornadas.shared.tarea;
+package com.jornadas.shared.tarea.creadoresDeTareas;
 
 import java.io.Serializable;
+
+import com.jornadas.shared.tarea.Tarea;
 
 public abstract class CreadorTarea implements Serializable{
 

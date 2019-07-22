@@ -1,4 +1,7 @@
-package com.jornadas.shared.tarea;
+package com.jornadas.shared.tarea.creadoresDeTareas;
+
+import com.jornadas.shared.tarea.Tarea;
+import com.jornadas.shared.tarea.TareaExterna;
 
 public class CreadorTareaExterna extends CreadorTarea{
 

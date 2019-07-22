@@ -9,7 +9,6 @@ import com.jornadas.client.ServicioAsync;
 
 public class VentanaCreacionAsistente extends VentanaCreacionUsuario{
 
-
 	private Button botonAgregar;
 	
 	public VentanaCreacionAsistente(ServicioAsync servicio) {
@@ -34,7 +33,7 @@ public class VentanaCreacionAsistente extends VentanaCreacionUsuario{
 
 				@Override
 				public void onFailure(Throwable caught) {
-					Window.alert("Exception Received from server.");
+					Window.alert("Error al comunicarse con el servidor. Por favor vuelva a intentarlo");
 				}
 
 				@Override

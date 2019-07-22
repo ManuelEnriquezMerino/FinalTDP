@@ -19,15 +19,15 @@ import com.jornadas.client.ServicioAsync;
 import com.jornadas.shared.excepciones.FechaInvalidaException;
 import com.jornadas.shared.excepciones.HoraInvalidaException;
 import com.jornadas.shared.excepciones.HorariosEventoInvalidosException;
-import com.jornadas.shared.tarea.CreadorTarea;
 import com.jornadas.shared.tarea.Tarea;
+import com.jornadas.shared.tarea.creadoresDeTareas.CreadorTarea;
 
 public class VentanaCreacionTarea extends VentanaPanelVerticalYServicio{
 	
 	protected Tarea NuevaTarea;
 
 	protected HorizontalPanel panelTitulo, panelDescripcion, panelTipo, panelHorarioInicio, panelHorarioFin, panelLugar, panelFecha, panelRadio;
-	protected Map<RadioButton,Tarea> tiposDeTareas;
+	protected Map<RadioButton,CreadorTarea> tiposDeTareas;
 	protected Label etiquetaTitulo, etiquetaDescripcion, etiquetaTipo, etiquetaHorarioInicio, etiquetaHorarioFin, etiquetaLugar, etiquetaFecha, etiquetaDosPuntosHI, etiquetaDosPuntosHF, etiquetaDia, etiquetaMes, etiquetaAnio;
 	protected TextBox textBoxTitulo, textBoxDescripcion, textBoxHI, textBoxMI, textBoxHF, textBoxMF, textBoxLugar, textBoxDia, textBoxMes, textBoxAnio;
 	protected Button botonCrear;
@@ -36,6 +36,7 @@ public class VentanaCreacionTarea extends VentanaPanelVerticalYServicio{
 		super(servicio);
 		
 		Panel.getElement().getStyle().setBackgroundColor("#711c91");
+		Panel.getElement().getStyle().setColor("#fffff0");
 		
 		Nombre = "Crear Tarea";
 		
@@ -63,19 +64,6 @@ public class VentanaCreacionTarea extends VentanaPanelVerticalYServicio{
 		etiquetaAnio = new Label("Anio:");
 		etiquetaDosPuntosHI = new Label(":");
 		etiquetaDosPuntosHF = new Label(":");
-		
-		etiquetaTitulo.getElement().getStyle().setColor("#fffff0");
-		etiquetaDescripcion.getElement().getStyle().setColor("#fffff0");
-		etiquetaTipo.getElement().getStyle().setColor("#fffff0");
-		etiquetaHorarioInicio.getElement().getStyle().setColor("#fffff0");
-		etiquetaHorarioFin.getElement().getStyle().setColor("#fffff0");
-		etiquetaLugar.getElement().getStyle().setColor("#fffff0");
-		etiquetaFecha.getElement().getStyle().setColor("#fffff0");
-		etiquetaDia.getElement().getStyle().setColor("#fffff0");
-		etiquetaMes.getElement().getStyle().setColor("#fffff0");
-		etiquetaAnio.getElement().getStyle().setColor("#fffff0");
-		etiquetaDosPuntosHI.getElement().getStyle().setColor("#fffff0");
-		etiquetaDosPuntosHF.getElement().getStyle().setColor("#fffff0");
 	}
 	
 	protected void inicializarTextBoxs() {
@@ -92,7 +80,7 @@ public class VentanaCreacionTarea extends VentanaPanelVerticalYServicio{
 	}
 	
 	protected void inicializarRadioButtons() {
-		tiposDeTareas = new HashMap<RadioButton,Tarea> ();
+		tiposDeTareas = new HashMap<RadioButton,CreadorTarea> ();
 		panelRadio = new HorizontalPanel();
 		
 		Servicio.obtenerTiposDeTareas(new AsyncCallback<Collection<CreadorTarea>>() {
@@ -106,9 +94,8 @@ public class VentanaCreacionTarea extends VentanaPanelVerticalYServicio{
 				RadioButton boton;
 				for(CreadorTarea creador : resultado) {
 					boton = new RadioButton("TiposDeTareas", creador.obtenerNombre());
-					boton.getElement().getStyle().setColor("#fffff0");
 					panelRadio.add(boton);
-					tiposDeTareas.put(boton, creador.obtenerTarea());
+					tiposDeTareas.put(boton, creador);
 				}
 			}
 		});
@@ -216,8 +203,8 @@ public class VentanaCreacionTarea extends VentanaPanelVerticalYServicio{
 	
 	protected boolean establecerTipoTarea() {
 		boolean encontre=false;
-		Iterator<Entry<RadioButton,Tarea>> iterador = tiposDeTareas.entrySet().iterator();
-		Entry<RadioButton,Tarea> aux=null;
+		Iterator<Entry<RadioButton,CreadorTarea>> iterador = tiposDeTareas.entrySet().iterator();
+		Entry<RadioButton,CreadorTarea> aux=null;
 		
 		while(!encontre && iterador.hasNext()) {
 			aux=iterador.next();
@@ -227,7 +214,7 @@ public class VentanaCreacionTarea extends VentanaPanelVerticalYServicio{
 		}
 		
 		if(encontre)
-			NuevaTarea = aux.getValue();
+			NuevaTarea = aux.getValue().obtenerTarea();
 		
 		return encontre;
 	}

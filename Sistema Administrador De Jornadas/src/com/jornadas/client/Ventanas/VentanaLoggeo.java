@@ -68,12 +68,14 @@ public class VentanaLoggeo extends VentanaPanelVerticalYServicio{
 						VentanaCreacionAsistente creacion = new VentanaCreacionAsistente(Servicio);
 						VentanaCreacionActividad actividad = new VentanaCreacionActividad(Servicio);
 						VentanaCreacionTarea tarea = new VentanaCreacionTarea(Servicio);
+						VentanaCreacionAyudante ayudante = new VentanaCreacionAyudante(Servicio);
 						
 						Collection<Ventana> paneles = new LinkedList<Ventana>();
 						
 						paneles.add(datos);
-						paneles.add(area);
 						paneles.add(creacion);
+						paneles.add(ayudante);
+						paneles.add(area);
 						paneles.add(actividad);
 						paneles.add(tarea);
 						

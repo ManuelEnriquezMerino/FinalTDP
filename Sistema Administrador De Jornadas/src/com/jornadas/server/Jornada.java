@@ -12,10 +12,15 @@ import com.jornadas.shared.Visitor.EstablecerArea;
 import com.jornadas.shared.actividad.Actividad;
 import com.jornadas.shared.actividad.Area;
 import com.jornadas.shared.actividad.TipoActividad;
-import com.jornadas.shared.tarea.CreadorTarea;
-import com.jornadas.shared.tarea.CreadorTareaExterna;
 import com.jornadas.shared.tarea.Tarea;
+import com.jornadas.shared.tarea.creadoresDeTareas.CreadorTarea;
+import com.jornadas.shared.tarea.creadoresDeTareas.CreadorTareaExterna;
 import com.jornadas.shared.usuario.Usuario;
+import com.jornadas.shared.usuario.creadoresDeOrganizadores.CreadorAyudanteEvento;
+import com.jornadas.shared.usuario.creadoresDeOrganizadores.CreadorCoordinadorDeArea;
+import com.jornadas.shared.usuario.creadoresDeOrganizadores.CreadorOrganizador;
+import com.jornadas.shared.usuario.creadoresDeOrganizadores.CreadorOrganizadorGeneral;
+import com.jornadas.shared.usuario.creadoresDeOrganizadores.CreadorVoluntario;
 
 public class Jornada implements Serializable{
 
@@ -25,6 +30,7 @@ public class Jornada implements Serializable{
 	//protected InformacionJornada InformacionJornada;
 	//protected Collection<Seleccionable> Servicios;
 	//protected Collection<Seleccionable> Caracteristicas;
+	protected Collection<CreadorAyudanteEvento> TiposDeAyudantes;
 	//protected Collection<TipoAsistente> TiposDeAsistentes;
 	protected Map<String, Usuario> Usuarios;
 	protected Collection<Area> Areas;
@@ -43,6 +49,7 @@ public class Jornada implements Serializable{
 		Actividades = new LinkedHashSet<Actividad>();
 		Tareas = new LinkedHashSet<Tarea>();
 		inicializarTiposDeTareas();
+		inicializarTiposDeAyudantes();
 	}
 	
 	
@@ -135,6 +142,14 @@ public class Jornada implements Serializable{
 		return TiposDeTareas;
 	}
 	
+	public Collection<CreadorAyudanteEvento> obtenerTiposDeAyudantes(){
+		return TiposDeAyudantes;
+	}
+	
+	public int obtenerNuevoIDUsuario() {
+		return (Usuarios.size()+1);
+	}
+	
 	public int obtenerNuevoIDArea() {
 		return (Areas.size()+1);
 	}
@@ -147,7 +162,7 @@ public class Jornada implements Serializable{
 		return (Tareas.size()+1);
 	}
 	
-	public boolean existeAsistente(String DNI) {
+	public boolean existeUsuario(String DNI) {
 		boolean existe = false;
 		Iterator<Usuario> iterador = Usuarios.values().iterator();
 		while(iterador.hasNext() && !existe) {
@@ -162,5 +177,13 @@ public class Jornada implements Serializable{
 	protected void inicializarTiposDeTareas() {
 		TiposDeTareas = new LinkedHashSet<CreadorTarea>();
 		TiposDeTareas.add(new CreadorTareaExterna());
+	}
+	
+	protected void inicializarTiposDeAyudantes() {
+		TiposDeAyudantes = new LinkedHashSet<CreadorAyudanteEvento>();
+		TiposDeAyudantes.add(new CreadorVoluntario());
+		TiposDeAyudantes.add(new CreadorOrganizador());
+		TiposDeAyudantes.add(new CreadorCoordinadorDeArea());
+		TiposDeAyudantes.add(new CreadorOrganizadorGeneral());
 	}
 }
