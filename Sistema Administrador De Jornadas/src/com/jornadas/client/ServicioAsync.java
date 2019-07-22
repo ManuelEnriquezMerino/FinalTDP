@@ -5,8 +5,9 @@ import java.util.Collection;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.jornadas.shared.actividad.Actividad;
 import com.jornadas.shared.actividad.Area;
-import com.jornadas.shared.actividad.Tarea;
 import com.jornadas.shared.actividad.TipoActividad;
+import com.jornadas.shared.tarea.CreadorTarea;
+import com.jornadas.shared.tarea.Tarea;
 import com.jornadas.shared.usuario.Usuario;
 
 public interface ServicioAsync {
@@ -22,6 +23,8 @@ public interface ServicioAsync {
 	public void obtenerUsuarios(AsyncCallback<Collection<Usuario>> Respuesta);
 	
 	public void obtenerTiposDeActividades(AsyncCallback<Collection<TipoActividad>> Respuesta);
+	
+	public void obtenerTiposDeTareas(AsyncCallback<Collection<CreadorTarea>> Respuesta);
 	
 	public void agregarArea(Area NuevaArea, AsyncCallback<Boolean> Respuesta);
 	

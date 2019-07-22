@@ -12,9 +12,10 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.jornadas.client.Servicio;
 import com.jornadas.shared.actividad.Actividad;
 import com.jornadas.shared.actividad.Area;
-import com.jornadas.shared.actividad.Tarea;
 import com.jornadas.shared.actividad.TipoActividad;
 import com.jornadas.shared.excepciones.FechaInvalidaException;
+import com.jornadas.shared.tarea.CreadorTarea;
+import com.jornadas.shared.tarea.Tarea;
 import com.jornadas.shared.usuario.Asistente;
 import com.jornadas.shared.usuario.*;
 import com.jornadas.shared.usuario.Usuario;
@@ -188,6 +189,10 @@ public class ServicioImpl extends RemoteServiceServlet implements Servicio {
 	
 	public Collection<TipoActividad> obtenerTiposDeActividades(){
 		return jornada.obtenerTiposDeActividades();
+	}
+	
+	public Collection<CreadorTarea> obtenerTiposDeTareas(){
+		return jornada.obtenerTiposDeTareas();
 	}
 	
 	public Boolean agregarArea(Area NuevaArea) {

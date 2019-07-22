@@ -1,4 +1,4 @@
-package com.jornadas.shared.actividad;
+package com.jornadas.shared.tarea;
 
 public class TareaExterna extends Tarea{
 

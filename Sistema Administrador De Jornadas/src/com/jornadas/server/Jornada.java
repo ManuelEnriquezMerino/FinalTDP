@@ -11,8 +11,10 @@ import java.util.Map;
 import com.jornadas.shared.Visitor.EstablecerArea;
 import com.jornadas.shared.actividad.Actividad;
 import com.jornadas.shared.actividad.Area;
-import com.jornadas.shared.actividad.Tarea;
 import com.jornadas.shared.actividad.TipoActividad;
+import com.jornadas.shared.tarea.CreadorTarea;
+import com.jornadas.shared.tarea.CreadorTareaExterna;
+import com.jornadas.shared.tarea.Tarea;
 import com.jornadas.shared.usuario.Usuario;
 
 public class Jornada implements Serializable{
@@ -30,6 +32,7 @@ public class Jornada implements Serializable{
 	protected Collection<Actividad> Actividades;
 	//protected Collection<ActividadObligatoria> ActividadesObligatorias;
 	protected Collection<Tarea> Tareas;
+	protected Collection<CreadorTarea> TiposDeTareas;
 	
 	//Constructor
 	
@@ -39,6 +42,7 @@ public class Jornada implements Serializable{
 		Areas = new LinkedHashSet<Area>();
 		Actividades = new LinkedHashSet<Actividad>();
 		Tareas = new LinkedHashSet<Tarea>();
+		inicializarTiposDeTareas();
 	}
 	
 	
@@ -104,7 +108,6 @@ public class Jornada implements Serializable{
 		return Tareas.add(NuevaTarea);
 	}
 	
-	
 	//Consultas
 	
 	public String obtenerNombre() {
@@ -128,6 +131,10 @@ public class Jornada implements Serializable{
 		return TiposDeActividades;
 	}
 	
+	public Collection<CreadorTarea> obtenerTiposDeTareas(){
+		return TiposDeTareas;
+	}
+	
 	public int obtenerNuevoIDArea() {
 		return (Areas.size()+1);
 	}
@@ -147,5 +154,13 @@ public class Jornada implements Serializable{
 			existe=iterador.next().obtenerDNI().equals(DNI);
 		}
 		return existe;
+	}
+	
+	
+	//Metodos Privados
+	
+	protected void inicializarTiposDeTareas() {
+		TiposDeTareas = new LinkedHashSet<CreadorTarea>();
+		TiposDeTareas.add(new CreadorTareaExterna());
 	}
 }

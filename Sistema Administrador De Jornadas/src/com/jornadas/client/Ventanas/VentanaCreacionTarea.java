@@ -1,5 +1,6 @@
 package com.jornadas.client.Ventanas;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -19,11 +20,12 @@ import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.jornadas.client.ServicioAsync;
-import com.jornadas.shared.actividad.Tarea;
-import com.jornadas.shared.actividad.TareaExterna;
 import com.jornadas.shared.excepciones.FechaInvalidaException;
 import com.jornadas.shared.excepciones.HoraInvalidaException;
 import com.jornadas.shared.excepciones.HorariosEventoInvalidosException;
+import com.jornadas.shared.tarea.CreadorTarea;
+import com.jornadas.shared.tarea.Tarea;
+import com.jornadas.shared.tarea.TareaExterna;
 
 public class VentanaCreacionTarea extends Ventana{
 	
@@ -102,14 +104,24 @@ public class VentanaCreacionTarea extends Ventana{
 	protected void inicializarRadioButtons() {
 		tiposDeTareas = new HashMap<RadioButton,Tarea> ();
 		panelRadio = new HorizontalPanel();
-		RadioButton radioButton;
 		
-		radioButton = new RadioButton("TiposTareas", "Tarea Externa");
-		radioButton.getElement().getStyle().setColor("#fffff0");
-		tiposDeTareas.put(radioButton, new TareaExterna());
-		
-		for(RadioButton boton : tiposDeTareas.keySet())
-			panelRadio.add(boton);
+		Servicio.obtenerTiposDeTareas(new AsyncCallback<Collection<CreadorTarea>>() {
+			@Override
+			public void onFailure(Throwable caught) {
+				Window.alert("Error al comunicarse con el servidor. Por favor vuelva a intentarlo");
+			}
+
+			@Override
+			public void onSuccess(Collection<CreadorTarea> resultado) {
+				RadioButton boton;
+				for(CreadorTarea creador : resultado) {
+					boton = new RadioButton("TiposDeTareas", creador.obtenerNombre());
+					boton.getElement().getStyle().setColor("#fffff0");
+					panelRadio.add(boton);
+					tiposDeTareas.put(boton, creador.obtenerTarea());
+				}
+			}
+		});
 	}
 	
 	protected void inicializarPaneles() {

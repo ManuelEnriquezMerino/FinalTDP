@@ -11,6 +11,7 @@ import com.jornadas.shared.excepciones.HoraInvalidaException;
 import com.jornadas.shared.excepciones.HorariosEventoInvalidosException;
 import com.jornadas.shared.extras.Fecha;
 import com.jornadas.shared.extras.Hora;
+import com.jornadas.shared.tarea.Tarea;
 import com.jornadas.shared.usuario.Asistente;
 
 public class Actividad implements Serializable{

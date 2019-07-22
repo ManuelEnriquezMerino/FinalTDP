@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.LinkedHashSet;
 
 import com.jornadas.shared.Visitor.Accion;
-import com.jornadas.shared.actividad.Tarea;
+import com.jornadas.shared.tarea.Tarea;
 
 public class Voluntario extends Usuario{
 	
