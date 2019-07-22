@@ -1,6 +1,5 @@
 package com.jornadas.client.Ventanas;
 
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -20,33 +19,32 @@ import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.jornadas.client.ServicioAsync;
-import com.jornadas.shared.actividad.Actividad;
-import com.jornadas.shared.actividad.TipoActividad;
-import com.jornadas.shared.excepciones.CupoInvalidoException;
+import com.jornadas.shared.actividad.Tarea;
+import com.jornadas.shared.actividad.TareaExterna;
 import com.jornadas.shared.excepciones.FechaInvalidaException;
 import com.jornadas.shared.excepciones.HoraInvalidaException;
 import com.jornadas.shared.excepciones.HorariosEventoInvalidosException;
 
-public class VentanaCreacionActividad extends Ventana{
+public class VentanaCreacionTarea extends Ventana{
 	
 	protected ServicioAsync Servicio;
-	protected Actividad NuevaActividad;
+	protected Tarea NuevaTarea;
 
-	protected HorizontalPanel panelTitulo, panelDescripcion, panelTipo, panelHorarioInicio, panelHorarioFin, panelLugar, panelFecha, panelCupo, panelRadio;
+	protected HorizontalPanel panelTitulo, panelDescripcion, panelTipo, panelHorarioInicio, panelHorarioFin, panelLugar, panelFecha, panelRadio;
 	protected VerticalPanel Panel;
-	protected Map<RadioButton,TipoActividad> tiposDeActividades;
-	protected Label etiquetaTitulo, etiquetaDescripcion, etiquetaTipo, etiquetaHorarioInicio, etiquetaHorarioFin, etiquetaLugar, etiquetaFecha, etiquetaCupo,etiquetaDosPuntosHI, etiquetaDosPuntosHF, etiquetaDia, etiquetaMes, etiquetaAnio;
-	protected TextBox textBoxTitulo, textBoxDescripcion, textBoxHI, textBoxMI, textBoxHF, textBoxMF, textBoxLugar, textBoxCupo, textBoxDia, textBoxMes, textBoxAnio;
+	protected Map<RadioButton,Tarea> tiposDeTareas;
+	protected Label etiquetaTitulo, etiquetaDescripcion, etiquetaTipo, etiquetaHorarioInicio, etiquetaHorarioFin, etiquetaLugar, etiquetaFecha, etiquetaDosPuntosHI, etiquetaDosPuntosHF, etiquetaDia, etiquetaMes, etiquetaAnio;
+	protected TextBox textBoxTitulo, textBoxDescripcion, textBoxHI, textBoxMI, textBoxHF, textBoxMF, textBoxLugar, textBoxDia, textBoxMes, textBoxAnio;
 	private Button botonCrear;
 	
-	public VentanaCreacionActividad(ServicioAsync servicio) {
+	public VentanaCreacionTarea(ServicioAsync servicio) {
 		Panel = new VerticalPanel();
 		Panel.setSize("100%", "100%"); 
 		Panel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
 		Panel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-		Panel.getElement().getStyle().setBackgroundColor("#E7E6A3");
+		Panel.getElement().getStyle().setBackgroundColor("#711c91");
 		
-		Nombre = "Crear Actividad";
+		Nombre = "Crear Tarea";
 		Servicio = servicio;
 		
 		inicializarLabels();
@@ -54,7 +52,7 @@ public class VentanaCreacionActividad extends Ventana{
 		inicializarRadioButtons();
 		inicializarPaneles();
 		
-		botonCrear = new Button("Crear Actividad");
+		botonCrear = new Button("Crear Tarea");
 		botonCrear.addClickHandler(new oyenteCrear());
 		
 		poblarPanel();
@@ -63,7 +61,7 @@ public class VentanaCreacionActividad extends Ventana{
 	protected void inicializarLabels() {
 		etiquetaTitulo = new Label("Titulo:");
 		etiquetaDescripcion = new Label("Descripcion:");
-		etiquetaTipo = new Label("Tipo de Actividad:");
+		etiquetaTipo = new Label("Tipo de Tarea:");
 		etiquetaHorarioInicio = new Label("Horario Inicio:");
 		etiquetaHorarioFin = new Label("Horario Finalizacion:");
 		etiquetaLugar = new Label("Lugar:");
@@ -71,9 +69,21 @@ public class VentanaCreacionActividad extends Ventana{
 		etiquetaDia = new Label("Dia:");
 		etiquetaMes = new Label("Mes:");
 		etiquetaAnio = new Label("Anio:");
-		etiquetaCupo = new Label("Cupo:");
 		etiquetaDosPuntosHI = new Label(":");
 		etiquetaDosPuntosHF = new Label(":");
+		
+		etiquetaTitulo.getElement().getStyle().setColor("#fffff0");
+		etiquetaDescripcion.getElement().getStyle().setColor("#fffff0");
+		etiquetaTipo.getElement().getStyle().setColor("#fffff0");
+		etiquetaHorarioInicio.getElement().getStyle().setColor("#fffff0");
+		etiquetaHorarioFin.getElement().getStyle().setColor("#fffff0");
+		etiquetaLugar.getElement().getStyle().setColor("#fffff0");
+		etiquetaFecha.getElement().getStyle().setColor("#fffff0");
+		etiquetaDia.getElement().getStyle().setColor("#fffff0");
+		etiquetaMes.getElement().getStyle().setColor("#fffff0");
+		etiquetaAnio.getElement().getStyle().setColor("#fffff0");
+		etiquetaDosPuntosHI.getElement().getStyle().setColor("#fffff0");
+		etiquetaDosPuntosHF.getElement().getStyle().setColor("#fffff0");
 	}
 	
 	protected void inicializarTextBoxs() {
@@ -84,34 +94,22 @@ public class VentanaCreacionActividad extends Ventana{
 		textBoxHF = new TextBox();
 		textBoxMF = new TextBox();
 		textBoxLugar = new TextBox();
-		textBoxCupo = new TextBox();
 		textBoxDia = new TextBox();
 		textBoxMes = new TextBox();
 		textBoxAnio = new TextBox();
 	}
 	
 	protected void inicializarRadioButtons() {
-		tiposDeActividades = new HashMap<RadioButton,TipoActividad> ();
+		tiposDeTareas = new HashMap<RadioButton,Tarea> ();
 		panelRadio = new HorizontalPanel();
+		RadioButton radioButton;
 		
-		Servicio.obtenerTiposDeActividades(new AsyncCallback<Collection<TipoActividad>>() {
-
-			@Override
-			public void onFailure(Throwable caught) {
-				Window.alert("Error al comunicarse con el servidor. Por favor vuelva a intentarlo");
-			}
-
-			@Override
-			public void onSuccess(Collection<TipoActividad> resultado) {
-				for(TipoActividad tipo : resultado){
-					tiposDeActividades.put(new RadioButton("TiposDeActividades", tipo.obtenerTitulo()), tipo);
-				}
-				
-				for(RadioButton boton : tiposDeActividades.keySet()) {
-					panelRadio.add(boton);
-				}
-			}
-		});
+		radioButton = new RadioButton("TiposTareas", "Tarea Externa");
+		radioButton.getElement().getStyle().setColor("#fffff0");
+		tiposDeTareas.put(radioButton, new TareaExterna());
+		
+		for(RadioButton boton : tiposDeTareas.keySet())
+			panelRadio.add(boton);
 	}
 	
 	protected void inicializarPaneles() {
@@ -150,10 +148,6 @@ public class VentanaCreacionActividad extends Ventana{
 		panelFecha.add(textBoxMes);
 		panelFecha.add(etiquetaAnio);
 		panelFecha.add(textBoxAnio);
-		
-		panelCupo = new HorizontalPanel();
-		panelCupo.add(etiquetaCupo);
-		panelCupo.add(textBoxCupo);
 	}
 	
 	protected void poblarPanel() {
@@ -165,7 +159,6 @@ public class VentanaCreacionActividad extends Ventana{
 		Panel.add(panelLugar);
 		Panel.add(etiquetaFecha);
 		Panel.add(panelFecha);
-		Panel.add(panelCupo);
 		Panel.add(botonCrear);
 	}
 	
@@ -173,72 +166,60 @@ public class VentanaCreacionActividad extends Ventana{
 		return Panel;
 	}
 
-	protected boolean crearActividad() {
-		NuevaActividad = new Actividad();
-		boolean resultado = true;
+	protected boolean crearTarea() {
+		boolean resultado = establecerTipoTarea();
 		
-		NuevaActividad.establecerTitulo(textBoxTitulo.getText());
-		NuevaActividad.establecerDescripcion(textBoxDescripcion.getText());
+		if(resultado) {
+			NuevaTarea.establecerTitulo(textBoxTitulo.getText());
+			NuevaTarea.establecerDescripcion(textBoxDescripcion.getText());
 		
-		establecerTipoActividad();
+			NuevaTarea.establecerLugar(textBoxLugar.getText());
 		
-		NuevaActividad.establecerLugar(textBoxLugar.getText());
-		
-		try {
-			int dia = Integer.parseInt(textBoxDia.getText());
-			int mes = Integer.parseInt(textBoxMes.getText());
-			int anio = Integer.parseInt(textBoxAnio.getText());
+			try {
+				int dia = Integer.parseInt(textBoxDia.getText());
+				int mes = Integer.parseInt(textBoxMes.getText());
+				int anio = Integer.parseInt(textBoxAnio.getText());
 			
-			NuevaActividad.establecerFecha(dia, mes, anio);
-		} catch (NumberFormatException e) {
-			Window.alert("Ingresar Numeros en la Fecha");
-			resultado=false;
-		} catch (FechaInvalidaException e) {
-			Window.alert("Fecha de Invalida");
-			resultado=false;
-		}
+				NuevaTarea.establecerFecha(dia, mes, anio);
+			} catch (NumberFormatException e) {
+				Window.alert("Ingresar Numeros en la Fecha");
+				resultado=false;
+			} catch (FechaInvalidaException e) {
+				Window.alert("Fecha de Invalida");
+				resultado=false;
+			}
 		
-		try {
-			int horaInicio = Integer.parseInt(textBoxHI.getText());
-			int minutoInicio = Integer.parseInt(textBoxMI.getText());
-			NuevaActividad.establecerHorarioInicio(horaInicio, minutoInicio);
-		} catch (HorariosEventoInvalidosException e) {
-			Window.alert("ERROR: El Inicio de la actividad debe ser despues del fin");
-			resultado=false;
-		} catch (HoraInvalidaException e) {
-			Window.alert("ERROR: Hora de Inicio ingresada Invalida");
-			resultado=false;
-		}
+			try {
+				int horaInicio = Integer.parseInt(textBoxHI.getText());
+				int minutoInicio = Integer.parseInt(textBoxMI.getText());
+				NuevaTarea.establecerHorarioInicio(horaInicio, minutoInicio);
+			} catch (HorariosEventoInvalidosException e) {
+				Window.alert("ERROR: El Inicio de la tarea debe ser despues del fin");
+				resultado=false;
+			} catch (HoraInvalidaException e) {
+				Window.alert("ERROR: Hora de Inicio ingresada Invalida");
+				resultado=false;
+			}
 		
-		try {
-			int horaFin = Integer.parseInt(textBoxHF.getText());
-			int minutoFin = Integer.parseInt(textBoxMF.getText());
-			NuevaActividad.establecerHorarioFin(horaFin, minutoFin);
-		} catch (HorariosEventoInvalidosException e) {
-			Window.alert("ERROR: El Inicio de la actividad debe ser despues del fin");
-			resultado=false;
-		} catch (HoraInvalidaException e) {
-			Window.alert("ERROR: Hora de Fin ingresada Invalida");
-			resultado=false;
+			try {
+				int horaFin = Integer.parseInt(textBoxHF.getText());
+				int minutoFin = Integer.parseInt(textBoxMF.getText());
+				NuevaTarea.establecerHorarioFin(horaFin, minutoFin);
+			} catch (HorariosEventoInvalidosException e) {
+				Window.alert("ERROR: El Inicio de la tarea debe ser despues del fin");
+				resultado=false;
+			} catch (HoraInvalidaException e) {
+				Window.alert("ERROR: Hora de Fin ingresada Invalida");
+				resultado=false;
+			}
 		}
-		
-		try {
-			NuevaActividad.establecerCupo(Integer.parseInt(textBoxCupo.getText()));
-		} catch (CupoInvalidoException e) {
-			Window.alert("ERROR: El cupo debe ser mayor a 0");
-			resultado=false;
-		} catch (NumberFormatException e) {
-			Window.alert("ERROR: El cupo debe ser un valor numerico.");
-			resultado=false;
-		}
-
 		return resultado;
 	}
 	
-	protected void establecerTipoActividad() {
+	protected boolean establecerTipoTarea() {
 		boolean encontre=false;
-		Iterator<Entry<RadioButton,TipoActividad>> iterador = tiposDeActividades.entrySet().iterator();
-		Entry<RadioButton,TipoActividad> aux=null;
+		Iterator<Entry<RadioButton,Tarea>> iterador = tiposDeTareas.entrySet().iterator();
+		Entry<RadioButton,Tarea> aux=null;
 		
 		while(!encontre && iterador.hasNext()) {
 			aux=iterador.next();
@@ -248,14 +229,16 @@ public class VentanaCreacionActividad extends Ventana{
 		}
 		
 		if(encontre)
-			NuevaActividad.establecerTipoActividad(aux.getValue());
+			NuevaTarea = aux.getValue();
+		
+		return encontre;
 	}
 	
 	private class oyenteCrear implements ClickHandler {
 
 		public void onClick(ClickEvent event) {	
-			if(crearActividad()) {
-				Servicio.agregarActividad(NuevaActividad, new AsyncCallback<String>() {
+			if(crearTarea()) {
+				Servicio.agregarTarea(NuevaTarea, new AsyncCallback<String>() {
 
 					@Override
 					public void onFailure(Throwable caught) {
@@ -264,7 +247,7 @@ public class VentanaCreacionActividad extends Ventana{
 
 					@Override
 					public void onSuccess(String resultado) {
-						Window.alert("Actividad creada con exito, su ID es: " + resultado);
+						Window.alert("Tarea creada con exito, su ID es: " + resultado);
 					}
 				});
 			}

@@ -12,6 +12,7 @@ import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.jornadas.client.Servicio;
 import com.jornadas.shared.actividad.Actividad;
 import com.jornadas.shared.actividad.Area;
+import com.jornadas.shared.actividad.Tarea;
 import com.jornadas.shared.actividad.TipoActividad;
 import com.jornadas.shared.excepciones.FechaInvalidaException;
 import com.jornadas.shared.usuario.Asistente;
@@ -207,6 +208,14 @@ public class ServicioImpl extends RemoteServiceServlet implements Servicio {
 		String ID = "Act_" + jornada.obtenerNuevoIDActividad();
 		NuevaActividad.establecerID(ID);
 		jornada.agregarActividad(NuevaActividad);
+		guardarJornada();
+		return ID;
+	}
+	
+	public String agregarTarea(Tarea NuevaTarea) {
+		String ID = "Tarea_" + jornada.obtenerNuevoIDTarea();
+		NuevaTarea.establecerID(ID);
+		jornada.agregarTarea(NuevaTarea);
 		guardarJornada();
 		return ID;
 	}

@@ -83,6 +83,7 @@ public class VentanaLoggeo {
 						VentanaArea area = new VentanaArea(Servicio);
 						VentanaCreacionAsistente creacion = new VentanaCreacionAsistente(Servicio);
 						VentanaCreacionActividad actividad = new VentanaCreacionActividad(Servicio);
+						VentanaCreacionTarea tarea = new VentanaCreacionTarea(Servicio);
 						
 						Collection<Ventana> paneles = new LinkedList<Ventana>();
 						
@@ -90,6 +91,7 @@ public class VentanaLoggeo {
 						paneles.add(area);
 						paneles.add(creacion);
 						paneles.add(actividad);
+						paneles.add(tarea);
 						
 						VentanaPestanias pestanias = new VentanaPestanias(paneles);
 						
