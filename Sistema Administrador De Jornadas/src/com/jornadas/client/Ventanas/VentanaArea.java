@@ -12,14 +12,10 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.CheckBox;
-import com.google.gwt.user.client.ui.HasHorizontalAlignment;
-import com.google.gwt.user.client.ui.HasVerticalAlignment;
-import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextBox;
-import com.google.gwt.user.client.ui.VerticalPanel;
 import com.jornadas.client.ServicioAsync;
 import com.jornadas.shared.Visitor.CoordinadoresDeArea;
 import com.jornadas.shared.actividad.Area;
@@ -27,12 +23,10 @@ import com.jornadas.shared.actividad.TipoActividad;
 import com.jornadas.shared.usuario.CoordinadorDeArea;
 import com.jornadas.shared.usuario.Usuario;
 
-public class VentanaArea extends Ventana{
+public class VentanaArea extends VentanaPanelVerticalYServicio{
 	
-	protected VerticalPanel Panel;
 	protected HorizontalPanel PanelCheckBox, PanelID, PanelNombre, PanelCoordinador, PanelActividades;
 	
-	protected ServicioAsync Servicio;
 	protected Area Area;
 	protected Map<String,CoordinadorDeArea> MapeoDeCoordinadores;
 	
@@ -44,28 +38,22 @@ public class VentanaArea extends Ventana{
 	private Button botonGuardar;
 	
 	public VentanaArea(Area area, ServicioAsync servicio) {
+		super(servicio);
+		
 		Nombre = "Area";
 		Area = area;
-		Servicio = servicio;
-		
-		Panel = new VerticalPanel();
-		Panel.setSize("100%", "100%"); 
-		Panel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
-		Panel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
+
 		Panel.getElement().getStyle().setBackgroundColor("#d6e2d5");
 		
 		cargarVentana();
 	}
 	
 	public VentanaArea(ServicioAsync servicio) {
+		super(servicio);
+		
 		Nombre = "Area";
-		Servicio = servicio;
 		Area = new Area();
 		
-		Panel = new VerticalPanel();
-		Panel.setSize("100%", "100%"); 
-		Panel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
-		Panel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
 		Panel.getElement().getStyle().setBackgroundColor("#d6e2d5");
 		
 		cargarVentana();
@@ -88,11 +76,7 @@ public class VentanaArea extends Ventana{
 		
 		poblarPanel();
 	}
-	
-	public Panel obtenerPanel() {
-		return Panel;
-	}
-	
+
 	protected void inicializarEtiquetas() {
 		etiquetaID = new Label("ID:");
 		etiquetaNombre = new Label("Nombre:");

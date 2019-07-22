@@ -11,43 +11,33 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.HasHorizontalAlignment;
-import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.TextBox;
-import com.google.gwt.user.client.ui.VerticalPanel;
 import com.jornadas.client.ServicioAsync;
 import com.jornadas.shared.excepciones.FechaInvalidaException;
 import com.jornadas.shared.excepciones.HoraInvalidaException;
 import com.jornadas.shared.excepciones.HorariosEventoInvalidosException;
 import com.jornadas.shared.tarea.CreadorTarea;
 import com.jornadas.shared.tarea.Tarea;
-import com.jornadas.shared.tarea.TareaExterna;
 
-public class VentanaCreacionTarea extends Ventana{
+public class VentanaCreacionTarea extends VentanaPanelVerticalYServicio{
 	
-	protected ServicioAsync Servicio;
 	protected Tarea NuevaTarea;
 
 	protected HorizontalPanel panelTitulo, panelDescripcion, panelTipo, panelHorarioInicio, panelHorarioFin, panelLugar, panelFecha, panelRadio;
-	protected VerticalPanel Panel;
 	protected Map<RadioButton,Tarea> tiposDeTareas;
 	protected Label etiquetaTitulo, etiquetaDescripcion, etiquetaTipo, etiquetaHorarioInicio, etiquetaHorarioFin, etiquetaLugar, etiquetaFecha, etiquetaDosPuntosHI, etiquetaDosPuntosHF, etiquetaDia, etiquetaMes, etiquetaAnio;
 	protected TextBox textBoxTitulo, textBoxDescripcion, textBoxHI, textBoxMI, textBoxHF, textBoxMF, textBoxLugar, textBoxDia, textBoxMes, textBoxAnio;
-	private Button botonCrear;
+	protected Button botonCrear;
 	
 	public VentanaCreacionTarea(ServicioAsync servicio) {
-		Panel = new VerticalPanel();
-		Panel.setSize("100%", "100%"); 
-		Panel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
-		Panel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
+		super(servicio);
+		
 		Panel.getElement().getStyle().setBackgroundColor("#711c91");
 		
 		Nombre = "Crear Tarea";
-		Servicio = servicio;
 		
 		inicializarLabels();
 		inicializarTextBoxs();
@@ -172,10 +162,6 @@ public class VentanaCreacionTarea extends Ventana{
 		Panel.add(etiquetaFecha);
 		Panel.add(panelFecha);
 		Panel.add(botonCrear);
-	}
-	
-	public Panel obtenerPanel() {
-		return Panel;
 	}
 
 	protected boolean crearTarea() {

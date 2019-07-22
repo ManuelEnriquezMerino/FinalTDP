@@ -5,40 +5,29 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.Panel;
-import com.google.gwt.user.client.ui.HasHorizontalAlignment;
-import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
-import com.google.gwt.user.client.ui.VerticalPanel;
 import com.jornadas.client.ServicioAsync;
 import com.jornadas.shared.excepciones.FechaInvalidaException;
 import com.jornadas.shared.usuario.Usuario;
 
-public class VentanaDatos extends Ventana{
-	
-	protected VerticalPanel Panel;
+public class VentanaDatos extends VentanaPanelVerticalYServicio{
 	
 	protected Usuario Usuario;
-	protected ServicioAsync Servicio;
 
 	protected HorizontalPanel panelID, panelDNI, panelNombre, panelApellido, panelFechaNacimiento, panelLU, panelUniversidad, panelCarrera, panelTelefono, panelMail;
-	private Label etiquetaDNI, etiquetaID, etiquetaNombre, etiquetaApellido, etiquetaFechaNacimiento, etiquetaLU, etiquetaUniversidad, etiquetaCarrera, etiquetaTelefono, etiquetaMail, etiquetaDia, etiquetaMes, etiquetaAnio;
-	private Label labelDNI, labelID;
-	private TextBox textBoxNombre, textBoxApellido, textBoxUniversidad, textBoxCarrera, textBoxTelefono, textBoxMail, textBoxDia, textBoxMes, textBoxAnio, textBoxLU;
-	private Button botonGuardar;
+	protected Label etiquetaDNI, etiquetaID, etiquetaNombre, etiquetaApellido, etiquetaFechaNacimiento, etiquetaLU, etiquetaUniversidad, etiquetaCarrera, etiquetaTelefono, etiquetaMail, etiquetaDia, etiquetaMes, etiquetaAnio;
+	protected Label labelDNI, labelID;
+	protected TextBox textBoxNombre, textBoxApellido, textBoxUniversidad, textBoxCarrera, textBoxTelefono, textBoxMail, textBoxDia, textBoxMes, textBoxAnio, textBoxLU;
+	protected Button botonGuardar;
 
 	public VentanaDatos(Usuario usuario, ServicioAsync servicio) {
+		super(servicio);
 		Nombre = "Datos de Usuario";
 		
 		Usuario = usuario;
-		Servicio = servicio;
 		
-		Panel = new VerticalPanel();
-		Panel.setSize("100%", "100%"); 
-		Panel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
-		Panel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
 		Panel.getElement().getStyle().setBackgroundColor("#c0e7f6");
 				
 		inicializarEtiquetas();
@@ -51,10 +40,6 @@ public class VentanaDatos extends Ventana{
 		inicializarPaneles();
 		
 		poblarPanel();
-	}
-	
-	public Panel obtenerPanel() {
-		return Panel;
 	}
 	
 	private void inicializarEtiquetas() {

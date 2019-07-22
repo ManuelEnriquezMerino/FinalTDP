@@ -11,14 +11,11 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.HasHorizontalAlignment;
-import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.TextBox;
-import com.google.gwt.user.client.ui.VerticalPanel;
 import com.jornadas.client.ServicioAsync;
 import com.jornadas.shared.actividad.Actividad;
 import com.jornadas.shared.actividad.TipoActividad;
@@ -27,27 +24,22 @@ import com.jornadas.shared.excepciones.FechaInvalidaException;
 import com.jornadas.shared.excepciones.HoraInvalidaException;
 import com.jornadas.shared.excepciones.HorariosEventoInvalidosException;
 
-public class VentanaCreacionActividad extends Ventana{
+public class VentanaCreacionActividad extends VentanaPanelVerticalYServicio{
 	
-	protected ServicioAsync Servicio;
 	protected Actividad NuevaActividad;
 
 	protected HorizontalPanel panelTitulo, panelDescripcion, panelTipo, panelHorarioInicio, panelHorarioFin, panelLugar, panelFecha, panelCupo, panelRadio;
-	protected VerticalPanel Panel;
 	protected Map<RadioButton,TipoActividad> tiposDeActividades;
 	protected Label etiquetaTitulo, etiquetaDescripcion, etiquetaTipo, etiquetaHorarioInicio, etiquetaHorarioFin, etiquetaLugar, etiquetaFecha, etiquetaCupo,etiquetaDosPuntosHI, etiquetaDosPuntosHF, etiquetaDia, etiquetaMes, etiquetaAnio;
 	protected TextBox textBoxTitulo, textBoxDescripcion, textBoxHI, textBoxMI, textBoxHF, textBoxMF, textBoxLugar, textBoxCupo, textBoxDia, textBoxMes, textBoxAnio;
-	private Button botonCrear;
+	protected Button botonCrear;
 	
 	public VentanaCreacionActividad(ServicioAsync servicio) {
-		Panel = new VerticalPanel();
-		Panel.setSize("100%", "100%"); 
-		Panel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
-		Panel.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
+		super(servicio);
+		
 		Panel.getElement().getStyle().setBackgroundColor("#E7E6A3");
 		
 		Nombre = "Crear Actividad";
-		Servicio = servicio;
 		
 		inicializarLabels();
 		inicializarTextBoxs();

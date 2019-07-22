@@ -8,34 +8,22 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.HasHorizontalAlignment;
-import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.Label;
-import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
 import com.google.gwt.user.client.ui.TextBox;
-import com.google.gwt.user.client.ui.VerticalPanel;
 import com.jornadas.client.ServicioAsync;
 import com.jornadas.shared.usuario.Usuario;
 
-public class VentanaLoggeo {
+public class VentanaLoggeo extends VentanaPanelVerticalYServicio{
 
-	protected VerticalPanel panelLoggeo;
-	
-	protected ServicioAsync Servicio;
-
-	private Label lbl;
-	private TextBox textBoxID, textBoxDNI;
-	private Button botonConsultar;
+	protected Label lbl;
+	protected TextBox textBoxID, textBoxDNI;
+	protected Button botonConsultar;
 	
 	public VentanaLoggeo(ServicioAsync servicio) {
-		Servicio = servicio;
+		super(servicio);
 		
-		panelLoggeo = new VerticalPanel();
-		panelLoggeo.setSize("100%", "100%"); 
-		panelLoggeo.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
-		panelLoggeo.setHorizontalAlignment(HasHorizontalAlignment.ALIGN_CENTER);
-		panelLoggeo.getElement().getStyle().setBackgroundColor("#262B71");
+		Panel.getElement().getStyle().setBackgroundColor("#262B71");
 		
 		textBoxID = new TextBox();
 		textBoxID.setText("ID Aca");
@@ -50,14 +38,10 @@ public class VentanaLoggeo {
 		lbl.getElement().getStyle().setColor("#fffff0");
 		
 		
-		panelLoggeo.add(textBoxDNI);
-		panelLoggeo.add(textBoxID);
-		panelLoggeo.add(botonConsultar);
-		panelLoggeo.add(lbl);
-	}
-	
-	public Panel obtenerPanel() {
-		return panelLoggeo;
+		Panel.add(textBoxDNI);
+		Panel.add(textBoxID);
+		Panel.add(botonConsultar);
+		Panel.add(lbl);
 	}
 	
 	private class oyenteConsultar implements ClickHandler {
