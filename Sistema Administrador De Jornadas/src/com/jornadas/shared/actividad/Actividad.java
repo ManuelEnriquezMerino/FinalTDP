@@ -150,4 +150,8 @@ public class Actividad implements Serializable{
 	public Iterator<Asistente> obtenerAsistentes() {
 		return Asistentes.iterator();
 	}
+	
+	public boolean hayCupo() {
+		return Asistentes.size()<InformacionActividad.obtenerCupo();
+	}
 }

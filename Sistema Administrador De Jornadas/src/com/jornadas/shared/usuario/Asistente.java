@@ -27,6 +27,7 @@ public class Asistente extends Usuario {
 	
 	public Asistente(String id, String dni) {
 		super(id, dni);
+		Actividades = new LinkedHashSet<Actividad>();
 	}
 
 	public boolean agregarActividad(Actividad actividad) {

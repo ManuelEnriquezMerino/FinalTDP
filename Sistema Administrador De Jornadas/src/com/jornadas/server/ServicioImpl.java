@@ -9,15 +9,15 @@ import java.util.Collection;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.jornadas.client.Servicio;
+import com.jornadas.shared.Visitor.inscribirAsistenteEnActividad;
+import com.jornadas.shared.Visitor.inscribirAyudanteEnTarea;
 import com.jornadas.shared.actividad.Actividad;
 import com.jornadas.shared.actividad.Area;
 import com.jornadas.shared.actividad.TipoActividad;
 import com.jornadas.shared.excepciones.FechaInvalidaException;
 import com.jornadas.shared.tarea.Tarea;
 import com.jornadas.shared.tarea.creadoresDeTareas.CreadorTarea;
-import com.jornadas.shared.usuario.Asistente;
 import com.jornadas.shared.usuario.*;
-import com.jornadas.shared.usuario.Usuario;
 import com.jornadas.shared.usuario.creadoresDeOrganizadores.CreadorAyudanteEvento;
 
 @SuppressWarnings("serial")
@@ -191,10 +191,31 @@ public class ServicioImpl extends RemoteServiceServlet implements Servicio {
 		}
 	}
 	
-	public Boolean inscribirAsistenteAActividad(Asistente asistente, Actividad actividad) {
-		boolean resultado;
-		if(asistente != null && actividad != null) {
-			resultado = asistente.agregarActividad(actividad) && actividad.agregarAsistente(asistente);
+	public Boolean inscribirAsistenteAActividad(String IDAyudante, String DNIAyudante, String IDActividad) {
+		Usuario usuario = jornada.recuperarUsuario(IDAyudante, DNIAyudante);
+		Actividad actividad = jornada.recuperarActividad(IDActividad);
+		boolean resultado = usuario!=null && actividad!=null;
+		if(resultado) {
+			inscribirAsistenteEnActividad inscripcion = new inscribirAsistenteEnActividad(actividad);
+			usuario.accionar(inscripcion);
+			resultado = inscripcion.resultadoInscripcion();
+			if(resultado)
+				guardarJornada();
+		} else
+			resultado = false;
+		return resultado;
+	}
+	
+	public Boolean inscribirAyudanteATarea(String IDAyudante, String DNIAyudante, String IDTarea) {
+		Usuario usuario = jornada.recuperarUsuario(IDAyudante, DNIAyudante);
+		Tarea tarea = jornada.recuperarTarea(IDTarea);
+		boolean resultado = usuario!=null && tarea!=null;
+		if(resultado) {
+			inscribirAyudanteEnTarea inscripcion = new inscribirAyudanteEnTarea(tarea);
+			usuario.accionar(inscripcion);
+			resultado = inscripcion.resultadoInscripcion();
+			if(resultado)
+				guardarJornada();
 		} else
 			resultado = false;
 		return resultado;
@@ -210,6 +231,10 @@ public class ServicioImpl extends RemoteServiceServlet implements Servicio {
 	
 	public Collection<Actividad> obtenerActividades() {
 		return jornada.obtenerActividades();
+	}
+	
+	public Collection<Tarea> obtenerTareas(){
+		return jornada.obtenerTareas();
 	}
 	
 	public Collection<TipoActividad> obtenerTiposDeActividades(){

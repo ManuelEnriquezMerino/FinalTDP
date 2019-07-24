@@ -8,6 +8,7 @@ import com.jornadas.client.Ventanas.VentanaCreacionAyudante;
 import com.jornadas.client.Ventanas.VentanaCreacionTarea;
 import com.jornadas.client.Ventanas.VentanaDatos;
 import com.jornadas.client.Ventanas.VentanaInscripcionActividad;
+import com.jornadas.client.Ventanas.VentanaInscripcionTarea;
 import com.jornadas.client.Ventanas.VentanaPestanias;
 import com.jornadas.shared.usuario.Asistente;
 import com.jornadas.shared.usuario.CoordinadorDeArea;
@@ -34,11 +35,13 @@ public class GenerarVentanas extends Accion{
 
 	public void Accionar(Voluntario usuario) {
 		Ventana.agregarPestania(new VentanaDatos(usuario, Servicio));
+		Ventana.agregarPestania(new VentanaInscripcionTarea(usuario, Servicio));
 	}
 
 	public void Accionar(Organizador usuario) {
 		Ventana.agregarPestania(new VentanaDatos(usuario, Servicio));
 		Ventana.agregarPestania(new VentanaCreacionAsistente(Servicio));
+		Ventana.agregarPestania(new VentanaInscripcionTarea(usuario, Servicio));
 	}
 
 	public void Accionar(CoordinadorDeArea usuario) {
@@ -46,6 +49,7 @@ public class GenerarVentanas extends Accion{
 		Ventana.agregarPestania(new VentanaCreacionAsistente(Servicio));
 		Ventana.agregarPestania(new VentanaCreacionActividad(Servicio));
 		Ventana.agregarPestania(new VentanaCreacionTarea(Servicio));
+		Ventana.agregarPestania(new VentanaInscripcionTarea(usuario, Servicio));
 	}
 
 	public void Accionar(OrganizadorGeneral usuario) {
@@ -53,6 +57,7 @@ public class GenerarVentanas extends Accion{
 		Ventana.agregarPestania(new VentanaCreacionAsistente(Servicio));
 		Ventana.agregarPestania(new VentanaCreacionActividad(Servicio));
 		Ventana.agregarPestania(new VentanaCreacionTarea(Servicio));
+		Ventana.agregarPestania(new VentanaInscripcionTarea(usuario, Servicio));
 		Ventana.agregarPestania(new VentanaCreacionAyudante(Servicio));
 		Ventana.agregarPestania(new VentanaArea(Servicio));
 	}

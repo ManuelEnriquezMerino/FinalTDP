@@ -130,12 +130,48 @@ public class Jornada implements Serializable{
 		return Usuarios.get(Clave);
 	}
 	
+	public Actividad recuperarActividad(String ID) {
+		boolean encontre = false;
+		Iterator<Actividad> iterador = Actividades.iterator();
+		Actividad actividad = null;
+		
+		while(!encontre && iterador.hasNext()) {
+			actividad = iterador.next();
+			encontre = ID.equals(actividad.obtenerID());
+		}
+		
+		if(!encontre)
+			actividad = null;
+		
+		return actividad;
+	}
+	
+	public Tarea recuperarTarea(String ID) {
+		boolean encontre = false;
+		Iterator<Tarea> iterador = Tareas.iterator();
+		Tarea tarea = null;
+		
+		while(!encontre && iterador.hasNext()) {
+			tarea = iterador.next();
+			encontre = ID.equals(tarea.obtenerID());
+		}
+		
+		if(!encontre)
+			tarea = null;
+		
+		return tarea;
+	}
+	
 	public Collection<Usuario> obtenerUsuarios() {
 		return new LinkedList<Usuario>(Usuarios.values());
 	}
 	
 	public Collection<Actividad> obtenerActividades() {
 		return Actividades;
+	}
+	
+	public Collection<Tarea> obtenerTareas() {
+		return Tareas;
 	}
 	
 	public Collection<TipoActividad> obtenerTiposDeActividades() {

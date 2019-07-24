@@ -14,6 +14,7 @@ public class Voluntario extends Usuario{
 
 	public Voluntario() {
 		super();
+		Tareas = new LinkedHashSet<Tarea>();
 	}
 	
 	public Voluntario(String id, String dni) {

@@ -10,6 +10,7 @@ import com.jornadas.shared.tarea.Tarea;
 import com.jornadas.shared.tarea.creadoresDeTareas.CreadorTarea;
 import com.jornadas.shared.usuario.Asistente;
 import com.jornadas.shared.usuario.Usuario;
+import com.jornadas.shared.usuario.Voluntario;
 import com.jornadas.shared.usuario.creadoresDeOrganizadores.CreadorAyudanteEvento;
 
 public interface ServicioAsync {
@@ -22,13 +23,17 @@ public interface ServicioAsync {
 	
 	public void actualizarUsuario(Usuario usuario, AsyncCallback<Boolean> Respuesta);
 	
-	public void inscribirAsistenteAActividad(Asistente asistente, Actividad actividad, AsyncCallback<Boolean> Respuesta);
+	public void inscribirAsistenteAActividad(String IDAsistente, String DNIAsistente, String IDActividad, AsyncCallback<Boolean> Respuesta);
+	
+	public void inscribirAyudanteATarea(String IDAyudante, String DNIAyudante, String IDTarea, AsyncCallback<Boolean> Respuesta);
 	
 	public void obtenerIDNuevaArea(AsyncCallback<Integer> Respuesta);
 	
 	public void obtenerUsuarios(AsyncCallback<Collection<Usuario>> Respuesta);
 	
 	public void obtenerActividades(AsyncCallback<Collection<Actividad>> Respuesta);
+	
+	public void obtenerTareas(AsyncCallback<Collection<Tarea>> Respuesta);;
 	
 	public void obtenerTiposDeActividades(AsyncCallback<Collection<TipoActividad>> Respuesta);
 	

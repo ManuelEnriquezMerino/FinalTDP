@@ -1,8 +1,5 @@
 package com.jornadas.client.Ventanas;
 
-import java.util.Collection;
-import java.util.LinkedList;
-
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;

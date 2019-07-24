@@ -11,6 +11,7 @@ import com.jornadas.shared.tarea.Tarea;
 import com.jornadas.shared.tarea.creadoresDeTareas.CreadorTarea;
 import com.jornadas.shared.usuario.Asistente;
 import com.jornadas.shared.usuario.Usuario;
+import com.jornadas.shared.usuario.Voluntario;
 import com.jornadas.shared.usuario.creadoresDeOrganizadores.CreadorAyudanteEvento;
 
 @RemoteServiceRelativePath("servicio")
@@ -25,13 +26,17 @@ public interface Servicio extends RemoteService{
 
 	public Boolean actualizarUsuario(Usuario usuario);
 	
-	public Boolean inscribirAsistenteAActividad(Asistente asistente, Actividad actividad);
+	public Boolean inscribirAsistenteAActividad(String IDAsistente, String DNIAsistente, String IDActividad);
+	
+	public Boolean inscribirAyudanteATarea(String IDAyudante, String DNIAyudante, String IDTarea);
 	
 	public int obtenerIDNuevaArea();
 	
 	public Collection<Usuario> obtenerUsuarios();
 	
 	public Collection<Actividad> obtenerActividades();
+	
+	public Collection<Tarea> obtenerTareas();
 	
 	public Collection<TipoActividad> obtenerTiposDeActividades();
 	

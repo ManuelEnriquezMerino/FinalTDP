@@ -85,4 +85,8 @@ public abstract class Tarea implements Serializable{
 	public Fecha obtenerFecha() {
 		return InformacionTarea.obtenerFecha();
 	}
+	
+	public boolean estaDisponible() {
+		return Voluntario==null;
+	}
 }
