@@ -293,10 +293,11 @@ public class ServicioImpl extends RemoteServiceServlet implements Servicio {
 		return resultado;
 	}
 	
-	public String agregarActividad(Actividad NuevaActividad) {
+	public String agregarActividad(Actividad NuevaActividad, String IDArea) {
 		String ID = "Act_" + jornada.obtenerNuevoIDActividad();
 		NuevaActividad.establecerID(ID);
 		jornada.agregarActividad(NuevaActividad);
+		jornada.recuperarArea(IDArea).agregarActividad(NuevaActividad);
 		guardarJornada();
 		return ID;
 	}

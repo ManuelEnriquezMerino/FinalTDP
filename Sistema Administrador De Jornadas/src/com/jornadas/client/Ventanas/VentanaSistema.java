@@ -5,48 +5,45 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
-import com.google.gwt.user.client.ui.TextBox;
 import com.jornadas.client.ServicioAsync;
 import com.jornadas.client.Ventanas.VentanasAbstractas.VentanaPanelVerticalYServicio;
 import com.jornadas.shared.Visitor.GenerarVentanas;
 import com.jornadas.shared.usuario.Usuario;
 
-public class VentanaLoggeo extends VentanaPanelVerticalYServicio{
+public class VentanaSistema extends VentanaPanelVerticalYServicio{
 
-	protected Label lbl;
-	protected TextBox textBoxID, textBoxDNI;
-	protected Button botonConsultar;
+	protected Usuario Usuario;
+	protected Button botonCerrarSesion, botonActualizar;
 	
-	public VentanaLoggeo(ServicioAsync servicio) {
+	public VentanaSistema(Usuario usuario, ServicioAsync servicio) {
 		super(servicio);
+		Nombre = "Sistema";
+		Panel.getElement().getStyle().setBackgroundColor("#ffdead");
 		
-		Panel.getElement().getStyle().setBackgroundColor("#262B71");
+		Usuario = usuario;
 		
-		textBoxID = new TextBox();
-		textBoxID.setText("ID Aca");
+		botonCerrarSesion = new Button("Cerrar Sesion");
+		botonCerrarSesion.addClickHandler(new oyenteCerrarSesion());
+		botonActualizar = new Button("Actualizar");
+		botonActualizar.addClickHandler(new oyenteActualizar());
 		
-		textBoxDNI = new TextBox();
-		textBoxDNI.setText("DNI Aca");
-		
-		botonConsultar = new Button("Obtener Usuario");
-		botonConsultar.addClickHandler(new oyenteConsultar());
-		
-		lbl = new Label();
-		lbl.getElement().getStyle().setColor("#fffff0");
-		
-		
-		Panel.add(textBoxDNI);
-		Panel.add(textBoxID);
-		Panel.add(botonConsultar);
-		Panel.add(lbl);
+		Panel.add(botonCerrarSesion);
+		Panel.add(botonActualizar);
 	}
 	
-	private class oyenteConsultar implements ClickHandler {
+	private class oyenteCerrarSesion implements ClickHandler {
 
 		public void onClick(ClickEvent event) {
-			Servicio.obtenerUsuario(textBoxID.getText(), textBoxDNI.getText(), new AsyncCallback<Usuario>() {
+			RootLayoutPanel.get().remove(0);
+			VentanaLoggeo logeo = new VentanaLoggeo(Servicio);
+			RootLayoutPanel.get().add(logeo.obtenerPanel());
+		}
+	}
+	
+	private class oyenteActualizar implements ClickHandler {
+		public void onClick(ClickEvent event) {
+			Servicio.obtenerUsuario(Usuario.obtenerID(), Usuario.obtenerDNI(), new AsyncCallback<Usuario>() {
 
 				@Override
 				public void onFailure(Throwable caught) {
@@ -56,18 +53,15 @@ public class VentanaLoggeo extends VentanaPanelVerticalYServicio{
 				@Override
 				public void onSuccess(Usuario resultado) {
 					if(resultado==null)
-						lbl.setText("ERROR: Usuario no encontrado");
+						Window.alert("ERROR: No es posible actualizar en este momento, por favor vuelva a intentarlo mas tarde");
 					else {
 						RootLayoutPanel.get().remove(0);
-						
 						GenerarVentanas ventana = new GenerarVentanas(Servicio);
-						
 						resultado.accionar(ventana);
-						
 						RootLayoutPanel.get().add(ventana.obtenerVentana().obtenerPanel());
 					}
 				}
 			});
 		}
-    }
+	}
 }

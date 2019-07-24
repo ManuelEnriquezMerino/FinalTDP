@@ -50,7 +50,7 @@ public interface Servicio extends RemoteService{
 	
 	public Boolean modificarArea(Area AreaModificada);
 	
-	public String agregarActividad(Actividad NuevaActividad);
+	public String agregarActividad(Actividad NuevaActividad, String IDArea);
 	
 	public String agregarTarea(Tarea NuevaTarea);
 }

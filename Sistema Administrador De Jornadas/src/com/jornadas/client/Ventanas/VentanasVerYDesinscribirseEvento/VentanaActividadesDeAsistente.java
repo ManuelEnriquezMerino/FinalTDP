@@ -26,7 +26,7 @@ public class VentanaActividadesDeAsistente extends VentanaEventoUsuario{
 		super(servicio);
 		Nombre = "Mis Actividades";
 		Asistente=asistente;
-		Panel.getElement().getStyle().setBackgroundColor("#F5A9BC");
+		Panel.getElement().getStyle().setBackgroundColor("#E1E9b7");
 		
 		Actividades = new HashMap<String,Actividad>();
 		

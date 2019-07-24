@@ -25,11 +25,13 @@ import com.jornadas.shared.excepciones.CupoInvalidoException;
 import com.jornadas.shared.excepciones.FechaInvalidaException;
 import com.jornadas.shared.excepciones.HoraInvalidaException;
 import com.jornadas.shared.excepciones.HorariosEventoInvalidosException;
+import com.jornadas.shared.usuario.CoordinadorDeArea;
 
 public class VentanaCreacionActividad extends VentanaPanelVerticalYServicio{
 	
 	protected Actividad NuevaActividad;
 
+	protected CoordinadorDeArea coordinador;
 	protected HorizontalPanel panelTitulo, panelDescripcion, panelTipo, panelHorarioInicio, panelHorarioFin, panelLugar, panelFecha, panelCupo, panelRadio;
 	protected Map<RadioButton,TipoActividad> tiposDeActividades;
 	protected Label etiquetaTitulo, etiquetaDescripcion, etiquetaTipo, etiquetaHorarioInicio, etiquetaHorarioFin, etiquetaLugar, etiquetaFecha, etiquetaCupo,etiquetaDosPuntosHI, etiquetaDosPuntosHF, etiquetaDia, etiquetaMes, etiquetaAnio;
@@ -252,7 +254,7 @@ public class VentanaCreacionActividad extends VentanaPanelVerticalYServicio{
 
 		public void onClick(ClickEvent event) {	
 			if(crearActividad()) {
-				Servicio.agregarActividad(NuevaActividad, new AsyncCallback<String>() {
+				Servicio.agregarActividad(NuevaActividad, coordinador.obtenerArea().obtenerID(), new AsyncCallback<String>() {
 
 					@Override
 					public void onFailure(Throwable caught) {

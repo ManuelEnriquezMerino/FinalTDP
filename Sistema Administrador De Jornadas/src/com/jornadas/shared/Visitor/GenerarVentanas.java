@@ -4,6 +4,7 @@ import com.jornadas.client.ServicioAsync;
 import com.jornadas.client.Ventanas.VentanaCrearArea;
 import com.jornadas.client.Ventanas.VentanaDatos;
 import com.jornadas.client.Ventanas.VentanaPestanias;
+import com.jornadas.client.Ventanas.VentanaSistema;
 import com.jornadas.client.Ventanas.VentanasDeCreacionDeEventos.VentanaCreacionActividad;
 import com.jornadas.client.Ventanas.VentanasDeCreacionDeEventos.VentanaCreacionTarea;
 import com.jornadas.client.Ventanas.VentanasDeCreacionDeUsuarios.VentanaCreacionAsistente;
@@ -33,6 +34,7 @@ public class GenerarVentanas extends Accion{
 		Ventana.agregarPestania(new VentanaDatos(usuario, Servicio));
 		Ventana.agregarPestania(new VentanaInscripcionActividad(usuario, Servicio));
 		Ventana.agregarPestania(new VentanaActividadesDeAsistente(usuario, Servicio));
+		Ventana.agregarPestania(new VentanaSistema(usuario, Servicio));
 	}
 
 
@@ -40,6 +42,7 @@ public class GenerarVentanas extends Accion{
 		Ventana.agregarPestania(new VentanaDatos(usuario, Servicio));
 		Ventana.agregarPestania(new VentanaInscripcionTarea(usuario, Servicio));
 		Ventana.agregarPestania(new VentanaTareasDeAyudante(usuario, Servicio));
+		Ventana.agregarPestania(new VentanaSistema(usuario, Servicio));
 	}
 
 	public void Accionar(Organizador usuario) {
@@ -47,6 +50,7 @@ public class GenerarVentanas extends Accion{
 		Ventana.agregarPestania(new VentanaCreacionAsistente(Servicio));
 		Ventana.agregarPestania(new VentanaInscripcionTarea(usuario, Servicio));
 		Ventana.agregarPestania(new VentanaTareasDeAyudante(usuario, Servicio));
+		Ventana.agregarPestania(new VentanaSistema(usuario, Servicio));
 	}
 
 	public void Accionar(CoordinadorDeArea usuario) {
@@ -56,6 +60,7 @@ public class GenerarVentanas extends Accion{
 		Ventana.agregarPestania(new VentanaCreacionTarea(Servicio));
 		Ventana.agregarPestania(new VentanaInscripcionTarea(usuario, Servicio));
 		Ventana.agregarPestania(new VentanaTareasDeAyudante(usuario, Servicio));
+		Ventana.agregarPestania(new VentanaSistema(usuario, Servicio));
 	}
 
 	public void Accionar(OrganizadorGeneral usuario) {
@@ -67,6 +72,7 @@ public class GenerarVentanas extends Accion{
 		Ventana.agregarPestania(new VentanaTareasDeAyudante(usuario, Servicio));
 		Ventana.agregarPestania(new VentanaCreacionAyudante(Servicio));
 		Ventana.agregarPestania(new VentanaCrearArea(Servicio));
+		Ventana.agregarPestania(new VentanaSistema(usuario, Servicio));
 	}
 	
 	public VentanaPestanias obtenerVentana() {

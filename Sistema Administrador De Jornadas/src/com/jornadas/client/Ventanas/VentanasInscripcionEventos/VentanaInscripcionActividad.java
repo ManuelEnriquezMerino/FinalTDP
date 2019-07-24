@@ -66,8 +66,10 @@ public class VentanaInscripcionActividad extends VentanaPanelVerticalYServicio{
 			@Override
 			public void onSuccess(Collection<Actividad> resultado) {
 				for(Actividad act : resultado) {
-					Actividades.put(act.obtenerTitulo(), act);
-					listBoxActividades.addItem(act.obtenerTitulo());
+					if(act.hayCupo() && !Asistente.inscriptoEnActividad(act.obtenerID())) {
+						Actividades.put(act.obtenerTitulo(), act);
+						listBoxActividades.addItem(act.obtenerTitulo());
+					}
 				}
 			}
 		});

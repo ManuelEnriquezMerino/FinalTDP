@@ -22,14 +22,12 @@ public class Actividad implements Serializable{
 	protected String Descripcion;
 	protected TipoActividad TipoActividad;
 	protected InformacionActividad InformacionActividad;
-	protected Collection<Tarea> TareasDeLaActividad;
 	protected Collection<Asistente> Asistentes;
 	
 	//Constructor
 	
 	public Actividad() {
 		InformacionActividad = new InformacionActividad();
-		TareasDeLaActividad = new LinkedHashSet<Tarea>();
 		Asistentes = new LinkedHashSet<Asistente>();
 	}
 	
@@ -71,23 +69,7 @@ public class Actividad implements Serializable{
 	public void establecerCupo(int cupo) throws CupoInvalidoException {
 		InformacionActividad.establecerCupo(cupo);
 	}
-	
-	/**
-	*	Agrega una nueva Tarea a la actividad
-	*	@return verdadero si la tarea no pertenecia ya a la actividad y entonces se la pudo agregar, caso contrario falso
-	*/
-	public boolean agregarTarea(Tarea tarea) {
-		return TareasDeLaActividad.add(tarea);
-	}
-	
-	/**
-	*	Quita una nueva Tarea de la actividad
-	*	@return verdadero si la tarea pertenecia a la actividad y entonces se la pudo quitar, caso contrario falso
-	*/
-	public boolean quitarTarea(Tarea tarea) {
-		return TareasDeLaActividad.remove(tarea);
-	}
-	
+
 	/**
 	*	Agrega un Asistente a la actividad
 	*	@return verdadero si el Asistente no estaba anotado en la actividad y entonces lo pudo agregar, caso contrario falso
@@ -141,10 +123,6 @@ public class Actividad implements Serializable{
 	
 	public int obtenerCupo() {
 		return InformacionActividad.obtenerCupo();
-	}
-	
-	public Iterator<Tarea> obtenerTareas() {
-		return TareasDeLaActividad.iterator();
 	}
 	
 	public Iterator<Asistente> obtenerAsistentes() {

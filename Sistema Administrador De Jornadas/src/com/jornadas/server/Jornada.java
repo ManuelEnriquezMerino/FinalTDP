@@ -162,6 +162,22 @@ public class Jornada implements Serializable{
 		return tarea;
 	}
 	
+	public Area recuperarArea(String ID) {
+		boolean encontre = false;
+		Iterator<Area> iterador = Areas.iterator();
+		Area area = null;
+		
+		while(!encontre && iterador.hasNext()) {
+			area = iterador.next();
+			encontre = ID.equals(area.obtenerID());
+		}
+		
+		if(!encontre)
+			area = null;
+		
+		return area;
+	}
+	
 	public Collection<Usuario> obtenerUsuarios() {
 		return new LinkedList<Usuario>(Usuarios.values());
 	}

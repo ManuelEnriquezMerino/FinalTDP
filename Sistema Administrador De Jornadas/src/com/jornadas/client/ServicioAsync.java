@@ -47,7 +47,7 @@ public interface ServicioAsync {
 	
 	public void modificarArea(Area AreaModificada, AsyncCallback<Boolean> Respuesta);
 	
-	public void agregarActividad(Actividad NuevaActividad, AsyncCallback<String> Respuesta);
+	public void agregarActividad(Actividad NuevaActividad, String IDArea, AsyncCallback<String> Respuesta);
 	
 	public void agregarTarea(Tarea NuevaTarea, AsyncCallback<String> Respuesta);
 }
