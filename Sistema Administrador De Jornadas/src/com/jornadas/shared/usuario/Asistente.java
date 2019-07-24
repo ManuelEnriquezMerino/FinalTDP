@@ -37,6 +37,10 @@ public class Asistente extends Usuario {
 	public boolean quitarActividad(Actividad actividad) {
 		return Actividades.remove(actividad);
 	}
+	
+	public Collection<Actividad> obtenerActividadesInscriptas(){
+		return Actividades;
+	}
 
 	public void accionar(Accion accion) {
 		accion.Accionar(this);

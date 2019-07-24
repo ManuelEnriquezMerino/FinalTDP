@@ -1,6 +1,7 @@
 package com.jornadas.shared.Visitor;
 
 import com.jornadas.client.ServicioAsync;
+import com.jornadas.client.Ventanas.VentanaActividadesDeAsistente;
 import com.jornadas.client.Ventanas.VentanaArea;
 import com.jornadas.client.Ventanas.VentanaCreacionActividad;
 import com.jornadas.client.Ventanas.VentanaCreacionAsistente;
@@ -30,6 +31,7 @@ public class GenerarVentanas extends Accion{
 	public void Accionar(Asistente usuario) {
 		Ventana.agregarPestania(new VentanaDatos(usuario, Servicio));
 		Ventana.agregarPestania(new VentanaInscripcionActividad(usuario, Servicio));
+		Ventana.agregarPestania(new VentanaActividadesDeAsistente(usuario, Servicio));
 	}
 
 
