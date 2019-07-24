@@ -25,6 +25,10 @@ public class Voluntario extends Usuario{
 		Tareas.add(t);
 	}
 	
+	public boolean quitarTarea(Tarea t) {
+		return Tareas.remove(t);
+	}
+	
 	public Collection<Tarea> obtenerTareas(){
 		return Tareas;
 	}

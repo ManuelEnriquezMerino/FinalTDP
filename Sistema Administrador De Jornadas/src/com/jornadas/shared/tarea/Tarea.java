@@ -38,6 +38,10 @@ public abstract class Tarea implements Serializable{
 		Voluntario=voluntario;
 	}
 	
+	public void quitarVoluntario() {
+		Voluntario=null;
+	}
+	
 	public void establecerHorarioInicio(int HI, int MI) throws HorariosEventoInvalidosException, HoraInvalidaException {
 		InformacionTarea.establecerHorarioInicio(HI, MI);
 	}

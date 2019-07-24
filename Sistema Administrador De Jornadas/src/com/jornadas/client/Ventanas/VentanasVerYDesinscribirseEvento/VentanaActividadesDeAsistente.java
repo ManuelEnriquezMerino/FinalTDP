@@ -1,4 +1,4 @@
-package com.jornadas.client.Ventanas.VentanasConsultas;
+package com.jornadas.client.Ventanas.VentanasVerYDesinscribirseEvento;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -6,6 +6,10 @@ import java.util.Map;
 
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.Window;
+import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.jornadas.client.ServicioAsync;
 import com.jornadas.client.Ventanas.VentanasAbstractas.VentanaEventoUsuario;
 import com.jornadas.shared.actividad.Actividad;
@@ -15,13 +19,11 @@ import com.jornadas.shared.usuario.Asistente;
 
 public class VentanaActividadesDeAsistente extends VentanaEventoUsuario{
 
-	protected ServicioAsync Servicio;
 	protected Asistente Asistente;
 	protected Map<String,Actividad> Actividades;
 	
 	public VentanaActividadesDeAsistente(Asistente asistente, ServicioAsync servicio) {
-		super();
-		Servicio=servicio;
+		super(servicio);
 		Nombre = "Mis Actividades";
 		Asistente=asistente;
 		Panel.getElement().getStyle().setBackgroundColor("#F5A9BC");
@@ -29,6 +31,8 @@ public class VentanaActividadesDeAsistente extends VentanaEventoUsuario{
 		Actividades = new HashMap<String,Actividad>();
 		
 		establecerListaDeActividades();
+		
+		botonDesanotarse.addClickHandler(new oyenteDesinscribir());
 	}
 	
 	
@@ -57,6 +61,31 @@ public class VentanaActividadesDeAsistente extends VentanaEventoUsuario{
 				labelLugar.setText(actividadElegida.obtenerLugar());
 			}
 		}
-		
+	}
+	
+	protected class oyenteDesinscribir implements ClickHandler {
+
+		public void onClick(ClickEvent event) {
+			Actividad actividadElegida = Actividades.get(listBoxEvento.getSelectedItemText());
+			if(actividadElegida!=null) {
+				Servicio.desinscribirAsistenteAActividad(Asistente.obtenerID(), Asistente.obtenerDNI(), actividadElegida.obtenerID(), new AsyncCallback<Boolean>() {
+
+					@Override
+					public void onFailure(Throwable caught) {
+						Window.alert("Error al comunicarse con el servidor. Por favor vuelva a intentarlo");
+					}
+
+					@Override
+					public void onSuccess(Boolean resultado) {
+						if(resultado) {
+							Window.alert("Usuario desinscripto a la Actividad con Exito");
+							listBoxEvento.removeItem(listBoxEvento.getSelectedIndex());
+						}
+						else
+							Window.alert("Error al desinscribir al usuario en la actividad. Por favor vuelva a intentarlo");
+					}
+				});
+			}
+		}
 	}
 }

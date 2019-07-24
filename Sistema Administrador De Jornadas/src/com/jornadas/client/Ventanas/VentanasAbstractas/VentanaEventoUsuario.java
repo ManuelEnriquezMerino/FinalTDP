@@ -1,6 +1,8 @@
 package com.jornadas.client.Ventanas.VentanasAbstractas;
 
 import com.google.gwt.dom.client.Style.Unit;
+import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.HasHorizontalAlignment;
 import com.google.gwt.user.client.ui.HasVerticalAlignment;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
@@ -15,16 +17,18 @@ public abstract class VentanaEventoUsuario extends Ventana{
 	protected ServicioAsync Servicio;
 	protected Label labelDescripcion, labelFecha, labelLugar, labelHora;
 	protected HorizontalPanel Panel;
-	protected VerticalPanel panelLabels;
+	protected VerticalPanel panelListaYBoton, panelLabels;
 	protected ListBox listBoxEvento;
+	protected Button botonDesanotarse;
 	
-	public VentanaEventoUsuario() {
+	public VentanaEventoUsuario(ServicioAsync servicio) {
+		Servicio=servicio;
 		Panel = new HorizontalPanel();
 		Panel.setSize("100%", "100%"); 
 		Panel.setVerticalAlignment(HasVerticalAlignment.ALIGN_MIDDLE);
 		
 		inicializarLabels();
-		inicializarListaDeActividades();
+		inicializarListaDeActividadesYBoton();
 		
 		poblarPanel();
 	}
@@ -36,6 +40,7 @@ public abstract class VentanaEventoUsuario extends Ventana{
 		labelHora = new Label();
 		
 		panelLabels = new VerticalPanel();
+		panelLabels.setSize("50%", "50%"); 
 		panelLabels.add(labelDescripcion);
 		panelLabels.add(labelFecha);
 		panelLabels.add(labelHora);
@@ -45,17 +50,24 @@ public abstract class VentanaEventoUsuario extends Ventana{
 			w.getElement().getStyle().setFontSize(1.5, Unit.EM);
 		}
 		
-		panelLabels.setSize("50%", "50%"); 
 	}
 	
-	protected void inicializarListaDeActividades() {
+	protected void inicializarListaDeActividadesYBoton() {
 		listBoxEvento = new ListBox();
 		listBoxEvento.getElement().getStyle().setWidth(200, Unit.PX);
 		listBoxEvento.setVisibleItemCount(20);
+		
+		botonDesanotarse = new Button("Desanotarse");
+		
+		panelListaYBoton = new VerticalPanel();
+		panelListaYBoton.setSize("50%", "50%");
+		
+		panelListaYBoton.add(listBoxEvento);
+		panelListaYBoton.add(botonDesanotarse);
 	}
 	
 	protected void poblarPanel() {
-		Panel.add(listBoxEvento);
+		Panel.add(panelListaYBoton);
 		Panel.add(panelLabels);
 	}
 	

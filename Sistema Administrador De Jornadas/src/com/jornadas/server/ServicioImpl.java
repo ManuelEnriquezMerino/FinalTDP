@@ -9,6 +9,8 @@ import java.util.Collection;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.jornadas.client.Servicio;
+import com.jornadas.shared.Visitor.desinscribirAsistenteEnActividad;
+import com.jornadas.shared.Visitor.desinscribirAyudanteEnTarea;
 import com.jornadas.shared.Visitor.inscribirAsistenteEnActividad;
 import com.jornadas.shared.Visitor.inscribirAyudanteEnTarea;
 import com.jornadas.shared.actividad.Actividad;
@@ -206,6 +208,20 @@ public class ServicioImpl extends RemoteServiceServlet implements Servicio {
 		return resultado;
 	}
 	
+	public Boolean desinscribirAsistenteAActividad(String IDAsistente, String DNIAsistente, String IDActividad) {
+		Usuario usuario = jornada.recuperarUsuario(IDAsistente, DNIAsistente);
+		Actividad actividad = jornada.recuperarActividad(IDActividad);
+		boolean resultado = usuario!=null && actividad!=null;
+		if(resultado) {
+			desinscribirAsistenteEnActividad desinscripcion = new desinscribirAsistenteEnActividad(actividad);
+			usuario.accionar(desinscripcion);
+			resultado = desinscripcion.resultadoDesinscripcion();
+			if(resultado)
+				guardarJornada();
+		}
+		return resultado;
+	}
+	
 	public Boolean inscribirAyudanteATarea(String IDAyudante, String DNIAyudante, String IDTarea) {
 		Usuario usuario = jornada.recuperarUsuario(IDAyudante, DNIAyudante);
 		Tarea tarea = jornada.recuperarTarea(IDTarea);
@@ -218,6 +234,20 @@ public class ServicioImpl extends RemoteServiceServlet implements Servicio {
 				guardarJornada();
 		} else
 			resultado = false;
+		return resultado;
+	}
+	
+	public Boolean desinscribirAyudanteATarea(String IDAyudante, String DNIAyudante, String IDTarea) {
+		Usuario usuario = jornada.recuperarUsuario(IDAyudante, DNIAyudante);
+		Tarea tarea = jornada.recuperarTarea(IDTarea);
+		boolean resultado = usuario!=null && tarea!=null;
+		if(resultado) {
+			desinscribirAyudanteEnTarea desinscripcion = new desinscribirAyudanteEnTarea(tarea);
+			usuario.accionar(desinscripcion);
+			resultado = desinscripcion.resultadoDesinscripcion();
+			if(resultado)
+				guardarJornada();
+		}
 		return resultado;
 	}
 	
