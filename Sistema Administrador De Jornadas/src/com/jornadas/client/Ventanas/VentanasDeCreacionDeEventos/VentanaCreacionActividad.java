@@ -1,4 +1,4 @@
-package com.jornadas.client.Ventanas;
+package com.jornadas.client.Ventanas.VentanasDeCreacionDeEventos;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -18,6 +18,7 @@ import com.google.gwt.user.client.ui.RadioButton;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.jornadas.client.ServicioAsync;
+import com.jornadas.client.Ventanas.VentanasAbstractas.VentanaPanelVerticalYServicio;
 import com.jornadas.shared.actividad.Actividad;
 import com.jornadas.shared.actividad.TipoActividad;
 import com.jornadas.shared.excepciones.CupoInvalidoException;

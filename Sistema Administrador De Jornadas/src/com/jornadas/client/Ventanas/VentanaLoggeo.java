@@ -9,6 +9,7 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.jornadas.client.ServicioAsync;
+import com.jornadas.client.Ventanas.VentanasAbstractas.VentanaPanelVerticalYServicio;
 import com.jornadas.shared.Visitor.GenerarVentanas;
 import com.jornadas.shared.usuario.Usuario;
 

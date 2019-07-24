@@ -1,4 +1,4 @@
-package com.jornadas.client.Ventanas;
+package com.jornadas.client.Ventanas.VentanasConsultas;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -7,6 +7,7 @@ import java.util.Map;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.jornadas.client.ServicioAsync;
+import com.jornadas.client.Ventanas.VentanasAbstractas.VentanaEventoUsuario;
 import com.jornadas.shared.actividad.Actividad;
 import com.jornadas.shared.extras.Fecha;
 import com.jornadas.shared.extras.Hora;

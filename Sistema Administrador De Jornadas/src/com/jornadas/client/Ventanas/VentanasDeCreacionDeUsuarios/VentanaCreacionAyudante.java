@@ -1,4 +1,4 @@
-package com.jornadas.client.Ventanas;
+package com.jornadas.client.Ventanas.VentanasDeCreacionDeUsuarios;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -15,6 +15,7 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.RadioButton;
 import com.jornadas.client.ServicioAsync;
+import com.jornadas.client.Ventanas.VentanasAbstractas.VentanaCreacionUsuario;
 import com.jornadas.shared.usuario.creadoresDeOrganizadores.CreadorAyudanteEvento;
 
 public class VentanaCreacionAyudante extends VentanaCreacionUsuario{

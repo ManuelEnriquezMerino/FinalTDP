@@ -17,13 +17,14 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.TextBox;
 import com.jornadas.client.ServicioAsync;
+import com.jornadas.client.Ventanas.VentanasAbstractas.VentanaPanelVerticalYServicio;
 import com.jornadas.shared.Visitor.CoordinadoresDeArea;
 import com.jornadas.shared.actividad.Area;
 import com.jornadas.shared.actividad.TipoActividad;
 import com.jornadas.shared.usuario.CoordinadorDeArea;
 import com.jornadas.shared.usuario.Usuario;
 
-public class VentanaArea extends VentanaPanelVerticalYServicio{
+public class VentanaCrearArea extends VentanaPanelVerticalYServicio{
 	
 	protected HorizontalPanel PanelCheckBox, PanelID, PanelNombre, PanelCoordinador, PanelActividades;
 	
@@ -37,7 +38,7 @@ public class VentanaArea extends VentanaPanelVerticalYServicio{
 	private Map<TipoActividad,CheckBox> checkBoxTipoDeActividades;
 	private Button botonGuardar;
 	
-	public VentanaArea(Area area, ServicioAsync servicio) {
+	public VentanaCrearArea(Area area, ServicioAsync servicio) {
 		super(servicio);
 		
 		Nombre = "Area";
@@ -48,7 +49,7 @@ public class VentanaArea extends VentanaPanelVerticalYServicio{
 		cargarVentana();
 	}
 	
-	public VentanaArea(ServicioAsync servicio) {
+	public VentanaCrearArea(ServicioAsync servicio) {
 		super(servicio);
 		
 		Nombre = "Area";

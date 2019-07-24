@@ -1,7 +1,6 @@
 package com.jornadas.shared.usuario;
 
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.LinkedHashSet;
 
 import com.jornadas.shared.Visitor.Accion;
@@ -26,8 +25,8 @@ public class Voluntario extends Usuario{
 		Tareas.add(t);
 	}
 	
-	public Iterator<Tarea> obtenerTareas(){
-		return Tareas.iterator();
+	public Collection<Tarea> obtenerTareas(){
+		return Tareas;
 	}
 	
 	public void accionar(Accion accion) {

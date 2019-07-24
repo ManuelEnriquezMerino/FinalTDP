@@ -9,6 +9,7 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.TextBox;
 import com.jornadas.client.ServicioAsync;
+import com.jornadas.client.Ventanas.VentanasAbstractas.VentanaPanelVerticalYServicio;
 import com.jornadas.shared.excepciones.FechaInvalidaException;
 import com.jornadas.shared.usuario.Usuario;
 

@@ -4,6 +4,7 @@ import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.user.client.ui.LayoutPanel;
 import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.TabLayoutPanel;
+import com.jornadas.client.Ventanas.VentanasAbstractas.Ventana;
 
 public class VentanaPestanias extends Ventana{
 

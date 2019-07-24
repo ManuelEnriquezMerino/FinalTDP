@@ -1,4 +1,4 @@
-package com.jornadas.client.Ventanas;
+package com.jornadas.client.Ventanas.VentanasInscripcionEventos;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -14,6 +14,7 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.jornadas.client.ServicioAsync;
+import com.jornadas.client.Ventanas.VentanasAbstractas.VentanaPanelVerticalYServicio;
 import com.jornadas.shared.extras.Fecha;
 import com.jornadas.shared.extras.Hora;
 import com.jornadas.shared.tarea.Tarea;

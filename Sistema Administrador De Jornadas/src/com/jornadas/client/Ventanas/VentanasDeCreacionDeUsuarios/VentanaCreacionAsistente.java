@@ -1,4 +1,4 @@
-package com.jornadas.client.Ventanas;
+package com.jornadas.client.Ventanas.VentanasDeCreacionDeUsuarios;
 
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -6,6 +6,7 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.google.gwt.user.client.ui.Button;
 import com.jornadas.client.ServicioAsync;
+import com.jornadas.client.Ventanas.VentanasAbstractas.VentanaCreacionUsuario;
 
 public class VentanaCreacionAsistente extends VentanaCreacionUsuario{
 

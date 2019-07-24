@@ -1,4 +1,4 @@
-package com.jornadas.client.Ventanas;
+package com.jornadas.client.Ventanas.VentanasAbstractas;
 
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.jornadas.client.ServicioAsync;
