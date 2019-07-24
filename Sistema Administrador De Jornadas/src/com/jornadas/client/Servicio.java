@@ -9,6 +9,7 @@ import com.jornadas.shared.actividad.Area;
 import com.jornadas.shared.actividad.TipoActividad;
 import com.jornadas.shared.tarea.Tarea;
 import com.jornadas.shared.tarea.creadoresDeTareas.CreadorTarea;
+import com.jornadas.shared.usuario.Asistente;
 import com.jornadas.shared.usuario.Usuario;
 import com.jornadas.shared.usuario.creadoresDeOrganizadores.CreadorAyudanteEvento;
 
@@ -24,9 +25,13 @@ public interface Servicio extends RemoteService{
 
 	public Boolean actualizarUsuario(Usuario usuario);
 	
+	public Boolean inscribirAsistenteAActividad(Asistente asistente, Actividad actividad);
+	
 	public int obtenerIDNuevaArea();
 	
 	public Collection<Usuario> obtenerUsuarios();
+	
+	public Collection<Actividad> obtenerActividades();
 	
 	public Collection<TipoActividad> obtenerTiposDeActividades();
 	

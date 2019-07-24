@@ -14,6 +14,7 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RadioButton;
+import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.jornadas.client.ServicioAsync;
 import com.jornadas.shared.excepciones.FechaInvalidaException;
@@ -29,7 +30,8 @@ public class VentanaCreacionTarea extends VentanaPanelVerticalYServicio{
 	protected HorizontalPanel panelTitulo, panelDescripcion, panelTipo, panelHorarioInicio, panelHorarioFin, panelLugar, panelFecha, panelRadio;
 	protected Map<RadioButton,CreadorTarea> tiposDeTareas;
 	protected Label etiquetaTitulo, etiquetaDescripcion, etiquetaTipo, etiquetaHorarioInicio, etiquetaHorarioFin, etiquetaLugar, etiquetaFecha, etiquetaDosPuntosHI, etiquetaDosPuntosHF, etiquetaDia, etiquetaMes, etiquetaAnio;
-	protected TextBox textBoxTitulo, textBoxDescripcion, textBoxHI, textBoxMI, textBoxHF, textBoxMF, textBoxLugar, textBoxDia, textBoxMes, textBoxAnio;
+	protected TextBox textBoxTitulo, textBoxHI, textBoxMI, textBoxHF, textBoxMF, textBoxLugar, textBoxDia, textBoxMes, textBoxAnio;
+	protected TextArea textAreaDescripcion;
 	protected Button botonCrear;
 	
 	public VentanaCreacionTarea(ServicioAsync servicio) {
@@ -68,7 +70,9 @@ public class VentanaCreacionTarea extends VentanaPanelVerticalYServicio{
 	
 	protected void inicializarTextBoxs() {
 		textBoxTitulo = new TextBox();
-		textBoxDescripcion = new TextBox();
+		textAreaDescripcion = new TextArea();
+		textAreaDescripcion.setCharacterWidth(40);
+		textAreaDescripcion.setVisibleLines(5);
 		textBoxHI = new TextBox();
 		textBoxMI = new TextBox();
 		textBoxHF = new TextBox();
@@ -108,7 +112,7 @@ public class VentanaCreacionTarea extends VentanaPanelVerticalYServicio{
 		
 		panelDescripcion = new HorizontalPanel();
 		panelDescripcion.add(etiquetaDescripcion);
-		panelDescripcion.add(textBoxDescripcion);
+		panelDescripcion.add(textAreaDescripcion);
 		
 		panelTipo = new HorizontalPanel();
 		panelTipo.add(etiquetaTipo);
@@ -156,7 +160,7 @@ public class VentanaCreacionTarea extends VentanaPanelVerticalYServicio{
 		
 		if(resultado) {
 			NuevaTarea.establecerTitulo(textBoxTitulo.getText());
-			NuevaTarea.establecerDescripcion(textBoxDescripcion.getText());
+			NuevaTarea.establecerDescripcion(textAreaDescripcion.getText());
 		
 			NuevaTarea.establecerLugar(textBoxLugar.getText());
 		

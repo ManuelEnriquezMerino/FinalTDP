@@ -15,6 +15,7 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.Panel;
 import com.google.gwt.user.client.ui.RadioButton;
+import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.jornadas.client.ServicioAsync;
 import com.jornadas.shared.actividad.Actividad;
@@ -31,7 +32,8 @@ public class VentanaCreacionActividad extends VentanaPanelVerticalYServicio{
 	protected HorizontalPanel panelTitulo, panelDescripcion, panelTipo, panelHorarioInicio, panelHorarioFin, panelLugar, panelFecha, panelCupo, panelRadio;
 	protected Map<RadioButton,TipoActividad> tiposDeActividades;
 	protected Label etiquetaTitulo, etiquetaDescripcion, etiquetaTipo, etiquetaHorarioInicio, etiquetaHorarioFin, etiquetaLugar, etiquetaFecha, etiquetaCupo,etiquetaDosPuntosHI, etiquetaDosPuntosHF, etiquetaDia, etiquetaMes, etiquetaAnio;
-	protected TextBox textBoxTitulo, textBoxDescripcion, textBoxHI, textBoxMI, textBoxHF, textBoxMF, textBoxLugar, textBoxCupo, textBoxDia, textBoxMes, textBoxAnio;
+	protected TextBox textBoxTitulo, textBoxHI, textBoxMI, textBoxHF, textBoxMF, textBoxLugar, textBoxCupo, textBoxDia, textBoxMes, textBoxAnio;
+	protected TextArea textAreaDescripcion;
 	protected Button botonCrear;
 	
 	public VentanaCreacionActividad(ServicioAsync servicio) {
@@ -70,7 +72,9 @@ public class VentanaCreacionActividad extends VentanaPanelVerticalYServicio{
 	
 	protected void inicializarTextBoxs() {
 		textBoxTitulo = new TextBox();
-		textBoxDescripcion = new TextBox();
+		textAreaDescripcion = new TextArea();
+		textAreaDescripcion.setCharacterWidth(40);
+		textAreaDescripcion.setVisibleLines(5);
 		textBoxHI = new TextBox();
 		textBoxMI = new TextBox();
 		textBoxHF = new TextBox();
@@ -113,7 +117,7 @@ public class VentanaCreacionActividad extends VentanaPanelVerticalYServicio{
 		
 		panelDescripcion = new HorizontalPanel();
 		panelDescripcion.add(etiquetaDescripcion);
-		panelDescripcion.add(textBoxDescripcion);
+		panelDescripcion.add(textAreaDescripcion);
 		
 		panelTipo = new HorizontalPanel();
 		panelTipo.add(etiquetaTipo);
@@ -170,7 +174,7 @@ public class VentanaCreacionActividad extends VentanaPanelVerticalYServicio{
 		boolean resultado = true;
 		
 		NuevaActividad.establecerTitulo(textBoxTitulo.getText());
-		NuevaActividad.establecerDescripcion(textBoxDescripcion.getText());
+		NuevaActividad.establecerDescripcion(textAreaDescripcion.getText());
 		
 		establecerTipoActividad();
 		

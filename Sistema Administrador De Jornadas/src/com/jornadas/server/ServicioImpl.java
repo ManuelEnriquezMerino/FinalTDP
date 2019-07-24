@@ -53,84 +53,84 @@ public class ServicioImpl extends RemoteServiceServlet implements Servicio {
 				jornada.agregarTipoActividad(tipo);
 			}
 			Organizador o = new Organizador();
-			o.establecerApellido("a");
-			o.establecerCarrera("a");
-			o.establecerDNI("a");
+			o.establecerApellido("o");
+			o.establecerCarrera("o");
+			o.establecerDNI("o");
 			try {
 				o.establecerFechaDeNacimiento(1, 1, 1);
 			} catch (FechaInvalidaException e) {
 				e.printStackTrace();
 			}
-			o.establecerID("a");
-			o.establecerLU("a");
-			o.establecerMail("a");
-			o.establecerNombre("a");
-			o.establecerTelefono("a");
-			o.establecerUniversidad("a");
+			o.establecerID("o");
+			o.establecerLU("o");
+			o.establecerMail("o");
+			o.establecerNombre("o");
+			o.establecerTelefono("o");
+			o.establecerUniversidad("o");
 			
 			CoordinadorDeArea c = new CoordinadorDeArea();
-			c.establecerApellido("b");
-			c.establecerCarrera("b");
-			c.establecerDNI("b");
+			c.establecerApellido("c");
+			c.establecerCarrera("c");
+			c.establecerDNI("c");
 			try {
 				c.establecerFechaDeNacimiento(1, 1, 1);
 			} catch (FechaInvalidaException e) {
 				e.printStackTrace();
 			}
-			c.establecerID("b");
-			c.establecerLU("b");
-			c.establecerMail("b");
-			c.establecerNombre("b");
-			c.establecerTelefono("b");
-			c.establecerUniversidad("b");
+			c.establecerID("c");
+			c.establecerLU("c");
+			c.establecerMail("c");
+			c.establecerNombre("c");
+			c.establecerTelefono("c");
+			c.establecerUniversidad("c");
 			
 			Asistente a = new Asistente();
-			a.establecerApellido("c");
-			a.establecerCarrera("c");
-			a.establecerDNI("c");
+			a.establecerApellido("a");
+			a.establecerCarrera("a");
+			a.establecerDNI("a");
 			try {
 				a.establecerFechaDeNacimiento(1, 1, 1);
 			} catch (FechaInvalidaException e) {
 				e.printStackTrace();
 			}
-			a.establecerID("c");
-			a.establecerLU("c");
-			a.establecerMail("c");
-			a.establecerNombre("c");
-			a.establecerTelefono("c");
-			a.establecerUniversidad("c");
+			a.establecerID("a");
+			a.establecerLU("a");
+			a.establecerMail("a");
+			a.establecerNombre("a");
+			a.establecerTelefono("a");
+			a.establecerUniversidad("a");
 			
 			OrganizadorGeneral og = new OrganizadorGeneral();
-			og.establecerApellido("d");
-			og.establecerCarrera("d");
-			og.establecerDNI("d");
+			og.establecerApellido("og");
+			og.establecerCarrera("og");
+			og.establecerDNI("og");
 			try {
 				og.establecerFechaDeNacimiento(1, 1, 1);
 			} catch (FechaInvalidaException e) {
 				e.printStackTrace();
 			}
-			og.establecerID("d");
-			og.establecerLU("d");
-			og.establecerMail("d");
-			og.establecerNombre("d");
-			og.establecerTelefono("d");
-			og.establecerUniversidad("d");
+			og.establecerID("og");
+			og.establecerLU("og");
+			og.establecerMail("og");
+			og.establecerNombre("og");
+			og.establecerTelefono("og");
+			og.establecerUniversidad("og");
 			
 			Voluntario v = new Voluntario();
-			v.establecerApellido("e");
-			v.establecerCarrera("e");
-			v.establecerDNI("e");
+			v.establecerApellido("v");
+			v.establecerCarrera("v");
+			v.establecerDNI("v");
 			try {
 				v.establecerFechaDeNacimiento(1, 1, 1);
 			} catch (FechaInvalidaException e) {
 				e.printStackTrace();
 			}
-			v.establecerID("e");
-			v.establecerLU("e");
-			v.establecerMail("e");
-			v.establecerNombre("e");
-			v.establecerTelefono("e");
-			v.establecerUniversidad("e");
+			v.establecerID("v");
+			v.establecerLU("v");
+			v.establecerMail("v");
+			v.establecerNombre("v");
+			v.establecerTelefono("v");
+			v.establecerUniversidad("v");
 			
 			jornada.agregarUsuario(o);
 			jornada.agregarUsuario(a);
@@ -191,12 +191,25 @@ public class ServicioImpl extends RemoteServiceServlet implements Servicio {
 		}
 	}
 	
+	public Boolean inscribirAsistenteAActividad(Asistente asistente, Actividad actividad) {
+		boolean resultado;
+		if(asistente != null && actividad != null) {
+			resultado = asistente.agregarActividad(actividad) && actividad.agregarAsistente(asistente);
+		} else
+			resultado = false;
+		return resultado;
+	}
+	
 	public int obtenerIDNuevaArea() {
 		return jornada.obtenerNuevoIDArea();
 	}
 	
 	public Collection<Usuario> obtenerUsuarios() {
 		return jornada.obtenerUsuarios();
+	}
+	
+	public Collection<Actividad> obtenerActividades() {
+		return jornada.obtenerActividades();
 	}
 	
 	public Collection<TipoActividad> obtenerTiposDeActividades(){

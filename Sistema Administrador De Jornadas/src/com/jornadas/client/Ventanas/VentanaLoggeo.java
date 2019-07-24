@@ -12,6 +12,7 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootLayoutPanel;
 import com.google.gwt.user.client.ui.TextBox;
 import com.jornadas.client.ServicioAsync;
+import com.jornadas.shared.Visitor.GenerarVentanas;
 import com.jornadas.shared.usuario.Usuario;
 
 public class VentanaLoggeo extends VentanaPanelVerticalYServicio{
@@ -63,25 +64,11 @@ public class VentanaLoggeo extends VentanaPanelVerticalYServicio{
 					else {
 						RootLayoutPanel.get().remove(0);
 						
-						VentanaDatos datos = new VentanaDatos(resultado, Servicio);
-						VentanaArea area = new VentanaArea(Servicio);
-						VentanaCreacionAsistente creacion = new VentanaCreacionAsistente(Servicio);
-						VentanaCreacionActividad actividad = new VentanaCreacionActividad(Servicio);
-						VentanaCreacionTarea tarea = new VentanaCreacionTarea(Servicio);
-						VentanaCreacionAyudante ayudante = new VentanaCreacionAyudante(Servicio);
+						GenerarVentanas ventana = new GenerarVentanas(Servicio);
 						
-						Collection<Ventana> paneles = new LinkedList<Ventana>();
+						resultado.accionar(ventana);
 						
-						paneles.add(datos);
-						paneles.add(creacion);
-						paneles.add(ayudante);
-						paneles.add(area);
-						paneles.add(actividad);
-						paneles.add(tarea);
-						
-						VentanaPestanias pestanias = new VentanaPestanias(paneles);
-						
-						RootLayoutPanel.get().add(pestanias.obtenerPanel());
+						RootLayoutPanel.get().add(ventana.obtenerVentana().obtenerPanel());
 					}
 				}
 			});

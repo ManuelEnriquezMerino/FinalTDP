@@ -134,6 +134,10 @@ public class Jornada implements Serializable{
 		return new LinkedList<Usuario>(Usuarios.values());
 	}
 	
+	public Collection<Actividad> obtenerActividades() {
+		return Actividades;
+	}
+	
 	public Collection<TipoActividad> obtenerTiposDeActividades() {
 		return TiposDeActividades;
 	}
