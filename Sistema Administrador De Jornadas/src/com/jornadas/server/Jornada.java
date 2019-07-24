@@ -202,6 +202,10 @@ public class Jornada implements Serializable{
 		return TiposDeAyudantes;
 	}
 	
+	public Collection<Area> obtenerAreas(){
+		return Areas;
+	}
+	
 	public int obtenerNuevoIDUsuario() {
 		return (Usuarios.size()+1);
 	}

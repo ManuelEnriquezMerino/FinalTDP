@@ -1,4 +1,4 @@
-package com.jornadas.client.Ventanas.VentanasDeCreacionDeEventos;
+package com.jornadas.client.Ventanas.VentanasDeTareas;
 
 import java.util.Collection;
 import java.util.HashMap;

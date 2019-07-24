@@ -19,6 +19,8 @@ public interface ServicioAsync {
 
 	public void registrarAyudante(String DNI, CreadorAyudanteEvento Creador, AsyncCallback<String> Respuesta);
 	
+	public void asignarAreaAOrganizador(String IDOrganizador, String DNIOrganizador, String IDArea, AsyncCallback<Boolean> Respuesta);
+	
 	public void actualizarUsuario(Usuario usuario, AsyncCallback<Boolean> Respuesta);
 	
 	public void inscribirAsistenteAActividad(String IDAsistente, String DNIAsistente, String IDActividad, AsyncCallback<Boolean> Respuesta);
@@ -42,6 +44,8 @@ public interface ServicioAsync {
 	public void obtenerTiposDeTareas(AsyncCallback<Collection<CreadorTarea>> Respuesta);
 	
 	public void obtenerTiposDeAyudantes(AsyncCallback<Collection<CreadorAyudanteEvento>> Respuesta);
+
+	public void obtenerAreas(AsyncCallback<Collection<Area>> Respuesta);
 	
 	public void agregarArea(Area NuevaArea, AsyncCallback<Boolean> Respuesta);
 	
@@ -49,5 +53,9 @@ public interface ServicioAsync {
 	
 	public void agregarActividad(Actividad NuevaActividad, String IDArea, AsyncCallback<String> Respuesta);
 	
+	public void modificarActividad(Actividad ActividadModificada, AsyncCallback<Boolean> Respuesta);
+	
 	public void agregarTarea(Tarea NuevaTarea, AsyncCallback<String> Respuesta);
+	
+	public void modificarTarea(Tarea TareaModificada, AsyncCallback<Boolean> Respuesta);
 }

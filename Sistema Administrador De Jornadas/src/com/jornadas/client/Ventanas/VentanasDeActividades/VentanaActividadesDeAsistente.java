@@ -1,4 +1,4 @@
-package com.jornadas.client.Ventanas.VentanasVerYDesinscribirseEvento;
+package com.jornadas.client.Ventanas.VentanasDeActividades;
 
 import java.util.Collection;
 import java.util.HashMap;

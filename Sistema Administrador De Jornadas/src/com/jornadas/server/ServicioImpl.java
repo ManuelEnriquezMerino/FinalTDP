@@ -9,6 +9,7 @@ import java.util.Collection;
 
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 import com.jornadas.client.Servicio;
+import com.jornadas.shared.Visitor.EstablecerArea;
 import com.jornadas.shared.Visitor.desinscribirAsistenteEnActividad;
 import com.jornadas.shared.Visitor.desinscribirAyudanteEnTarea;
 import com.jornadas.shared.Visitor.inscribirAsistenteEnActividad;
@@ -16,7 +17,12 @@ import com.jornadas.shared.Visitor.inscribirAyudanteEnTarea;
 import com.jornadas.shared.actividad.Actividad;
 import com.jornadas.shared.actividad.Area;
 import com.jornadas.shared.actividad.TipoActividad;
+import com.jornadas.shared.excepciones.CupoInvalidoException;
 import com.jornadas.shared.excepciones.FechaInvalidaException;
+import com.jornadas.shared.excepciones.HoraInvalidaException;
+import com.jornadas.shared.excepciones.HorariosEventoInvalidosException;
+import com.jornadas.shared.extras.Fecha;
+import com.jornadas.shared.extras.Hora;
 import com.jornadas.shared.tarea.Tarea;
 import com.jornadas.shared.tarea.creadoresDeTareas.CreadorTarea;
 import com.jornadas.shared.usuario.*;
@@ -169,6 +175,17 @@ public class ServicioImpl extends RemoteServiceServlet implements Servicio {
 			return null;
 	}
 	
+	public Boolean asignarAreaAOrganizador(String IDOrganizador, String DNIOrganizador, String IDArea) {
+		Usuario usuario = jornada.recuperarUsuario(IDOrganizador, DNIOrganizador);
+		Area area = jornada.recuperarArea(IDArea);
+		if(usuario!=null && area!=null) {
+			EstablecerArea accion = new EstablecerArea(area);
+			usuario.accionar(accion);
+			return accion.obtenerResultado();
+		} else 
+			return false;
+	}
+	
 	public Boolean actualizarUsuario(Usuario usuario) {
 		Usuario usuarioServidor = jornada.recuperarUsuario(usuario.obtenerID(), usuario.obtenerDNI());
 		
@@ -279,6 +296,10 @@ public class ServicioImpl extends RemoteServiceServlet implements Servicio {
 		return jornada.obtenerTiposDeAyudantes();
 	}
 	
+	public Collection<Area> obtenerAreas(){
+		return jornada.obtenerAreas();
+	}
+	
 	public Boolean agregarArea(Area NuevaArea) {
 		Boolean resultado = jornada.agregarArea(NuevaArea);
 		if(resultado)
@@ -296,10 +317,37 @@ public class ServicioImpl extends RemoteServiceServlet implements Servicio {
 	public String agregarActividad(Actividad NuevaActividad, String IDArea) {
 		String ID = "Act_" + jornada.obtenerNuevoIDActividad();
 		NuevaActividad.establecerID(ID);
+		
+		if(IDArea!=null) 
+			jornada.recuperarArea(IDArea).agregarActividad(NuevaActividad);
+		
 		jornada.agregarActividad(NuevaActividad);
-		jornada.recuperarArea(IDArea).agregarActividad(NuevaActividad);
 		guardarJornada();
 		return ID;
+	}
+	
+	public Boolean modificarActividad(Actividad ActividadModificada) {
+		Actividad actividadJornada = jornada.recuperarActividad(ActividadModificada.obtenerID());
+		if(actividadJornada!=null) {
+			actividadJornada.establecerTitulo(ActividadModificada.obtenerTitulo());
+			actividadJornada.establecerDescripcion(ActividadModificada.obtenerDescripcion());			
+			
+			try {
+				Fecha fecha = ActividadModificada.obtenerFecha();
+				Hora HI = ActividadModificada.obtenerHorarioInicio();
+				Hora HF = ActividadModificada.obtenerHorarioFin();
+				actividadJornada.establecerFecha(fecha.obtenerDia(), fecha.obtenerMes(), fecha.obtenerAnio());
+				actividadJornada.establecerHorarioInicio(HI.obtenerHora(), HI.obtenerMinutos());
+				actividadJornada.establecerHorarioFin(HF.obtenerHora(), HF.obtenerMinutos());
+				actividadJornada.establecerCupo(ActividadModificada.obtenerCupo());
+			} catch (FechaInvalidaException | HorariosEventoInvalidosException | HoraInvalidaException | CupoInvalidoException e) {
+				return false;
+			}
+
+			actividadJornada.establecerLugar(ActividadModificada.obtenerLugar());
+			return true;
+		} else
+			return false;
 	}
 	
 	public String agregarTarea(Tarea NuevaTarea) {
@@ -308,6 +356,29 @@ public class ServicioImpl extends RemoteServiceServlet implements Servicio {
 		jornada.agregarTarea(NuevaTarea);
 		guardarJornada();
 		return ID;
+	}
+	
+	public Boolean modificarTarea(Tarea TareaModificada) {
+		Tarea tareaJornada = jornada.recuperarTarea(TareaModificada.obtenerID());
+		if(tareaJornada!=null) {
+			tareaJornada.establecerTitulo(TareaModificada.obtenerTitulo());
+			tareaJornada.establecerDescripcion(TareaModificada.obtenerDescripcion());			
+			
+			try {
+				Fecha fecha = TareaModificada.obtenerFecha();
+				Hora HI = TareaModificada.obtenerHorarioInicio();
+				Hora HF = TareaModificada.obtenerHorarioFin();
+				tareaJornada.establecerFecha(fecha.obtenerDia(), fecha.obtenerMes(), fecha.obtenerAnio());
+				tareaJornada.establecerHorarioInicio(HI.obtenerHora(), HI.obtenerMinutos());
+				tareaJornada.establecerHorarioFin(HF.obtenerHora(), HF.obtenerMinutos());
+			} catch (FechaInvalidaException | HorariosEventoInvalidosException | HoraInvalidaException e) {
+				return false;
+			}
+
+			tareaJornada.establecerLugar(TareaModificada.obtenerLugar());
+			return true;
+		} else
+			return false;
 	}
 	
 	private void guardarJornada() {

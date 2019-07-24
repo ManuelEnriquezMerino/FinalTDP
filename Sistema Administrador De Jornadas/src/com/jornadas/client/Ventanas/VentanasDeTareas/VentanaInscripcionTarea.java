@@ -1,4 +1,4 @@
-package com.jornadas.client.Ventanas.VentanasInscripcionEventos;
+package com.jornadas.client.Ventanas.VentanasDeTareas;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -15,30 +15,30 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.ListBox;
 import com.jornadas.client.ServicioAsync;
 import com.jornadas.client.Ventanas.VentanasAbstractas.VentanaPanelVerticalYServicio;
-import com.jornadas.shared.actividad.Actividad;
 import com.jornadas.shared.extras.Fecha;
 import com.jornadas.shared.extras.Hora;
-import com.jornadas.shared.usuario.Asistente;
+import com.jornadas.shared.tarea.Tarea;
+import com.jornadas.shared.usuario.Voluntario;
 
-public class VentanaInscripcionActividad extends VentanaPanelVerticalYServicio{
+public class VentanaInscripcionTarea extends VentanaPanelVerticalYServicio{
 	
-	protected Asistente Asistente;
-	protected ListBox listBoxActividades; 
-	protected Map<String,Actividad> Actividades;
+	protected Voluntario Ayudante;
+	protected ListBox listBoxTareas; 
+	protected Map<String,Tarea> Tareas;
 	protected Label labelDescripcion, labelFecha, labelLugar, labelHora;
 	protected Button botonInscribirse;
 	
-	public VentanaInscripcionActividad(Asistente asistente, ServicioAsync servicio) {
+	public VentanaInscripcionTarea(Voluntario ayudante, ServicioAsync servicio) {
 		super(servicio);
-		Asistente = asistente;
+		Ayudante = ayudante;
 		
-		Nombre = "Inscripcion a Actividades";
+		Nombre = "Inscripcion a Tarea";
 		Panel.getElement().getStyle().setBackgroundColor("#c6ece7");
 		
 		inicializarLabels();
 		inicializarListBox();
 		
-		botonInscribirse = new Button("Inscribirse a Actividad");
+		botonInscribirse = new Button("Inscribirse a Tarea");
 		botonInscribirse.addClickHandler(new oyenteInscribir());
 		
 		poblarPanel();
@@ -52,11 +52,11 @@ public class VentanaInscripcionActividad extends VentanaPanelVerticalYServicio{
 	}
 	
 	protected void inicializarListBox() {
-		Actividades = new HashMap<String,Actividad>();
-		listBoxActividades = new ListBox();
-		listBoxActividades.addItem("Actividades");
-		listBoxActividades.addChangeHandler(new cambioActividad());
-		Servicio.obtenerActividades(new AsyncCallback<Collection<Actividad>>() {
+		Tareas = new HashMap<String,Tarea>();
+		listBoxTareas = new ListBox();
+		listBoxTareas.addItem("Tareas");
+		listBoxTareas.addChangeHandler(new cambioActividad());
+		Servicio.obtenerTareas(new AsyncCallback<Collection<Tarea>>() {
 
 			@Override
 			public void onFailure(Throwable caught) {
@@ -64,11 +64,11 @@ public class VentanaInscripcionActividad extends VentanaPanelVerticalYServicio{
 			}
 
 			@Override
-			public void onSuccess(Collection<Actividad> resultado) {
-				for(Actividad act : resultado) {
-					if(act.hayCupo() && !Asistente.inscriptoEnActividad(act.obtenerID())) {
-						Actividades.put(act.obtenerTitulo(), act);
-						listBoxActividades.addItem(act.obtenerTitulo());
+			public void onSuccess(Collection<Tarea> resultado) {
+				for(Tarea tarea : resultado) {
+					if(tarea.estaDisponible()) {
+						Tareas.put(tarea.obtenerTitulo(), tarea);
+						listBoxTareas.addItem(tarea.obtenerTitulo());
 					}
 				}
 			}
@@ -76,7 +76,7 @@ public class VentanaInscripcionActividad extends VentanaPanelVerticalYServicio{
 	}
 	
 	protected void poblarPanel() {
-		Panel.add(listBoxActividades);
+		Panel.add(listBoxTareas);
 		Panel.add(labelDescripcion);
 		Panel.add(labelFecha);
 		Panel.add(labelHora);
@@ -87,15 +87,15 @@ public class VentanaInscripcionActividad extends VentanaPanelVerticalYServicio{
 	private class cambioActividad implements ChangeHandler {
 
 		public void onChange(ChangeEvent event) {
-			Actividad actividadElegida = Actividades.get(listBoxActividades.getSelectedItemText());
-			if(actividadElegida!=null) {
-				labelDescripcion.setText(actividadElegida.obtenerDescripcion());
-				Fecha fechaActividad = actividadElegida.obtenerFecha();
+			Tarea tareaElegida = Tareas.get(listBoxTareas.getSelectedItemText());
+			if(tareaElegida!=null) {
+				labelDescripcion.setText(tareaElegida.obtenerDescripcion());
+				Fecha fechaActividad = tareaElegida.obtenerFecha();
 				labelFecha.setText("Fecha: " + fechaActividad.obtenerDia() + "/" + fechaActividad.obtenerMes() + "/" + fechaActividad.obtenerAnio());
-				Hora horaInicio = actividadElegida.obtenerHorarioInicio();
-				Hora horaFin = actividadElegida.obtenerHorarioFin();
+				Hora horaInicio = tareaElegida.obtenerHorarioInicio();
+				Hora horaFin = tareaElegida.obtenerHorarioFin();
 				labelHora.setText("Inicio: " + horaInicio.obtenerHora() + ":" + horaInicio.obtenerMinutos() + " - Fin: " + horaFin.obtenerHora() + ":" + horaFin.obtenerMinutos());
-				labelLugar.setText(actividadElegida.obtenerLugar());
+				labelLugar.setText(tareaElegida.obtenerLugar());
 			}
 		}
 		
@@ -104,9 +104,9 @@ public class VentanaInscripcionActividad extends VentanaPanelVerticalYServicio{
 	private class oyenteInscribir implements ClickHandler {
 
 		public void onClick(ClickEvent event) {
-			Actividad actividadElegida = Actividades.get(listBoxActividades.getSelectedItemText());
-			if(actividadElegida!=null) {
-				Servicio.inscribirAsistenteAActividad(Asistente.obtenerID(), Asistente.obtenerDNI(), actividadElegida.obtenerID(), new AsyncCallback<Boolean>() {
+			Tarea tareaElegida = Tareas.get(listBoxTareas.getSelectedItemText());
+			if(tareaElegida!=null) {
+				Servicio.inscribirAyudanteATarea(Ayudante.obtenerID(), Ayudante.obtenerDNI(), tareaElegida.obtenerID(), new AsyncCallback<Boolean>() {
 
 					@Override
 					public void onFailure(Throwable caught) {
@@ -116,11 +116,11 @@ public class VentanaInscripcionActividad extends VentanaPanelVerticalYServicio{
 					@Override
 					public void onSuccess(Boolean resultado) {
 						if(resultado) {
-							Window.alert("Usuario inscripto a la Actividad con Exito");
-							listBoxActividades.removeItem(listBoxActividades.getSelectedIndex());
+							Window.alert("Usuario inscripto a la Tarea con Exito");
+							listBoxTareas.removeItem(listBoxTareas.getSelectedIndex());
 						}
 						else
-							Window.alert("Error al inscribir al usuario en la actividad, verificar que no este ya inscripto y que la actividad no este llena");
+							Window.alert("Error al inscribir al usuario en la tarea, verificar que la tarea no tenga un ayudante Asignado");
 					}
 				});
 			} else {

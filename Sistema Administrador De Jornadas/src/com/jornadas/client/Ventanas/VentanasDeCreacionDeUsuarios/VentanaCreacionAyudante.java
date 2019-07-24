@@ -30,7 +30,7 @@ public class VentanaCreacionAyudante extends VentanaCreacionUsuario{
 		
 		Nombre = "Agregar Ayudante";
 		
-		botonAgregar = new Button("Agregar Asistente");
+		botonAgregar = new Button("Agregar Ayudante");
 		botonAgregar.addClickHandler(new oyenteAgregar());
 		
 		inicializarRadioButtons();

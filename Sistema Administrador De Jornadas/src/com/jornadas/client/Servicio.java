@@ -22,6 +22,8 @@ public interface Servicio extends RemoteService{
 	
 	public String registrarAyudante(String DNI, CreadorAyudanteEvento Creador);
 
+	public Boolean asignarAreaAOrganizador(String IDOrganizador, String DNIOrganizador, String IDArea);
+	
 	public Boolean actualizarUsuario(Usuario usuario);
 	
 	public Boolean inscribirAsistenteAActividad(String IDAsistente, String DNIAsistente, String IDActividad);
@@ -46,11 +48,17 @@ public interface Servicio extends RemoteService{
 	
 	public Collection<CreadorAyudanteEvento> obtenerTiposDeAyudantes();
 	
+	public Collection<Area> obtenerAreas();
+	
 	public Boolean agregarArea(Area NuevaArea);
 	
 	public Boolean modificarArea(Area AreaModificada);
 	
 	public String agregarActividad(Actividad NuevaActividad, String IDArea);
 	
+	public Boolean modificarActividad(Actividad ActividadModificada);
+	
 	public String agregarTarea(Tarea NuevaTarea);
+	
+	public Boolean modificarTarea(Tarea TareaModificada);
 }
