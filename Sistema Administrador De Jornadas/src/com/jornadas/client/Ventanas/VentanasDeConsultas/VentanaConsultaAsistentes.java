@@ -17,6 +17,7 @@ public class VentanaConsultaAsistentes extends VentanaPanelVerticalYServicio{
 	
 	public VentanaConsultaAsistentes(ServicioAsync servicio) {
 		super(servicio);
+		Panel.getElement().getStyle().setBackgroundColor("#E1E9b7");
 		
 		Nombre = "Asistentes Inscriptos";
 		

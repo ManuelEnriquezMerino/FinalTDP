@@ -44,7 +44,7 @@ public class VentanaModificacionActividad extends VentanaPanelVerticalYServicio{
 	public VentanaModificacionActividad(ServicioAsync servicio) {
 		super(servicio);
 		
-		Panel.getElement().getStyle().setBackgroundColor("#E7E6A3");
+		Panel.getElement().getStyle().setBackgroundColor("#ccffff");
 		
 		Nombre = "Modificar Actividad";
 		

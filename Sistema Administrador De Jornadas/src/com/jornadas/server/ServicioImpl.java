@@ -50,101 +50,18 @@ public class ServicioImpl extends RemoteServiceServlet implements Servicio {
 		    e.printStackTrace();
 		}
 		
+		//Si al intentar abrir el archivo de la jornada no se encuentra ninguno se crea una nueva jornada
+		//con un Organizador General por defecto
 		if(jornada==null) {
 			jornada = new Jornada();
-			TipoActividad tipo;
-			for(int i=0; i<5 ; i++) {
-				tipo = new TipoActividad();
-				tipo.establecerDescripcion("Descripcion: "+i);
-				tipo.establecerID("ID: "+i);
-				tipo.establecerTitulo("Titulo: "+i);
-				jornada.agregarTipoActividad(tipo);
-			}
-			Organizador o = new Organizador();
-			o.establecerApellido("o");
-			o.establecerCarrera("o");
-			o.establecerDNI("o");
-			try {
-				o.establecerFechaDeNacimiento(1, 1, 1);
-			} catch (FechaInvalidaException e) {
-				e.printStackTrace();
-			}
-			o.establecerID("o");
-			o.establecerLU("o");
-			o.establecerMail("o");
-			o.establecerNombre("o");
-			o.establecerTelefono("o");
-			o.establecerUniversidad("o");
-			
-			CoordinadorDeArea c = new CoordinadorDeArea();
-			c.establecerApellido("c");
-			c.establecerCarrera("c");
-			c.establecerDNI("c");
-			try {
-				c.establecerFechaDeNacimiento(1, 1, 1);
-			} catch (FechaInvalidaException e) {
-				e.printStackTrace();
-			}
-			c.establecerID("c");
-			c.establecerLU("c");
-			c.establecerMail("c");
-			c.establecerNombre("c");
-			c.establecerTelefono("c");
-			c.establecerUniversidad("c");
-			
-			Asistente a = new Asistente();
-			a.establecerApellido("a");
-			a.establecerCarrera("a");
-			a.establecerDNI("a");
-			try {
-				a.establecerFechaDeNacimiento(1, 1, 1);
-			} catch (FechaInvalidaException e) {
-				e.printStackTrace();
-			}
-			a.establecerID("a");
-			a.establecerLU("a");
-			a.establecerMail("a");
-			a.establecerNombre("a");
-			a.establecerTelefono("a");
-			a.establecerUniversidad("a");
 			
 			OrganizadorGeneral og = new OrganizadorGeneral();
-			og.establecerApellido("og");
-			og.establecerCarrera("og");
-			og.establecerDNI("og");
-			try {
-				og.establecerFechaDeNacimiento(1, 1, 1);
-			} catch (FechaInvalidaException e) {
-				e.printStackTrace();
-			}
-			og.establecerID("og");
-			og.establecerLU("og");
-			og.establecerMail("og");
-			og.establecerNombre("og");
-			og.establecerTelefono("og");
-			og.establecerUniversidad("og");
+			og.establecerDNI("OrganizadorGeneral");
+			og.establecerID("OrganizadorGeneral");
+			og.establecerNombre("OrganizadorGeneral");
+			og.establecerApellido("OrganizadorGeneral");
 			
-			Voluntario v = new Voluntario();
-			v.establecerApellido("v");
-			v.establecerCarrera("v");
-			v.establecerDNI("v");
-			try {
-				v.establecerFechaDeNacimiento(1, 1, 1);
-			} catch (FechaInvalidaException e) {
-				e.printStackTrace();
-			}
-			v.establecerID("v");
-			v.establecerLU("v");
-			v.establecerMail("v");
-			v.establecerNombre("v");
-			v.establecerTelefono("v");
-			v.establecerUniversidad("v");
-			
-			jornada.agregarUsuario(o);
-			jornada.agregarUsuario(a);
 			jornada.agregarUsuario(og);
-			jornada.agregarUsuario(v);
-			jornada.agregarUsuario(c);
 		}
 	}
 	
