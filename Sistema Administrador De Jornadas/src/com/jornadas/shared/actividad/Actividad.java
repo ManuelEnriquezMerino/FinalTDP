@@ -2,7 +2,6 @@ package com.jornadas.shared.actividad;
 
 import java.io.Serializable;
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.LinkedHashSet;
 
 import com.jornadas.shared.excepciones.CupoInvalidoException;
@@ -124,8 +123,8 @@ public class Actividad implements Serializable{
 		return InformacionActividad.obtenerCupo();
 	}
 	
-	public Iterator<Asistente> obtenerAsistentes() {
-		return Asistentes.iterator();
+	public Collection<Asistente> obtenerAsistentes() {
+		return Asistentes;
 	}
 	
 	public boolean hayCupo() {

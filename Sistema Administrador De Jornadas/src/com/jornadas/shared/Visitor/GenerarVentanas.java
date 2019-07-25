@@ -3,6 +3,7 @@ package com.jornadas.shared.Visitor;
 import com.jornadas.client.ServicioAsync;
 import com.jornadas.client.Ventanas.VentanasDeActividades.VentanaActividadesDeAsistente;
 import com.jornadas.client.Ventanas.VentanasDeActividades.VentanaCreacionActividad;
+import com.jornadas.client.Ventanas.VentanasDeActividades.VentanaEliminarActividad;
 import com.jornadas.client.Ventanas.VentanasDeActividades.VentanaInscripcionActividad;
 import com.jornadas.client.Ventanas.VentanasDeActividades.VentanaModificacionActividad;
 import com.jornadas.client.Ventanas.VentanasDeAreas.VentanaAsignarAreaOrganizador;
@@ -10,6 +11,7 @@ import com.jornadas.client.Ventanas.VentanasDeAreas.VentanaCrearArea;
 import com.jornadas.client.Ventanas.VentanasDeCreacionDeUsuarios.VentanaCreacionAsistente;
 import com.jornadas.client.Ventanas.VentanasDeCreacionDeUsuarios.VentanaCreacionAyudante;
 import com.jornadas.client.Ventanas.VentanasDeTareas.VentanaCreacionTarea;
+import com.jornadas.client.Ventanas.VentanasDeTareas.VentanaEliminarTarea;
 import com.jornadas.client.Ventanas.VentanasDeTareas.VentanaInscripcionTarea;
 import com.jornadas.client.Ventanas.VentanasDeTareas.VentanaModificacionTarea;
 import com.jornadas.client.Ventanas.VentanasDeTareas.VentanaTareasDeAyudante;
@@ -71,15 +73,30 @@ public class GenerarVentanas extends Accion{
 	public void Accionar(OrganizadorGeneral usuario) {
 		Ventana.agregarPestania(new VentanaDatos(usuario, Servicio));
 		Ventana.agregarPestania(new VentanaCreacionAsistente(Servicio));
-		Ventana.agregarPestania(new VentanaCreacionActividad(usuario, Servicio));
-		Ventana.agregarPestania(new VentanaModificacionActividad(Servicio));
-		Ventana.agregarPestania(new VentanaCreacionTarea(Servicio));
-		Ventana.agregarPestania(new VentanaModificacionTarea(Servicio));
-		Ventana.agregarPestania(new VentanaInscripcionTarea(usuario, Servicio));
-		Ventana.agregarPestania(new VentanaTareasDeAyudante(usuario, Servicio));
 		Ventana.agregarPestania(new VentanaCreacionAyudante(Servicio));
-		Ventana.agregarPestania(new VentanaCrearArea(Servicio));
-		Ventana.agregarPestania(new VentanaAsignarAreaOrganizador(Servicio));
+		
+		VentanaPestanias VentanaActividad = new VentanaPestanias();
+		VentanaActividad.establecerNombre("Actividades");
+		VentanaActividad.agregarPestania(new VentanaCreacionActividad(usuario, Servicio));
+		VentanaActividad.agregarPestania(new VentanaModificacionActividad(Servicio));
+		VentanaActividad.agregarPestania(new VentanaEliminarActividad(Servicio));
+		Ventana.agregarPestania(VentanaActividad);
+		
+		VentanaPestanias VentanaTareas = new VentanaPestanias();
+		VentanaTareas.establecerNombre("Tareas");
+		VentanaTareas.agregarPestania(new VentanaCreacionTarea(Servicio));
+		VentanaTareas.agregarPestania(new VentanaModificacionTarea(Servicio));
+		VentanaTareas.agregarPestania(new VentanaEliminarTarea(Servicio));
+		VentanaTareas.agregarPestania(new VentanaInscripcionTarea(usuario, Servicio));
+		VentanaTareas.agregarPestania(new VentanaTareasDeAyudante(usuario, Servicio));
+		Ventana.agregarPestania(VentanaTareas);
+		
+		VentanaPestanias VentanaAreas = new VentanaPestanias();
+		VentanaAreas.establecerNombre("Areas");
+		VentanaAreas.agregarPestania(new VentanaCrearArea(Servicio));
+		VentanaAreas.agregarPestania(new VentanaAsignarAreaOrganizador(Servicio));
+		Ventana.agregarPestania(VentanaAreas);
+		
 		Ventana.agregarPestania(new VentanaSistema(usuario, Servicio));
 	}
 	

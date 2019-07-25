@@ -55,7 +55,11 @@ public interface ServicioAsync {
 	
 	public void modificarActividad(Actividad ActividadModificada, AsyncCallback<Boolean> Respuesta);
 	
+	public void eliminarActividad(String IDActividad, AsyncCallback<Boolean> Respuesta);
+	
 	public void agregarTarea(Tarea NuevaTarea, AsyncCallback<String> Respuesta);
 	
 	public void modificarTarea(Tarea TareaModificada, AsyncCallback<Boolean> Respuesta);
+	
+	public void eliminarTarea(String IDTarea, AsyncCallback<Boolean> Respuesta);
 }

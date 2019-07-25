@@ -181,6 +181,7 @@ public class ServicioImpl extends RemoteServiceServlet implements Servicio {
 		if(usuario!=null && area!=null) {
 			EstablecerArea accion = new EstablecerArea(area);
 			usuario.accionar(accion);
+			guardarJornada();
 			return accion.obtenerResultado();
 		} else 
 			return false;
@@ -345,9 +346,23 @@ public class ServicioImpl extends RemoteServiceServlet implements Servicio {
 			}
 
 			actividadJornada.establecerLugar(ActividadModificada.obtenerLugar());
+			guardarJornada();
 			return true;
 		} else
 			return false;
+	}
+	
+	public Boolean eliminarActividad(String IDActividad) {
+		Actividad actividad = jornada.recuperarActividad(IDActividad);
+		Boolean resultado = actividad!=null;
+		if(resultado) {
+			for(Asistente asistente : actividad.obtenerAsistentes()) {
+				asistente.quitarActividad(actividad);
+			}
+			jornada.obtenerActividades().remove(actividad);
+			guardarJornada();
+		}
+		return resultado;
 	}
 	
 	public String agregarTarea(Tarea NuevaTarea) {
@@ -376,9 +391,24 @@ public class ServicioImpl extends RemoteServiceServlet implements Servicio {
 			}
 
 			tareaJornada.establecerLugar(TareaModificada.obtenerLugar());
+			guardarJornada();
 			return true;
 		} else
 			return false;
+	}
+	
+	public Boolean eliminarTarea(String IDTarea) {
+		Tarea tarea = jornada.recuperarTarea(IDTarea);
+		boolean resultado = tarea!=null;
+		
+		if(resultado) {
+			if(tarea.obtenerVoluntario()!=null)
+				tarea.obtenerVoluntario().quitarTarea(tarea);
+			jornada.obtenerTareas().remove(tarea);
+			guardarJornada();
+		}
+		
+		return resultado;
 	}
 	
 	private void guardarJornada() {

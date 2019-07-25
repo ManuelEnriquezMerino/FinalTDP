@@ -33,7 +33,7 @@ public class VentanaAsignarAreaOrganizador extends VentanaPanelVerticalYServicio
 	
 	public VentanaAsignarAreaOrganizador(ServicioAsync servicio) {
 		super(servicio);
-		Nombre = "Establecer Area de Organizador";
+		Nombre = "Establecer Area";
 		Panel.getElement().getStyle().setBackgroundColor("#dba77d");
 		
 		inicializarRadioButtons();

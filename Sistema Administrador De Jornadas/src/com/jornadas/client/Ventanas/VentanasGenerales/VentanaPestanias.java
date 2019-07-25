@@ -16,7 +16,7 @@ public class VentanaPestanias extends Ventana{
 		
 		Panel = new LayoutPanel();
 		Panel.setSize("100%", "100%");
-		PanelPestanias = new TabLayoutPanel(1.5, Unit.EM);
+		PanelPestanias = new TabLayoutPanel(2, Unit.EM);
 
 		Panel.add(PanelPestanias);
 	}
