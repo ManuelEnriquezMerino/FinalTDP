@@ -12,7 +12,6 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.ListBox;
 import com.jornadas.client.ServicioAsync;
 import com.jornadas.client.Ventanas.VentanasAbstractas.VentanaPanelVerticalYServicio;
-import com.jornadas.shared.actividad.Actividad;
 import com.jornadas.shared.tarea.Tarea;
 
 public class VentanaEliminarTarea extends VentanaPanelVerticalYServicio{
