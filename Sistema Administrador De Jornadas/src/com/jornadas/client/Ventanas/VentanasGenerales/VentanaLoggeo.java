@@ -25,10 +25,10 @@ public class VentanaLoggeo extends VentanaPanelVerticalYServicio{
 		Panel.getElement().getStyle().setBackgroundColor("#262B71");
 		
 		textBoxID = new TextBox();
-		textBoxID.setText("ID Aca");
+		textBoxID.setText("ID");
 		
 		textBoxDNI = new TextBox();
-		textBoxDNI.setText("DNI Aca");
+		textBoxDNI.setText("DNI");
 		
 		botonConsultar = new Button("Obtener Usuario");
 		botonConsultar.addClickHandler(new oyenteConsultar());
